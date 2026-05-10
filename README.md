@@ -1,75 +1,174 @@
-# E-commerce Store (Loja)
+<div align="center">
+  <img src="https://via.placeholder.com/800x200.png?text=E-commerce+Platform" alt="Loja E-commerce Banner">
+  
+  # 🛒 Plataforma de E-commerce (Loja)
 
-Uma aplicação de E-commerce completa construída com Java, Spring Boot e Thymeleaf. Este projeto apresenta tanto a interface voltada para o cliente (storefront) quanto um painel administrativo completo (dashboard).
+  *Uma solução completa de comércio eletrônico desenvolvida com Java, Spring Boot e arquitetura MVC.*
+  
+  <p align="center">
+    <a href="#-sobre-o-projeto">Sobre</a> •
+    <a href="#-tecnologias-e-ferramentas">Tecnologias</a> •
+    <a href="#%EF%B8%8F-arquitetura-e-padrões">Arquitetura</a> •
+    <a href="#-funcionalidades-em-destaque">Funcionalidades</a> •
+    <a href="#-como-executar-localmente">Como Executar</a> •
+    <a href="#-contato">Contato</a>
+  </p>
 
-## 🚀 Tecnologias Utilizadas
+  ![Status Em Desenvolvimento](https://img.shields.io/badge/Status-Em%20Desenvolvimento-green?style=for-the-badge)
+  ![Licença MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
+</div>
 
-### Back-end
-- **Java 21**
-- **Spring Boot 3.5.14**
-- **Spring Web** (MVC)
-- **Spring Data JPA** (Persistência)
-- **H2 Database** (Banco de dados em memória)
+---
 
-### Front-end
-- **Thymeleaf** (Template Engine)
-- **HTML5 & CSS3** (Vanilla, CSS customizado responsivo)
-- **JavaScript** (Vanilla)
-- **FontAwesome** (Ícones)
-- **Plus Jakarta Sans** (Google Fonts)
+## 📖 Sobre o Projeto
 
-## 📋 Funcionalidades
+Este projeto é uma **plataforma completa de E-commerce** desenvolvida do zero para demonstrar habilidades avançadas no ecossistema Java. A aplicação foi projetada para resolver problemas reais de lojas virtuais, dividindo-se em duas áreas principais:
 
-### Área do Cliente (Storefront)
-- **Catálogo de Produtos:** Listagem de produtos com filtros por categorias (Eletrônicos, Roupas, Casa e Jardim, etc).
-- **Carrinho de Compras:** Adicionar, remover e visualizar itens no carrinho.
-- **Checkout:** Finalização de compra intuitiva.
-- **Autenticação:** Páginas de Login (Sign In) e Cadastro (Sign Up).
-- **Modo Dark/Light:** Alternância de tema para melhor experiência do usuário.
+1. **Storefront (Área do Cliente):** Interface amigável e intuitiva para navegação de produtos, carrinho de compras e checkout.
+2. **Admin Dashboard (Painel Administrativo):** Um robusto sistema de gestão (CRM/ERP simplificado) que permite controle total sobre o inventário, pedidos e usuários.
 
-### Painel Administrativo (Admin Dashboard)
-- **Dashboard:** Visão geral com estatísticas de vendas, usuários e produtos.
-- **Gestão de Produtos:** CRUD completo (Adicionar, Editar, Excluir, Listar).
-- **Gestão de Usuários:** Controle de contas de usuários cadastrados e seus status (Ativo, Inativo, Bloqueado).
-- **Gestão de Pedidos:** Acompanhamento de status de pedidos (Pendente, Pago, Enviado, Entregue).
+> **💡 Foco para Recrutadores:** O código foi construído prezando pelas melhores práticas de engenharia de software, incluindo **Design Patterns**, **Separação de Responsabilidades (MVC)**, renderização do lado do servidor (SSR) otimizada para SEO e uma interface de usuário rica com responsividade.
 
-## 🔧 Como Executar o Projeto
+## 🛠️ Tecnologias e Ferramentas
 
-1. **Clone o repositório** (se aplicável):
-   ```bash
-   git clone <url-do-repositorio>
-   cd loja
-   ```
+As ferramentas foram escolhidas a dedo, refletindo o que há de mais moderno e demandado no mercado corporativo atual:
 
-2. **Execute a aplicação utilizando o Maven Wrapper:**
-   ```bash
-   # No Windows:
-   mvnw.cmd spring-boot:run
+### ⚙️ Back-end
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
+![Spring Data JPA](https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![H2 Database](https://img.shields.io/badge/H2_Database-4479A1?style=for-the-badge&logo=database&logoColor=white)
+![Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
 
-   # No Linux/Mac:
-   ./mvnw spring-boot:run
-   ```
+### 🎨 Front-end
+![Thymeleaf](https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Font Awesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
 
-3. **Acesse no Navegador:**
-   - Página Inicial: [http://localhost:8080/](http://localhost:8080/)
-   - Área Administrativa: [http://localhost:8080/admin](http://localhost:8080/admin)
-   - Console do Banco H2: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+---
 
-## 🗄️ Acesso ao Banco de Dados (H2 Console)
+## 🏗️ Arquitetura e Padrões
 
-Durante o desenvolvimento, você pode visualizar e interagir com as tabelas do banco de dados em memória.
-- **URL:** `http://localhost:8080/h2-console`
-- **JDBC URL:** `jdbc:h2:mem:ecommerce-db`
-- **Username:** `sa`
-- **Password:** *(deixe em branco)*
+O projeto adota de forma estrita a arquitetura **MVC (Model-View-Controller)**, garantindo um código limpo, testável e de fácil manutenção:
+- **Models (Entities):** Mapeamento Objeto-Relacional (ORM) estruturado com Hibernate/JPA.
+- **Controllers:** Orquestração de requisições HTTP, tratamento de validações e integração com a camada de serviços.
+- **Views (Thymeleaf):** Renderização de páginas dinâmicas no servidor, favorecendo tempo de resposta e segurança de dados críticos.
 
-## 📂 Estrutura do Projeto
+---
 
-- `src/main/java/com/example/loja`: Contém as classes Java (Controllers, Entities, e Main Application).
-- `src/main/resources/templates`: Contém as views em HTML integradas com Thymeleaf (`index.html`, `admin.html`, `checkout.html`, etc).
-- `src/main/resources/static`: Contém os arquivos estáticos de estilização (`css/`) e scripts (`js/`).
-- `src/main/resources/application.properties`: Configurações da aplicação e do banco de dados H2.
+## 📁 Estrutura de Pastas (Padrão MVC)
 
-## 🤝 Contribuição
+A organização do código foi cuidadosamente estruturada para facilitar a manutenção e a escalabilidade, separando claramente as responsabilidades (Model, View e Controller):
 
-Sinta-se à vontade para realizar forks e enviar pull requests. Para grandes mudanças, por favor abra uma issue primeiro para discutirmos o que você gostaria de mudar.
+```text
+📦 loja
+ ┣ 📂 src
+ ┃ ┣ 📂 main
+ ┃ ┃ ┣ 📂 java/com/example/loja
+ ┃ ┃ ┃ ┣ 📜 Product.java              <-- 🔵 MODEL (Representação dos Dados/Banco)
+ ┃ ┃ ┃ ┣ 📜 HomeController.java         <-- 🟢 CONTROLLER (Gerencia rotas e lógica)
+ ┃ ┃ ┃ ┣ 📜 ProduvtController.java      <-- 🟢 CONTROLLER (Ações de Produtos)
+ ┃ ┃ ┃ ┣ 📜 UsersController.java        <-- 🟢 CONTROLLER (Ações de Usuários)
+ ┃ ┃ ┃ ┣ 📜 DashboarController.java     <-- 🟢 CONTROLLER (Ações do Painel Admin)
+ ┃ ┃ ┃ ┗ 📜 LojaApplication.java        <-- Setup Inicial (Spring Boot Application)
+ ┃ ┃ ┃
+ ┃ ┃ ┣ 📂 resources
+ ┃ ┃ ┃ ┣ 📂 static                      <-- Arquivos Estáticos (Estilos CSS e Scripts JS)
+ ┃ ┃ ┃ ┣ 📂 templates                   <-- 🟡 VIEWS (Páginas visuais via Thymeleaf)
+ ┃ ┃ ┃ ┃ ┣ 📜 index.html              <-- 🟡 VIEW (Catálogo da Loja)
+ ┃ ┃ ┃ ┃ ┣ 📜 admin.html              <-- 🟡 VIEW (Painel Administrativo)
+ ┃ ┃ ┃ ┃ ┣ 📜 checkout.html           <-- 🟡 VIEW (Tela de Compra)
+ ┃ ┃ ┃ ┃ ┗ 📜 product.html            <-- 🟡 VIEW (Detalhes)
+ ┃ ┃ ┃ ┗ 📜 application.properties      <-- Configurações (Conexão do Banco H2)
+ ┣ 📜 pom.xml                           <-- Gerenciador de Dependências (Maven)
+ ┗ 📜 README.md                         <-- Documentação do Projeto
+```
+
+---
+
+## ✨ Funcionalidades em Destaque
+
+### 🛍️ Storefront (Experiência do Usuário)
+- **Catálogo Dinâmico:** Navegação fluida com filtros categóricos (Eletrônicos, Vestuário, etc.).
+- **Gestão de Carrinho:** Adição, edição de quantidade e remoção de itens com atualização intuitiva.
+- **Tema Personalizado:** Suporte nativo completo a **Dark Mode / Light Mode** na interface visual.
+- **Mobile-First:** Design completamente responsivo e agradável para dispositivos móveis, tablets e web.
+
+### 📊 Dashboard Administrativo (Gestão)
+- **Gestão de Produtos (CRUD):** Interface especializada para adicionar, atualizar informações, deletar e listar todos os produtos disponíveis na loja.
+- **Controle de Usuários:** Visão total de clientes cadastrados, níveis de permissão e status.
+- **Métricas e Dashboards:** Cards informativos para rápida tomada de decisão pelos administradores.
+
+---
+
+## 🚀 Como Executar Localmente
+
+Siga o passo a passo abaixo para rodar a aplicação em seu ambiente:
+
+### 1. Pré-requisitos
+- **Java 21** (ou superior) instalado e configurado no seu PATH.
+- Git instalado.
+
+### 2. Passo a Passo
+
+```bash
+# Clone este repositório
+git clone https://github.com/seu-usuario/seu-repositorio-loja.git
+
+# Acesse o diretório do projeto
+cd loja
+
+# Execute a aplicação via Maven Wrapper (sem necessidade de instalar o Maven globalmente)
+
+# 💻 No Windows:
+mvnw.cmd spring-boot:run
+
+# 🐧/🍏 No Linux/Mac:
+./mvnw spring-boot:run
+```
+
+### 3. Acessando a Aplicação
+Após alguns segundos, o servidor Tomcat embutido iniciará. Acesse:
+
+| Ambiente | URL |
+| :--- | :--- |
+| **Loja Virtual (Público)** | [http://localhost:8080/](http://localhost:8080/) |
+| **Painel Admin** | [http://localhost:8080/admin](http://localhost:8080/admin) |
+| **Console H2 (Banco)** | [http://localhost:8080/h2-console](http://localhost:8080/h2-console) |
+
+> **Acesso ao Banco H2 (Em Memória):**  
+> **JDBC URL:** `jdbc:h2:mem:ecommerce-db` | **User:** `sa` | **Password:** *(deixe em branco)*
+
+---
+
+## 📸 Demonstração Visual
+
+*(Sugestão: Substitua os placeholders abaixo pelas capturas de tela reais do seu projeto para impressionar quem visita seu repositório)*
+
+<table>
+  <tr>
+    <td align="center"><strong>Visão da Loja Virtual</strong></td>
+    <td align="center"><strong>Painel Administrativo</strong></td>
+  </tr>
+  <tr>
+    <td><img src="https://via.placeholder.com/450x280.png?text=Insira+Print+da+Loja+Aqui" alt="Loja"></td>
+    <td><img src="https://via.placeholder.com/450x280.png?text=Insira+Print+do+Admin+Aqui" alt="Admin Dashboard"></td>
+  </tr>
+</table>
+
+---
+
+## 📞 Contato
+
+Gostou da forma como desenvolvo? Estou disponível para novas oportunidades, sinta-se à vontade para me contatar:
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/seu-perfil/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/seu-usuario)
+[![E-mail](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:seu-email@gmail.com)
+
+---
+<p align="center">
+  <i>Desenvolvido com foco na qualidade e melhores práticas de Engenharia de Software.</i>
+</p>
