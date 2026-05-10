@@ -2,37 +2,17 @@ package com.example.loja;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 
 @Controller
 public class HomeController {
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("title", "Sua Loja Online Completa");
+        
         return "index";
     }
 
-    @GetMapping("/signin")
-    public String signin() {
-        return "signin";
-    }
-
-    @GetMapping("/signup")
-    public String signup() {
-        return "signup";
-    }
-
-    @GetMapping("/admin")
-    public String admin() {
-        return "admin";
-    }
-
-    @GetMapping("/checkout")
-    public String checkout() {
-        return "checkout";
-    }
-
-    @GetMapping("/order-success")
-    public String orderSuccess() {
-        return "order-success";
-    }
+    
 }
