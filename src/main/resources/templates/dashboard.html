@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-nav-container">
+            <div class="admin-logo">
+                <a th:href="@{/}">
+                    <h1><i class="fas fa-shopping-bag"></i> E-commerce</h1>
+                </a>
+                <span class="admin-badge">Admin</span>
+            </div>
+            <div class="admin-user-actions">
+                <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <div class="admin-user-info">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Admin</span>
+                </div>
+                <a th:href="@{/}" class="btn btn-outline btn-small">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Site
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <ul class="admin-nav-list">
+                    <li class="admin-nav-item">
+                        <a th:href="@{/dashboard}" class="admin-nav-link active">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="admin-nav-item">
+                        <a th:href="@{/product}" class="admin-nav-link">
+                            <i class="fas fa-box"></i>
+                            <span>Produtos</span>
+                        </a>
+                    </li>
+                    <li class="admin-nav-item">
+                        <a th:href="@{/orders}" class="admin-nav-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Pedidos</span>
+                        </a>
+                    </li>
+                    <li class="admin-nav-item">
+                        <a th:href="@{/users}" class="admin-nav-link">
+                            <i class="fas fa-users"></i>
+                            <span>Usuários</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <section id="dashboard-section" class="admin-section active">
+                <div class="admin-header-section">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                    <p>Visão geral do sistema</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-box text-primary"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>48</h3>
+                            <p>Total de Produtos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users text-success"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>234</h3>
+                            <p>Usuários Cadastrados</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-cart text-warning"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>127</h3>
+                            <p>Pedidos Realizados</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign text-success"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>R$ 68.450,00</h3>
+                            <p>Total em Vendas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="admin-grid">
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>Pedidos Recentes</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <i class="fas fa-shopping-cart text-success"></i>
+                                    <div>
+                                        <strong>Pedido #125</strong>
+                                        <span>Maria Santos</span>
+                                        <small>R$ 450,00 - Entregue</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <i class="fas fa-shopping-cart text-warning"></i>
+                                    <div>
+                                        <strong>Pedido #124</strong>
+                                        <span>Carlos Oliveira</span>
+                                        <small>R$ 1.200,00 - Em Transporte</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <i class="fas fa-shopping-cart text-danger"></i>
+                                    <div>
+                                        <strong>Pedido #123</strong>
+                                        <span>Ana Costa</span>
+                                        <small>R$ 320,00 - Cancelado</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>Produtos Mais Vendidos</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="product-ranking">
+                                <div class="ranking-item">
+                                    <span class="rank">1º</span>
+                                    <span class="product-name">Notebook Dell Inspiron 15</span>
+                                    <span class="sales-count">45 vendas</span>
+                                </div>
+                                <div class="ranking-item">
+                                    <span class="rank">2º</span>
+                                    <span class="product-name">Mouse Gamer RGB</span>
+                                    <span class="sales-count">38 vendas</span>
+                                </div>
+                                <div class="ranking-item">
+                                    <span class="rank">3º</span>
+                                    <span class="product-name">Teclado Mecânico</span>
+                                    <span class="sales-count">32 vendas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/admin.js}"></script>
+</body>
+</html>

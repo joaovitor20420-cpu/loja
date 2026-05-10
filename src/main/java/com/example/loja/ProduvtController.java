@@ -5,11 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class SignUpController {
-    
-    @GetMapping("/signup")
-    public String signUp(Model model) {
-        model.addAttribute("title", "Cadastro");
-        return "signup";
+public class ProduvtController {
+    @GetMapping("/product")
+    public String product(Model model) {
+        model.addAttribute("title", "Produto");
+        return "product";
     }
 }
