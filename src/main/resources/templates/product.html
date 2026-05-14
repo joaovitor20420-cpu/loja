@@ -111,15 +111,15 @@
                 </div>
 
                 <!-- Products Form -->
-                <form id="produto-form" class="form-grid two-columns" action="/product/save" method="POST" style="display:none; margin-bottom: 2rem;">
+                <form id="produto-form" class="form-grid two-columns" th:object="${product}" action="/product/save" method="POST" style="display:none; margin-bottom: 2rem;">
                     <input type="hidden" name="id" value="">
                     <div class="form-group">
                         <label for="produto-nome">Nome do Produto</label>
-                        <input type="text" id="produto-nome" name="name" required>
+                        <input type="text" th:field="*{name}" id="produto-nome" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="produto-categoria">Categoria</label>
-                        <select id="produto-categoria" name="category" required>
+                        <select id="produto-categoria" th:field="*{category}" name="category" required>
                             <option value="">Selecione uma categoria</option>
                             <option value="ELECTRONICS">Eletrônicos</option>
                             <option value="CLOTHING">Roupas e Acessórios</option>
@@ -132,18 +132,20 @@
                     </div>
                     <div class="form-group">
                         <label for="produto-preco">Preço</label>
-                        <input type="number" id="produto-preco" name="price" step="0.01" value="0" required>
+                        <input type="number" th:field="*{price}" id="produto-preco" name="price" step="0.01" value="0" required>
                     </div>
                     <div class="form-group">
                         <label for="produto-status">Status</label>
-                        <select id="produto-status" name="status" required>
+                        <select id="produto-status" th:field="*{state}" name="state" required>
                             <option value="ativo">Ativo</option>
                             <option value="inativo">Inativo</option>
                         </select>
+                        <label for="produto-quantity">Quantidade</label>
+                        <input type="number" id="produto-quantity" name="quantity" th:field="*{stock}" value="1" min="1" required>
                     </div>
                     <div class="form-group full-width">
                         <label for="produto-descricao">Descrição</label>
-                        <textarea id="produto-descricao" name="description" rows="4" required></textarea>
+                        <textarea th:field="*{description}" id="produto-descricao" name="description" rows="4" required></textarea>
                     </div>
 
                     <div class="form-actions">
