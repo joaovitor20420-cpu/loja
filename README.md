@@ -67,23 +67,38 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
  ┣ 📂 src
  ┃ ┣ 📂 main
  ┃ ┃ ┣ 📂 java/com/example/loja
- ┃ ┃ ┃ ┣ 📜 Product.java              <-- 🔵 MODEL (Representação dos Dados/Banco)
- ┃ ┃ ┃ ┣ 📜 HomeController.java         <-- 🟢 CONTROLLER (Gerencia rotas e lógica)
- ┃ ┃ ┃ ┣ 📜 ProduvtController.java      <-- 🟢 CONTROLLER (Ações de Produtos)
- ┃ ┃ ┃ ┣ 📜 UsersController.java        <-- 🟢 CONTROLLER (Ações de Usuários)
- ┃ ┃ ┃ ┣ 📜 DashboarController.java     <-- 🟢 CONTROLLER (Ações do Painel Admin)
- ┃ ┃ ┃ ┗ 📜 LojaApplication.java        <-- Setup Inicial (Spring Boot Application)
+ ┃ ┃ ┃ ┣ 📜 Product.java              <-- 🔵 MODEL (Entidade JPA - Produto)
+ ┃ ┃ ┃ ┣ 📜 ProductRepository.java    <-- 🔵 REPOSITORY (Acesso ao Banco de Dados)
+ ┃ ┃ ┃ ┣ 📜 ProductController.java    <-- 🟢 CONTROLLER (CRUD de Produtos)
+ ┃ ┃ ┃ ┣ 📜 HomeController.java       <-- 🟢 CONTROLLER (Página Inicial)
+ ┃ ┃ ┃ ┣ 📜 AdmimController.java      <-- 🟢 CONTROLLER (Painel Admin)
+ ┃ ┃ ┃ ┣ 📜 DashboarController.java   <-- 🟢 CONTROLLER (Dashboard)
+ ┃ ┃ ┃ ┣ 📜 UsersController.java      <-- 🟢 CONTROLLER (Usuários)
+ ┃ ┃ ┃ ┣ 📜 OrdersController.java     <-- 🟢 CONTROLLER (Pedidos)
+ ┃ ┃ ┃ ┣ 📜 CheckoutController.java   <-- 🟢 CONTROLLER (Checkout)
+ ┃ ┃ ┃ ┣ 📜 OrderSuccessController.java <-- 🟢 CONTROLLER (Confirmação de Pedido)
+ ┃ ┃ ┃ ┣ 📜 SignInController.java      <-- 🟢 CONTROLLER (Login)
+ ┃ ┃ ┃ ┣ 📜 SignUpController.java      <-- 🟢 CONTROLLER (Cadastro)
+ ┃ ┃ ┃ ┗ 📜 LojaApplication.java      <-- Setup Inicial (Spring Boot Application)
  ┃ ┃ ┃
  ┃ ┃ ┣ 📂 resources
- ┃ ┃ ┃ ┣ 📂 static                      <-- Arquivos Estáticos (Estilos CSS e Scripts JS)
- ┃ ┃ ┃ ┣ 📂 templates                   <-- 🟡 VIEWS (Páginas visuais via Thymeleaf)
- ┃ ┃ ┃ ┃ ┣ 📜 index.html              <-- 🟡 VIEW (Catálogo da Loja)
- ┃ ┃ ┃ ┃ ┣ 📜 admin.html              <-- 🟡 VIEW (Painel Administrativo)
- ┃ ┃ ┃ ┃ ┣ 📜 checkout.html           <-- 🟡 VIEW (Tela de Compra)
- ┃ ┃ ┃ ┃ ┗ 📜 product.html            <-- 🟡 VIEW (Detalhes)
- ┃ ┃ ┃ ┗ 📜 application.properties      <-- Configurações (Conexão do Banco H2)
- ┣ 📜 pom.xml                           <-- Gerenciador de Dependências (Maven)
- ┗ 📜 README.md                         <-- Documentação do Projeto
+ ┃ ┃ ┃ ┣ 📂 static                    <-- Arquivos Estáticos (CSS e JS)
+ ┃ ┃ ┃ ┃ ┣ 📂 css                    <-- Estilos da Aplicação
+ ┃ ┃ ┃ ┃ ┗ 📂 js                     <-- Scripts JavaScript
+ ┃ ┃ ┃ ┣ 📂 templates                 <-- 🟡 VIEWS (Páginas Thymeleaf)
+ ┃ ┃ ┃ ┃ ┣ 📜 index.html             <-- 🟡 VIEW (Catálogo da Loja)
+ ┃ ┃ ┃ ┃ ┣ 📜 product.html           <-- 🟡 VIEW (Gestão de Produtos - CRUD)
+ ┃ ┃ ┃ ┃ ┣ 📜 admin.html             <-- 🟡 VIEW (Painel Administrativo)
+ ┃ ┃ ┃ ┃ ┣ 📜 dashboard.html         <-- 🟡 VIEW (Dashboard Admin)
+ ┃ ┃ ┃ ┃ ┣ 📜 users.html             <-- 🟡 VIEW (Gestão de Usuários)
+ ┃ ┃ ┃ ┃ ┣ 📜 orders.html            <-- 🟡 VIEW (Gestão de Pedidos)
+ ┃ ┃ ┃ ┃ ┣ 📜 checkout.html          <-- 🟡 VIEW (Tela de Compra)
+ ┃ ┃ ┃ ┃ ┣ 📜 order-success.html     <-- 🟡 VIEW (Confirmação de Pedido)
+ ┃ ┃ ┃ ┃ ┣ 📜 signin.html            <-- 🟡 VIEW (Login)
+ ┃ ┃ ┃ ┃ ┗ 📜 signup.html            <-- 🟡 VIEW (Cadastro)
+ ┃ ┃ ┃ ┗ 📜 application.properties    <-- Configurações (Conexão do Banco H2)
+ ┣ 📜 pom.xml                         <-- Gerenciador de Dependências (Maven)
+ ┗ 📜 README.md                       <-- Documentação do Projeto
 ```
 
 ---
@@ -97,7 +112,11 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
 - **Mobile-First:** Design completamente responsivo e agradável para dispositivos móveis, tablets e web.
 
 ### 📊 Dashboard Administrativo (Gestão)
-- **Gestão de Produtos (CRUD):** Interface especializada para adicionar, atualizar informações, deletar e listar todos os produtos disponíveis na loja.
+- **CRUD Completo de Produtos:** ✅ Totalmente funcional — Criar, Listar, Editar e Excluir produtos com persistência no banco de dados H2 via Spring Data JPA.
+  - **Create:** Formulário dinâmico para cadastro de novos produtos (nome, categoria, preço, status, quantidade e descrição).
+  - **Read:** Listagem em tabela com todos os produtos cadastrados, com busca e filtro por categoria.
+  - **Update:** Edição inline — ao clicar em "Editar", o formulário é preenchido automaticamente com os dados do produto selecionado.
+  - **Delete:** Exclusão com confirmação do navegador para evitar remoções acidentais.
 - **Controle de Usuários:** Visão total de clientes cadastrados, níveis de permissão e status.
 - **Métricas e Dashboards:** Cards informativos para rápida tomada de decisão pelos administradores.
 
