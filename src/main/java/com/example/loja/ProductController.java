@@ -20,15 +20,17 @@ public class ProductController {
     public String product(Model model) {
         model.addAttribute("title", "Produto");
         model.addAttribute("product", new Product());
+        model.addAttribute("products", productRepository.findAll());
         return "product";
     }
-    
+
     @PostMapping("/product/save")
     public String saveProduct(@ModelAttribute Product product) {
         productRepository.save(product);
+        System.out.println(product);
         return "redirect:/product";
-    } 
-    
+    }
+
     @GetMapping("/product/list")
     public String productList(Model model) {
         model.addAttribute("title", "Lista de Produtos");
@@ -39,9 +41,15 @@ public class ProductController {
     @GetMapping("/product/edit/{id}")
     public String editProduct(@PathVariable Long id, Model model) {
         model.addAttribute("title", "Editar Produto");
+        model.addAttribute("products", productRepository.findAll());
         model.addAttribute("product", ((Optional<Product>) productRepository.findById(id)).get());
         return "product";
     }
 
-    
+    @GetMapping("/product/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productRepository.deleteById(id);
+        return "redirect:/product";
+    }
+
 }

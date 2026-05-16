@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}"></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/auth.css}">
     <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
+
 <body>
     <header class="admin-header">
         <div class="admin-nav-container">
@@ -69,50 +72,21 @@
         </aside>
 
         <main class="admin-main">
-            <!-- Delete Confirmation -->
-            <section id="delete-confirmation" class="admin-section" style="display:none">
-                <div class="admin-card">
-                    <div class="card-header">
-                        <h3>
-                            <i class="fas fa-exclamation-triangle text-warning"></i>
-                            Excluir Produto
-                        </h3>
-                    </div>
-                    <div class="card-content">
-                        <div class="delete-confirmation">
-                            <div class="warning-icon">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                            <h2>Confirmar Exclusão</h2>
-                            <p>Tem certeza que deseja excluir o produto:</p>
-                            <h4 class="product-name-highlight">Produto Selecionado</h4>
-                            <p class="warning-text">Esta ação não poderá ser desfeita.</p>
-                        </div>
-                    </div>
-                    <div class="card-footer delete-footer" style="display: flex; justify-content: center; padding-bottom: 2rem;">
-                        <div class="form-actions" style="gap: 1rem;">
-                            <button type="button" class="btn btn-outline" onclick="document.getElementById('delete-confirmation').style.display='none'; document.getElementById('produtos-section').style.display='block';">
-                                <i class="fas fa-times"></i> Cancelar
-                            </button>
-                            <a href="#" class="btn btn-danger">
-                                <i class="fas fa-trash"></i> Excluir
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             <section id="produtos-section" class="admin-section active">
                 <div class="admin-header-section">
                     <h2><i class="fas fa-box"></i> Gestão de Produtos</h2>
-                    <button class="btn btn-primary" id="add-produto-btn" onclick="document.getElementById('produto-form').style.display='grid';">
+                    <button class="btn btn-primary" id="add-produto-btn"
+                        onclick="document.getElementById('produto-form').style.display='grid';">
                         <i class="fas fa-plus"></i> Adicionar Produto
                     </button>
                 </div>
 
                 <!-- Products Form -->
-                <form id="produto-form" class="form-grid two-columns" th:object="${product}" action="/product/save" method="POST" style="display:none; margin-bottom: 2rem;">
-                    <input type="hidden" name="id" value="">
+                <form id="produto-form" class="form-grid two-columns" th:object="${product}" action="/product/save"
+                    method="POST"
+                    th:style="${product.id != null} ? 'display:grid; margin-bottom: 2rem;' : 'display:none; margin-bottom: 2rem;'">
+                    <input type="text" name="id" th:field="*{id}" style="display:none;">
                     <div class="form-group">
                         <label for="produto-nome">Nome do Produto</label>
                         <input type="text" th:field="*{name}" id="produto-nome" name="name" required>
@@ -132,7 +106,8 @@
                     </div>
                     <div class="form-group">
                         <label for="produto-preco">Preço</label>
-                        <input type="number" th:field="*{price}" id="produto-preco" name="price" step="0.01" value="0" required>
+                        <input type="number" th:field="*{price}" id="produto-preco" name="price" step="0.01" value="0"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="produto-status">Status</label>
@@ -141,15 +116,18 @@
                             <option value="inativo">Inativo</option>
                         </select>
                         <label for="produto-quantity">Quantidade</label>
-                        <input type="number" id="produto-quantity" name="quantity" th:field="*{stock}" value="1" min="1" required>
+                        <input type="number" id="produto-quantity" name="quantity" th:field="*{stock}" value="1" min="1"
+                            required>
                     </div>
                     <div class="form-group full-width">
                         <label for="produto-descricao">Descrição</label>
-                        <textarea th:field="*{description}" id="produto-descricao" name="description" rows="4" required></textarea>
+                        <textarea th:field="*{description}" id="produto-descricao" name="description" rows="4"
+                            required></textarea>
                     </div>
 
                     <div class="form-actions">
-                        <button type="button" class="btn btn-outline btn-form" onclick="document.getElementById('produto-form').style.display='none';">
+                        <button type="button" class="btn btn-outline btn-form"
+                            onclick="document.getElementById('produto-form').style.display='none';">
                             <i class="fas fa-times"></i> Cancelar
                         </button>
                         <button type="submit" class="btn btn-primary btn-form">
@@ -184,53 +162,28 @@
                                 <th>Categoria</th>
                                 <th>Preço</th>
                                 <th>Status</th>
+                                <th>Quantidade</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Notebook Dell Inspiron 15</td>
-                                <td>Eletrônicos</td>
-                                <td>R$ 3.499,00</td>
-                                <td>ativo</td>
+                            <tr th:each="product : ${products}">
+                                <td th:text="${product.id}"></td>
+                                <td th:text="${product.name}"></td>
+                                <td th:text="${product.category}"></td>
+                                <td th:text="${product.price}"></td>
+                                <td th:text="${product.state}"></td>
+                                <td th:text="${product.stock}"></td>
                                 <td class="action-buttons">
-                                    <button class="btn-icon btn-edit" title="Editar" onclick="document.getElementById('produto-form').style.display='grid';">
+                                    <a th:href="@{/product/edit/{id}(id=${product.id})}" class="btn-icon btn-edit"
+                                        title="Editar">
                                         <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon btn-delete" title="Excluir" onclick="document.getElementById('delete-confirmation').style.display='block'; document.getElementById('produtos-section').style.display='none';">
+                                    </a>
+                                    <a th:href="@{/product/delete/{id}(id=${product.id})}" class="btn-icon btn-delete"
+                                        title="Excluir"
+                                        onclick="return confirm('Tem certeza que deseja excluir este produto?');">
                                         <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Mouse Gamer RGB</td>
-                                <td>Eletrônicos</td>
-                                <td>R$ 149,90</td>
-                                <td>ativo</td>
-                                <td class="action-buttons">
-                                    <button class="btn-icon btn-edit" title="Editar" onclick="document.getElementById('produto-form').style.display='grid';">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon btn-delete" title="Excluir" onclick="document.getElementById('delete-confirmation').style.display='block'; document.getElementById('produtos-section').style.display='none';">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Camiseta Algodão Premium</td>
-                                <td>Roupas e Acessórios</td>
-                                <td>R$ 79,90</td>
-                                <td>inativo</td>
-                                <td class="action-buttons">
-                                    <button class="btn-icon btn-edit" title="Editar" onclick="document.getElementById('produto-form').style.display='grid';">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon btn-delete" title="Excluir" onclick="document.getElementById('delete-confirmation').style.display='block'; document.getElementById('produtos-section').style.display='none';">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -243,4 +196,5 @@
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/admin.js}"></script>
 </body>
+
 </html>
