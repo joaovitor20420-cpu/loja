@@ -1,5 +1,10 @@
 package com.example.loja;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class ProductController {
@@ -25,9 +32,31 @@ public class ProductController {
     }
 
     @PostMapping("/product/save")
-    public String saveProduct(@ModelAttribute Product product) {
+    public String saveProduct(@ModelAttribute Product product,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
+                Path uploadPath = Paths.get("uploads");
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+                Files.copy(imageFile.getInputStream(), uploadPath.resolve(fileName),
+                        StandardCopyOption.REPLACE_EXISTING);
+                product.setImage(fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (product.getId() != null) {
+            // Editando sem trocar a imagem: manter a imagem antiga
+            Product existing = productRepository.findById(product.getId()).orElse(null);
+            if (existing != null) {
+                product.setImage(existing.getImage());
+            }
+        }
+
         productRepository.save(product);
-        System.out.println(product);
         return "redirect:/product";
     }
 
