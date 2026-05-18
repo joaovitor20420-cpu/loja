@@ -68,6 +68,7 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
  ┃ ┣ 📂 main
  ┃ ┃ ┣ 📂 java/com/example/loja
  ┃ ┃ ┃ ┣ 📜 Product.java              <-- 🔵 MODEL (Entidade JPA - Produto)
+ ┃ ┃ ┃ ┣ 📜 Category.java             <-- 🔵 MODEL (Enum de Categorias EN/pt-BR)
  ┃ ┃ ┃ ┣ 📜 ProductRepository.java    <-- 🔵 REPOSITORY (Acesso ao Banco de Dados)
  ┃ ┃ ┃ ┣ 📜 ProductController.java    <-- 🟢 CONTROLLER (CRUD de Produtos)
  ┃ ┃ ┃ ┣ 📜 HomeController.java       <-- 🟢 CONTROLLER (Página Inicial)
@@ -79,6 +80,7 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
  ┃ ┃ ┃ ┣ 📜 OrderSuccessController.java <-- 🟢 CONTROLLER (Confirmação de Pedido)
  ┃ ┃ ┃ ┣ 📜 SignInController.java      <-- 🟢 CONTROLLER (Login)
  ┃ ┃ ┃ ┣ 📜 SignUpController.java      <-- 🟢 CONTROLLER (Cadastro)
+ ┃ ┃ ┃ ┣ 📜 WebConfig.java             <-- ⚙️ CONFIG (Recursos Estáticos / Uploads)
  ┃ ┃ ┃ ┗ 📜 LojaApplication.java      <-- Setup Inicial (Spring Boot Application)
  ┃ ┃ ┃
  ┃ ┃ ┣ 📂 resources
@@ -111,14 +113,69 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
 - **Tema Personalizado:** Suporte nativo completo a **Dark Mode / Light Mode** na interface visual.
 - **Mobile-First:** Design completamente responsivo e agradável para dispositivos móveis, tablets e web.
 
+### 🏠 Página Inicial (`index.html`)
+- Hero section com chamada para ação e título dinâmico via Thymeleaf
+- Listagem de produtos em grid responsivo com ícones por categoria
+- Filtro visual de produtos por categoria (botões categóricos)
+- Botões de "Adicionar ao Carrinho" e "Ver Detalhes" por produto
+- Menu de navegação com links para Home, Produtos e Meus Pedidos
+- Dropdown de perfil com opções de Login, Cadastro, Área Administrativa e Logout
+- Seção de carrinho de compras com resumo, tabela de itens e mensagem de carrinho vazio
+
+### 🔐 Autenticação (`signin.html` / `signup.html`)
+- Tela de **Login** com validação de senha, toggle de visibilidade, "Lembrar de mim" e "Esqueceu a senha?"
+- Tela de **Cadastro** com campos de nome, sobrenome, e-mail, telefone, senha e confirmação
+- Requisitos de senha exibidos em tempo real (8+ caracteres, maiúscula, número, caractere especial)
+- Login social com Google e Facebook (layout preparado)
+- Aceite de Termos de Uso, Política de Privacidade e opção de newsletter
+- Painel decorativo lateral com destaques da loja
+
+### 💳 Checkout e Confirmação (`checkout.html` / `order-success.html`)
+- Resumo do pedido com detalhes do cliente, total de itens e valor
+- Método de pagamento via PIX com QR Code
+- Tabela de itens do pedido com preço unitário, quantidade e subtotal
+- Tela de sucesso com confirmação visual, número do pedido e próximos passos
+
 ### 📊 Dashboard Administrativo (Gestão)
 - **CRUD Completo de Produtos:** ✅ Totalmente funcional — Criar, Listar, Editar e Excluir produtos com persistência no banco de dados H2 via Spring Data JPA.
   - **Create:** Formulário dinâmico para cadastro de novos produtos (nome, categoria, preço, status, quantidade e descrição).
+  - **Upload de Imagens:** Suporte a upload de arquivos de imagem (`MultipartFile`), com salvamento em diretório local (`uploads/`) e pré-visualização dinâmica.
   - **Read:** Listagem em tabela com todos os produtos cadastrados, com busca e filtro por categoria.
   - **Update:** Edição inline — ao clicar em "Editar", o formulário é preenchido automaticamente com os dados do produto selecionado.
   - **Delete:** Exclusão com confirmação do navegador para evitar remoções acidentais.
-- **Controle de Usuários:** Visão total de clientes cadastrados, níveis de permissão e status.
-- **Métricas e Dashboards:** Cards informativos para rápida tomada de decisão pelos administradores.
+- **Categorias Dinâmicas:** Enum `Category` com nomes em inglês e descrições em pt-BR, carregadas automaticamente nos selects via `Category.values()`.
+- **Controle de Usuários:** Formulário de cadastro/edição, tabela com listagem, filtro por status (Ativo, Inativo, Bloqueado, Suspenso) e confirmação de exclusão.
+- **Gestão de Pedidos:** Tabela com ID, cliente, total de itens, valor, status, método de pagamento e data. Filtro por status (Pendente, Confirmado, Pago, Enviado, Entregue, Cancelado).
+- **Métricas e Dashboards:** Cards informativos (Total de Produtos, Usuários, Pedidos, Receita), lista de pedidos recentes e ranking de produtos mais vendidos.
+- **Sidebar de Navegação:** Menu lateral com links ativos para Dashboard, Produtos, Pedidos e Usuários.
+
+### 🎨 Interface & UX
+- Design moderno com tipografia **Plus Jakarta Sans** (Google Fonts)
+- Ícones **Font Awesome 6.4** em toda a aplicação
+- Alternância de tema **claro/escuro** com toggle persistente
+- Layout responsivo com grid CSS
+- 4 arquivos CSS especializados: `styles.css`, `admin.css`, `auth.css`, `order-success.css`
+- 3 arquivos JS especializados: `main.js`, `admin.js`, `auth.js`
+
+---
+
+## 🗺️ Mapa de Rotas
+
+| Rota | Controller | Página | Descrição |
+| :--- | :--- | :--- | :--- |
+| `GET /` | `HomeController` | `index.html` | Vitrine da loja com catálogo de produtos |
+| `GET /product` | `ProductController` | `product.html` | CRUD de produtos (admin) |
+| `POST /product/save` | `ProductController` | — | Salvar/atualizar produto |
+| `GET /product/edit/{id}` | `ProductController` | `product.html` | Editar produto existente |
+| `GET /product/delete/{id}` | `ProductController` | — | Excluir produto |
+| `GET /admin` | `AdmimController` | `admin.html` | Painel administrativo completo |
+| `GET /dashboard` | `DashboarController` | `dashboard.html` | Dashboard com métricas |
+| `GET /orders` | `OrdersController` | `orders.html` | Gestão de pedidos |
+| `GET /users` | `UsersController` | `users.html` | Gestão de usuários |
+| `GET /signin` | `SignInController` | `signin.html` | Tela de login |
+| `GET /signup` | `SignUpController` | `signup.html` | Tela de cadastro |
+| `GET /checkout` | `CheckoutController` | `checkout.html` | Finalizar compra |
+| `GET /order-success` | `OrderSuccessController` | `order-success.html` | Pedido confirmado |
 
 ---
 

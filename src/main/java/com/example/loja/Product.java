@@ -1,6 +1,8 @@
 package com.example.loja;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,13 +17,15 @@ public class Product {
     private double price;
     private String state;
     private String image;
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private Category category;
     private int stock;
 
     public Product() {
     }
 
-    public Product(Long id, String name, String description, double price,String state, String image, String category, int stock) {
+    public Product(Long id, String name, String description, double price, String state, String image,
+            Category category, int stock) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -55,9 +59,11 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getState() {
         return state;
     }
+
     public void setState(String state) {
         this.state = state;
     }
@@ -78,11 +84,11 @@ public class Product {
         this.image = image;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -97,5 +103,5 @@ public class Product {
     public String toString() {
         return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
                 + ", image=" + image + ", category=" + category + ", stock=" + stock + "]";
-    }   
+    }
 }
