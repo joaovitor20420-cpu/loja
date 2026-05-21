@@ -3,63 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - E-commerce Full Stack Club</title>
+    <title>Exclusive Access - Login</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
     <link rel="stylesheet" th:href="@{/css/auth.css}" href="/css/auth.css">
 </head>
 <body>
-    <!-- Header Simplificado -->
     <header class="header">
         <nav class="nav-container">
             <div class="logo">
                 <a th:href="@{/}">
-                    <h1><i class="fas fa-shopping-bag"></i> E-commerce</h1>
+                    <h1><i class="fas fa-crown"></i> E-commerce</h1>
                 </a>
             </div>
             <div class="user-actions">
                 <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
-                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
                 </button>
             </div>
         </nav>
     </header>
 
-    <!-- Auth Container -->
     <main class="auth-main">
         <div class="auth-container">
             <div class="auth-card">
                 <div class="auth-header">
-                    <h2><i class="fas fa-sign-in-alt"></i> Entrar na sua conta</h2>
-                    <p>Acesse sua conta para continuar comprando</p>
+                    <h2><i class="fas fa-key"></i> Exclusive Access</h2>
+                    <p>Enter your credentials to access your private collection</p>
                 </div>
 
-                <!-- Mensagem de erro (hidden by default) -->
-                <!-- ⚠️ THYMELEAF: Remover style="display: none;" e adicionar th:if="${error}" -->
-                <div class="alert alert-error" style="display: none;">
-                    <i class="fas fa-exclamation-circle"></i>
+                <div class="alert alert-error" th:if="${error}">
+                    <i class="fas fa-exclamation-triangle"></i>
                     <span>Email ou senha incorretos</span>
                 </div>
-
-                <br>
 
                 <form class="auth-form" th:href="@{/}" method="post">
                     <div class="form-group">
                         <label for="email">
-                            <i class="fas fa-envelope"></i> E-mail
+                            <i class="fas fa-envelope"></i> Email Address
                         </label>
-                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                        <input type="email" id="email" name="email" required placeholder="Enter Email Address">
                     </div>
 
                     <div class="form-group">
                         <label for="password">
-                            <i class="fas fa-lock"></i> Senha
+                            <i class="fas fa-lock"></i> Passcode
                         </label>
                         <div class="password-field">
-                            <input type="password" id="password" name="password" required placeholder="Digite sua senha" minlength="8">
+                            <input type="password" id="password" name="password" required placeholder="Enter Passcode" minlength="8">
                             <button type="button" class="password-toggle" id="password-toggle">
                                 <i class="fas fa-eye"></i>
                             </button>
@@ -67,12 +61,12 @@
                     </div>
 
                     <div class="password-requirements" id="password-requirements">
-                        <p><i class="fas fa-info-circle"></i> Sua senha deve ter:</p>
+                        <p><i class="fas fa-shield-alt"></i> Security Requirements:</p>
                         <ul>
-                            <li id="req-length"><i class="fas fa-times"></i> Pelo menos 8 caracteres</li>
-                            <li id="req-uppercase"><i class="fas fa-times"></i> Uma letra maiúscula</li>
-                            <li id="req-number"><i class="fas fa-times"></i> Um número</li>
-                            <li id="req-special"><i class="fas fa-times"></i> Um caractere especial</li>
+                            <li id="req-length"><i class="fas fa-times"></i> Minimum 8 characters</li>
+                            <li id="req-uppercase"><i class="fas fa-times"></i> One uppercase letter</li>
+                            <li id="req-number"><i class="fas fa-times"></i> One numeric value</li>
+                            <li id="req-special"><i class="fas fa-times"></i> One special symbol</li>
                         </ul>
                     </div>
 
@@ -80,52 +74,50 @@
                         <label class="checkbox-container">
                             <input type="checkbox" id="remember" name="remember">
                             <span class="checkmark"></span>
-                            Lembrar de mim
+                            Remember my credentials
                         </label>
-                        <a href="#" class="forgot-link">Esqueceu a senha?</a>
+                        <a href="#" class="forgot-link">Recover Passcode</a>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-auth">
-                        <i class="fas fa-sign-in-alt"></i> Entrar
+                        Enter Vault <i class="fas fa-arrow-right"></i>
                     </button>
 
                     <div class="divider">
-                        <span>ou</span>
+                        <span>or</span>
                     </div>
 
                     <div class="social-login">
                         <button type="button" class="btn btn-social btn-google">
-                            <i class="fab fa-google"></i> Continuar com Google
+                            <i class="fab fa-google"></i> Google
                         </button>
                         <button type="button" class="btn btn-social btn-facebook">
-                            <i class="fab fa-facebook-f"></i> Continuar com Facebook
+                            <i class="fab fa-facebook-f"></i> Facebook
                         </button>
                     </div>
                 </form>
 
                 <div class="auth-footer">
-                    <p>Não tem uma conta? <a th:href="@{/signup}" class="auth-link">Criar conta</a></p>
+                    <p>Not a member yet? <a th:href="@{/signup}" class="auth-link">Request Invitation</a></p>
                 </div>
             </div>
 
-            <!-- Decorative Side -->
             <div class="auth-side">
                 <div class="auth-side-content">
-                    <i class="fas fa-shopping-cart auth-side-icon"></i>
-                    <h3>Bem-vindo de volta!</h3>
-                    <p>Entre na sua conta e continue explorando nossos produtos incríveis. Suas compras estão te esperando!</p>
+                    <h3>The Club</h3>
+                    <p>A curated experience of absolute luxury and refinement. Step inside the vault and discover our exclusive collections.</p>
                     <div class="auth-side-features">
                         <div class="feature-item">
-                            <i class="fas fa-truck"></i>
-                            <span>Frete grátis acima de R$ 199</span>
+                            <i class="fas fa-gem"></i>
+                            <span>Unparalleled Quality</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Compra 100% segura</span>
+                            <i class="fas fa-concierge-bell"></i>
+                            <span>White-Glove Delivery</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-undo"></i>
-                            <span>Troca grátis em 30 dias</span>
+                            <i class="fas fa-user-shield"></i>
+                            <span>Private & Secure</span>
                         </div>
                     </div>
                 </div>

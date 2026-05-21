@@ -3,117 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedido Confirmado - E-commerce Full Stack Club</title>
+    <title>Acquisition Confirmed - Exclusive E-commerce</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
     <link rel="stylesheet" th:href="@{/css/admin.css}" href="/css/admin.css">
     <link rel="stylesheet" th:href="@{/css/order-success.css}" href="/css/order-success.css">
 </head>
-<body>
+<body class="dark-luxury">
     <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">
-                <h1><i class="fas fa-shopping-bag"></i> E-commerce</h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#produtos">Produtos</a></li>
-            </ul>
-            <div class="user-actions">
-                <a href="index.html" class="cart-btn" id="cart-btn" title="Carrinho de compras">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count" id="cart-count">0</span>
-                </a>
-                <div class="dropdown">
-                    <button class="btn btn-outline dropdown-toggle" id="profile-dropdown">
-                        <i class="fas fa-user"></i> <span>Perfil</span> <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="dropdown-menu" id="dropdown-menu">
-                        <a href="signin.html" class="dropdown-item">
-                            <i class="fas fa-sign-in-alt"></i> Fazer Login
-                        </a>
-                        <a href="signup.html" class="dropdown-item">
-                            <i class="fas fa-user-plus"></i> Criar Conta
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="admin.html" class="dropdown-item">
-                            <i class="fas fa-cogs"></i> Área Administrativa
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="index.html" class="dropdown-item">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Success Section -->
-    <section class="cart-section">
-        <div class="container">
-            <div class="admin-card">
-                <div class="card-header">
-                    <h3>
-                        <i class="fas fa-check-circle" style="color: #10b981;"></i>
-                        Pedido Confirmado
-                    </h3>
-                </div>
-                <div class="card-content">
-                    <!-- Success Alert -->
-                    <div class="success-alert">
-                        <div class="success-alert-header">
-                            <i class="fas fa-check-circle success-alert-icon"></i>
-                            <h2 class="success-alert-title">Pedido Realizado com Sucesso!</h2>
-                        </div>
-                        <div class="success-alert-body">
-                            <p class="success-alert-text">
-                                Seu pedido foi confirmado e está sendo processado.
-                            </p>
-                            <p class="success-alert-text">
-                                Você receberá um email com o <strong>QR Code PIX</strong> para realizar o pagamento.
-                            </p>
-                            <p class="success-alert-text">
-                                Verifique sua caixa de entrada em: <strong>usuario@email.com</strong>
-                            </p>
-                            <div class="order-id-badge">
-                                <i class="fas fa-receipt"></i> Pedido #<span>12345</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Additional Info -->
-                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 8px; margin-top: 2rem; border: 1px solid var(--border-color);">
-                        <h4 style="color: var(--text-primary); margin-bottom: 1rem;">
-                            <i class="fas fa-info-circle"></i> Próximos Passos
-                        </h4>
-                        <ul style="color: var(--text-secondary); line-height: 1.8; padding-left: 1.5rem;">
-                            <li>Verifique seu email para o QR Code de pagamento</li>
-                            <li>Realize o pagamento via PIX</li>
-                            <li>Aguarde a confirmação do pagamento</li>
-                            <li>Acompanhe o status do seu pedido em "Meus Pedidos"</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-footer" style="display: flex; justify-content: center; padding-bottom: 2rem;">
-                    <div class="form-actions" style="gap: 1rem;">
-                        <a href="index.html" class="btn btn-primary">
-                            <i class="fas fa-home"></i> Voltar à Home
-                        </a>
-                    </div>
+    <header class="dark-luxury-header">
+        <div class="logo">
+            <h1><i class="fas fa-gem"></i> EXCLUSIVE</h1>
+        </div>
+        <ul class="dark-luxury-nav">
+            <li><a href="index.html">Boutique</a></li>
+            <li><a href="#produtos">Collections</a></li>
+        </ul>
+        <div class="dark-luxury-actions">
+            <a href="index.html" class="cart-btn" id="cart-btn" title="Shopping Bag">
+                <i class="fas fa-shopping-bag"></i> <span id="cart-count" style="margin-left: 0.2rem;">0</span>
+            </a>
+            
+            <div class="dropdown">
+                <button class="luxury-btn luxury-btn-outline dropdown-toggle" id="profile-dropdown" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+                    <i class="fas fa-user"></i> <span>Client</span> <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
+                </button>
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Register</a>
+                    <hr class="dropdown-divider">
+                    <a href="admin.html" class="dropdown-item"><i class="fas fa-cogs"></i> Administration</a>
+                    <hr class="dropdown-divider">
+                    <a href="index.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
-        <i class="fas fa-sun"></i>
-    </button>
+    <!-- Success Section -->
+    <main class="luxury-container">
+        <div class="luxury-card" style="text-align: center; padding: 5rem 3rem;">
+            
+            <div class="luxury-success-alert">
+                <i class="fas fa-gem luxury-success-icon"></i>
+                <h2>Acquisition Confirmed</h2>
+                <p>Your exclusive request has been received and is being prepared with utmost care.</p>
+                <p>An elegant correspondence containing your <strong>PIX QR Code</strong> has been dispatched.</p>
+                <p style="margin-top: 1.5rem; font-size: 0.95rem;">
+                    Please check your inbox at: <strong style="color: var(--text-light);">usuario@email.com</strong>
+                </p>
+                
+                <div class="luxury-order-badge">
+                    <i class="fas fa-stamp"></i> Reference #<span>12345</span>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="luxury-info-box" style="text-align: left; max-width: 600px; margin: 3rem auto 0 auto;">
+                <h4 class="luxury-section-title">
+                    <i class="fas fa-concierge-bell"></i> The Next Steps
+                </h4>
+                <ul class="luxury-steps-list">
+                    <li>Inspect your email for the secure payment gateway</li>
+                    <li>Complete the PIX transfer securely</li>
+                    <li>Await our confirmation of funds</li>
+                    <li>Track the journey in your private "Client Portfolio"</li>
+                </ul>
+            </div>
+            
+            <div class="luxury-actions-wrapper" style="margin-top: 4rem;">
+                <a href="index.html" class="luxury-btn luxury-btn-primary">
+                    <i class="fas fa-door-open"></i> Return to Boutique
+                </a>
+            </div>
+
+        </div>
+    </main>
 
     <script th:src="@{/js/main.js}" src="/js/main.js"></script>
 </body>

@@ -24,11 +24,19 @@ public class ProductController {
     private ProductRepository productRepository;
 
     @GetMapping("/product")
-    public String product(Model model) {
+    public String product(@RequestParam(required = false) String category, Model model) {
         model.addAttribute("title", "Gerenciar Produto");
         model.addAttribute("product", new Product());
-        model.addAttribute("products", productRepository.findAll());
         model.addAttribute("categories", Category.values());
+        
+        if (category != null && !category.isEmpty()) {
+            Category cat = Category.valueOf(category);
+            model.addAttribute("products", productRepository.findByCategory(cat));
+            model.addAttribute("selectedCategory", category);
+        } else {
+            model.addAttribute("products", productRepository.findAll());
+            model.addAttribute("selectedCategory", "");
+        }
         return "product";
     }
 

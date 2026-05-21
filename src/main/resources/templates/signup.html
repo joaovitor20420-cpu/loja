@@ -3,77 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - E-commerce Full Stack Club</title>
+    <title>Request Invitation - The Club</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
     <link rel="stylesheet" th:href="@{/css/auth.css}" href="/css/auth.css">
 </head>
 <body>
-    <!-- Header Simplificado -->
     <header class="header">
         <nav class="nav-container">
             <div class="logo">
                 <a href="index.html">
-                    <h1><i class="fas fa-shopping-bag"></i> E-commerce</h1>
+                    <h1><i class="fas fa-crown"></i> E-commerce</h1>
                 </a>
             </div>
             <div class="user-actions">
                 <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
-                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
                 </button>
             </div>
         </nav>
     </header>
 
-    <!-- Auth Container -->
     <main class="auth-main">
         <div class="auth-container">
             <div class="auth-card">
                 <div class="auth-header">
-                    <h2><i class="fas fa-user-plus"></i> Criar sua conta</h2>
-                    <p>Cadastre-se e aproveite todas as vantagens</p>
+                    <h2><i class="fas fa-feather-pointed"></i> Request Invitation</h2>
+                    <p>Register to unlock our exclusive catalog</p>
                 </div>
 
                 <form class="auth-form" action="index.html" method="post">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">
-                                <i class="fas fa-user"></i> Nome
+                                <i class="fas fa-user"></i> First Name
                             </label>
-                            <input type="text" id="firstName" name="firstName" required placeholder="Seu nome">
+                            <input type="text" id="firstName" name="firstName" required placeholder="First Name">
                         </div>
                         <div class="form-group">
                             <label for="lastName">
-                                <i class="fas fa-user"></i> Sobrenome
+                                <i class="fas fa-user"></i> Last Name
                             </label>
-                            <input type="text" id="lastName" name="lastName" required placeholder="Seu sobrenome">
+                            <input type="text" id="lastName" name="lastName" required placeholder="Last Name">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="email">
-                            <i class="fas fa-envelope"></i> E-mail
+                            <i class="fas fa-envelope"></i> Email Address
                         </label>
-                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                        <input type="email" id="email" name="email" required placeholder="Email Address">
                     </div>
 
                     <div class="form-group">
                         <label for="phone">
-                            <i class="fas fa-phone"></i> Telefone
+                            <i class="fas fa-phone"></i> Contact Number
                         </label>
-                        <input type="tel" id="phone" name="phone" required placeholder="(11) 99999-9999" maxlength="15">
+                        <input type="tel" id="phone" name="phone" required placeholder="Contact Number" maxlength="15">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="password">
-                                <i class="fas fa-lock"></i> Senha
+                                <i class="fas fa-lock"></i> Passcode
                             </label>
                             <div class="password-field">
-                                <input type="password" id="password" name="password" required placeholder="Crie uma senha" minlength="8">
+                                <input type="password" id="password" name="password" required placeholder="Create Passcode" minlength="8">
                                 <button type="button" class="password-toggle" id="password-toggle">
                                     <i class="fas fa-eye"></i>
                                 </button>
@@ -81,10 +79,10 @@
                         </div>
                         <div class="form-group">
                             <label for="confirmPassword">
-                                <i class="fas fa-lock"></i> Confirmar senha
+                                <i class="fas fa-lock"></i> Confirm Passcode
                             </label>
                             <div class="password-field">
-                                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirme sua senha">
+                                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm Passcode">
                                 <button type="button" class="password-toggle" id="confirm-password-toggle">
                                     <i class="fas fa-eye"></i>
                                 </button>
@@ -93,20 +91,20 @@
                     </div>
 
                     <div class="password-requirements" id="password-requirements">
-                        <p><i class="fas fa-info-circle"></i> Sua senha deve ter:</p>
+                        <p><i class="fas fa-shield-alt"></i> Security Requirements:</p>
                         <ul>
-                            <li id="req-length"><i class="fas fa-times"></i> Pelo menos 8 caracteres</li>
-                            <li id="req-uppercase"><i class="fas fa-times"></i> Uma letra maiúscula</li>
-                            <li id="req-number"><i class="fas fa-times"></i> Um número</li>
-                            <li id="req-special"><i class="fas fa-times"></i> Um caractere especial</li>
+                            <li id="req-length"><i class="fas fa-times"></i> Minimum 8 characters</li>
+                            <li id="req-uppercase"><i class="fas fa-times"></i> One uppercase letter</li>
+                            <li id="req-number"><i class="fas fa-times"></i> One numeric value</li>
+                            <li id="req-special"><i class="fas fa-times"></i> One special symbol</li>
                         </ul>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top: 1rem;">
                         <label class="checkbox-container">
                             <input type="checkbox" id="terms" name="terms" required>
                             <span class="checkmark"></span>
-                            Eu aceito os <a href="#" class="auth-link">Termos de Uso</a> e a <a href="#" class="auth-link">Política de Privacidade</a>
+                            <span>I accept the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">Privacy Policy</a></span>
                         </label>
                     </div>
 
@@ -114,51 +112,50 @@
                         <label class="checkbox-container">
                             <input type="checkbox" id="newsletter" name="newsletter">
                             <span class="checkmark"></span>
-                            Quero receber ofertas e novidades por e-mail
+                            <span>Subscribe to exclusive offers and updates</span>
                         </label>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-auth">
-                        <i class="fas fa-user-plus"></i> Criar conta
+                        Apply Now <i class="fas fa-arrow-right"></i>
                     </button>
 
                     <div class="divider">
-                        <span>ou</span>
+                        <span>or</span>
                     </div>
 
                     <div class="social-login">
                         <button type="button" class="btn btn-social btn-google">
-                            <i class="fab fa-google"></i> Cadastrar com Google
+                            <i class="fab fa-google"></i> Apply with Google
                         </button>
                         <button type="button" class="btn btn-social btn-facebook">
-                            <i class="fab fa-facebook-f"></i> Cadastrar com Facebook
+                            <i class="fab fa-facebook-f"></i> Apply with Facebook
                         </button>
                     </div>
                 </form>
 
                 <div class="auth-footer">
-                    <p>Já tem uma conta? <a href="signin.html" class="auth-link">Fazer login</a></p>
+                    <p>Already a member? <a href="signin.html" class="auth-link">Enter the Vault</a></p>
                 </div>
             </div>
 
             <!-- Decorative Side -->
             <div class="auth-side">
                 <div class="auth-side-content">
-                    <i class="fas fa-gift auth-side-icon"></i>
-                    <h3>Junte-se a nós!</h3>
-                    <p>Crie sua conta e tenha acesso a ofertas exclusivas, frete grátis e muito mais. É rápido e seguro!</p>
+                    <h3>The Vanguard</h3>
+                    <p>Registering grants you entry into a world of curated elegance, bespoke services, and unparalleled exclusivity.</p>
                     <div class="auth-side-features">
                         <div class="feature-item">
-                            <i class="fas fa-percentage"></i>
-                            <span>Descontos exclusivos</span>
+                            <i class="fas fa-star"></i>
+                            <span>VIP Access</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-heart"></i>
-                            <span>Lista de desejos</span>
+                            <i class="fas fa-ring"></i>
+                            <span>Premium Selection</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-history"></i>
-                            <span>Histórico de pedidos</span>
+                            <i class="fas fa-award"></i>
+                            <span>Luxury Guaranteed</span>
                         </div>
                     </div>
                 </div>

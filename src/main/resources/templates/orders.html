@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}"></title>
+    <title th:text="${title}">Acquisitions - Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/auth.css}">
@@ -17,20 +17,17 @@
         <div class="admin-nav-container">
             <div class="admin-logo">
                 <a th:href="@{/}">
-                    <h1><i class="fas fa-shopping-bag"></i> E-commerce</h1>
+                    <h1><i class="fas fa-crown"></i> L'ÉLÉGANCE</h1>
                 </a>
-                <span class="admin-badge">Admin</span>
+                <span class="admin-badge">Director</span>
             </div>
             <div class="admin-user-actions">
-                <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
-                    <i class="fas fa-sun"></i>
-                </button>
                 <div class="admin-user-info">
-                    <i class="fas fa-user-shield"></i>
+                    <i class="fas fa-user-tie"></i>
                     <span>Admin</span>
                 </div>
                 <a th:href="@{/}" class="btn btn-outline btn-small">
-                    <i class="fas fa-arrow-left"></i> Voltar ao Site
+                    <i class="fas fa-arrow-left"></i> Main Site
                 </a>
             </div>
         </div>
@@ -42,26 +39,26 @@
                 <ul class="admin-nav-list">
                     <li class="admin-nav-item">
                         <a th:href="@{/dashboard}" class="admin-nav-link">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
+                            <i class="fas fa-gem"></i>
+                            <span>Overview</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
                         <a th:href="@{/product}" class="admin-nav-link">
-                            <i class="fas fa-box"></i>
-                            <span>Produtos</span>
+                            <i class="fas fa-box-open"></i>
+                            <span>Collection</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
                         <a th:href="@{/orders}" class="admin-nav-link active">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Pedidos</span>
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Acquisitions</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
                         <a th:href="@{/users}" class="admin-nav-link">
                             <i class="fas fa-users"></i>
-                            <span>Usuários</span>
+                            <span>Clientele</span>
                         </a>
                     </li>
                 </ul>
@@ -71,21 +68,24 @@
         <main class="admin-main">
             <section id="pedidos-section" class="admin-section active">
                 <div class="admin-header-section">
-                    <h2><i class="fas fa-shopping-cart"></i> Gestão de Pedidos</h2>
+                    <div>
+                        <h2><i class="fas fa-file-invoice-dollar"></i> Client Acquisitions</h2>
+                        <p>Track exclusive orders and transactions</p>
+                    </div>
                 </div>
 
                 <!-- Filters -->
                 <div class="admin-filters">
                     <div class="filter-group">
-                        <input type="text" id="search-pedidos" placeholder="Buscar por cliente ou pedido..." class="admin-input">
+                        <input type="text" id="search-pedidos" placeholder="Search by client or reference..." class="admin-input" style="width: 300px;">
                         <select id="filter-status-pedido" class="admin-select">
-                            <option value="" selected>Todos os Status</option>
-                            <option value="PENDING">Pendente</option>
-                            <option value="CONFIRMED">Confirmado</option>
-                            <option value="PAID">Pago</option>
-                            <option value="SHIPPED">Enviado</option>
-                            <option value="DELIVERED">Entregue</option>
-                            <option value="CANCELLED">Cancelado</option>
+                            <option value="" selected>All Statuses</option>
+                            <option value="PENDING">Pending</option>
+                            <option value="CONFIRMED">Confirmed</option>
+                            <option value="PAID">Paid</option>
+                            <option value="SHIPPED">Shipped</option>
+                            <option value="DELIVERED">Delivered</option>
+                            <option value="CANCELLED">Cancelled</option>
                         </select>
                     </div>
                 </div>
@@ -94,57 +94,63 @@
                     <table class="admin-table" id="pedidos-table">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Cliente</th>
-                                <th>Total Itens</th>
-                                <th>Valor Total</th>
+                                <th>Ref ID</th>
+                                <th>Client Name</th>
+                                <th>Pieces</th>
+                                <th>Total Value</th>
                                 <th>Status</th>
-                                <th>Pagamento</th>
-                                <th>Data</th>
-                                <th>Ações</th>
+                                <th>Method</th>
+                                <th>Date</th>
+                                <th>View</th>
                             </tr>
                         </thead>
                         <tbody id="pedidos-tbody">
                             <tr>
-                                <td>125</td>
+                                <td>#125</td>
                                 <td>Maria Santos</td>
                                 <td>3</td>
                                 <td>R$ 450,00</td>
-                                <td>Entregue</td>
-                                <td>Cartão de Crédito</td>
+                                <td><span class="status-badge status-delivered">Delivered</span></td>
+                                <td>Credit Card</td>
                                 <td>15/03/2025 14:30</td>
-                                <td class="action-buttons">
-                                    <button class="btn-icon btn-view" title="Ver Detalhes">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>124</td>
+                                <td>#124</td>
                                 <td>Carlos Oliveira</td>
                                 <td>5</td>
                                 <td>R$ 1.200,00</td>
-                                <td>Em Transporte</td>
+                                <td><span class="status-badge status-shipped">Shipped</span></td>
                                 <td>PIX</td>
                                 <td>18/03/2025 10:15</td>
-                                <td class="action-buttons">
-                                    <button class="btn-icon btn-view" title="Ver Detalhes">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>123</td>
+                                <td>#123</td>
                                 <td>Ana Costa</td>
                                 <td>2</td>
                                 <td>R$ 320,00</td>
-                                <td>Cancelado</td>
-                                <td>Boleto</td>
+                                <td><span class="status-badge status-cancelled">Cancelled</span></td>
+                                <td>Bank Slip</td>
                                 <td>20/03/2025 16:45</td>
-                                <td class="action-buttons">
-                                    <button class="btn-icon btn-view" title="Ver Detalhes">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

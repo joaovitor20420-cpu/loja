@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}"></title>
+    <title th:text="${title}">Collection - Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/auth.css}">
     <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
-
 <body>
     <header class="admin-header">
         <div class="admin-nav-container">
             <div class="admin-logo">
                 <a th:href="@{/}">
-                    <h1><i class="fas fa-shopping-bag"></i> E-commerce</h1>
+                    <h1><i class="fas fa-crown"></i> L'ÉLÉGANCE</h1>
                 </a>
-                <span class="admin-badge">Admin</span>
+                <span class="admin-badge">Director</span>
             </div>
             <div class="admin-user-actions">
-                <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
-                    <i class="fas fa-sun"></i>
-                </button>
                 <div class="admin-user-info">
-                    <i class="fas fa-user-shield"></i>
+                    <i class="fas fa-user-tie"></i>
                     <span>Admin</span>
                 </div>
                 <a th:href="@{/}" class="btn btn-outline btn-small">
-                    <i class="fas fa-arrow-left"></i> Voltar ao Site
+                    <i class="fas fa-arrow-left"></i> Main Site
                 </a>
             </div>
         </div>
@@ -45,26 +39,26 @@
                 <ul class="admin-nav-list">
                     <li class="admin-nav-item">
                         <a th:href="@{/dashboard}" class="admin-nav-link">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
+                            <i class="fas fa-gem"></i>
+                            <span>Overview</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
                         <a th:href="@{/product}" class="admin-nav-link active">
-                            <i class="fas fa-box"></i>
-                            <span>Produtos</span>
+                            <i class="fas fa-box-open"></i>
+                            <span>Collection</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
                         <a th:href="@{/orders}" class="admin-nav-link">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Pedidos</span>
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Acquisitions</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
                         <a th:href="@{/users}" class="admin-nav-link">
                             <i class="fas fa-users"></i>
-                            <span>Usuários</span>
+                            <span>Clientele</span>
                         </a>
                     </li>
                 </ul>
@@ -72,59 +66,61 @@
         </aside>
 
         <main class="admin-main">
-
             <section id="produtos-section" class="admin-section active">
                 <div class="admin-header-section">
-                    <h2><i class="fas fa-box"></i> Gestão de Produtos</h2>
+                    <div>
+                        <h2><i class="fas fa-box-open"></i> Collection Management</h2>
+                        <p>Curate the exclusive luxury pieces</p>
+                    </div>
                     <button class="btn btn-primary" id="add-produto-btn"
                         onclick="document.getElementById('produto-form').style.display='grid';">
-                        <i class="fas fa-plus"></i> Adicionar Produto
+                        <i class="fas fa-plus"></i> Add Piece
                     </button>
                 </div>
 
                 <!-- Products Form -->
                 <form id="produto-form" class="form-grid two-columns" th:object="${product}" action="/product/save"
                     method="POST" enctype="multipart/form-data"
-                    th:style="${product.id != null} ? 'display:grid; margin-bottom: 2rem;' : 'display:none; margin-bottom: 2rem;'">
+                    th:style="${product.id != null} ? 'display:grid; margin-bottom: 3rem;' : 'display:none; margin-bottom: 3rem;'">
                     <input type="text" name="id" th:field="*{id}" style="display:none;">
 
                     <div class="form-group">
-                        <label for="produto-nome">Nome do Produto</label>
+                        <label for="produto-nome">Piece Name</label>
                         <input type="text" th:field="*{name}" id="produto-nome" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="produto-categoria">Categoria</label>
+                        <label for="produto-categoria">Category</label>
                         <select id="produto-categoria" th:field="*{category}" name="category" required>
-
-                            <option th:each="category : ${categories}" th:value="${category.name}"
+                            <option th:each="category : ${categories}" th:value="${category.name()}"
                                 th:text="${category.description}">
                             </option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="produto-preco">Preço</label>
+                        <label for="produto-preco">Price (R$)</label>
                         <input type="number" th:field="*{price}" id="produto-preco" name="price" step="0.01" value="0"
                             required>
                     </div>
                     <div class="form-group">
                         <label for="produto-status">Status</label>
                         <select id="produto-status" th:field="*{state}" name="state" required>
-                            <option value="ativo">Ativo</option>
-                            <option value="inativo">Inativo</option>
+                            <option value="ativo">Available</option>
+                            <option value="inativo">Archived</option>
                         </select>
-                        <label for="produto-quantity">Quantidade</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="produto-quantity">Stock Quantity</label>
                         <input type="number" id="produto-quantity" name="quantity" th:field="*{stock}" value="1" min="1"
                             required>
                     </div>
-                    <div class="form-group full-width">
-                        <label for="produto-imagem">Imagem do Produto</label>
+                    <div class="form-group">
+                        <label for="produto-imagem">Upload Imagery</label>
                         <input type="file" id="produto-imagem" name="imageFile" accept="image/*">
                         <img th:if="${product.image != null}" th:src="@{'/uploads/' + ${product.image}}"
-                            alt="Imagem atual" style="max-width: 150px; margin-top: 0.5rem; border-radius: 8px;">
+                            alt="Current Image" style="max-width: 150px; margin-top: 1rem; border-radius: 2px; border: 1px solid var(--border-color);">
                     </div>
-                    --
                     <div class="form-group full-width">
-                        <label for="produto-descricao">Descrição</label>
+                        <label for="produto-descricao">Description</label>
                         <textarea th:field="*{description}" id="produto-descricao" name="description" rows="4"
                             required></textarea>
                     </div>
@@ -132,38 +128,39 @@
                     <div class="form-actions">
                         <button type="button" class="btn btn-outline btn-form"
                             onclick="document.getElementById('produto-form').style.display='none';">
-                            <i class="fas fa-times"></i> Cancelar
+                            <i class="fas fa-times"></i> Cancel
                         </button>
                         <button type="submit" class="btn btn-primary btn-form">
-                            <i class="fas fa-save"></i> Salvar
+                            <i class="fas fa-save"></i> Save Piece
                         </button>
                     </div>
                 </form>
 
                 <!-- Filters -->
                 <div class="admin-filters">
-                    <div class="filter-group">
-                        <input type="text" id="search-produtos" placeholder="Buscar produtos..." class="admin-input">
-                        <select id="filter-categoria" class="admin-select">
-                            <option value="" selected>Todas as categorias</option>
-                            <option th:each="category : ${categories}" th:value="${category.name}"
+                    <form action="product" method="get" class="filter-group">
+                        <input type="text" id="search-produtos" placeholder="Search collection..." class="admin-input" style="width: 300px;">
+                        <select name="category" id="filter-categoria" class="admin-select" onchange="this.form.submit()">
+                            <option value="" th:selected="${selectedCategory == ''}">All Categories</option>
+                            <option th:each="category : ${categories}" th:value="${category.name()}"
                                 th:text="${category.description}">
                             </option>
                         </select>
-                    </div>
+                    </form>
                 </div>
 
                 <div class="admin-table-container">
                     <table class="admin-table" id="produtos-table">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Categoria</th>
-                                <th>Preço</th>
+                                <th>Ref ID</th>
+                                <th>Piece Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
                                 <th>Status</th>
-                                <th>Quantidade</th>
-                                <th>Imagem</th>
+                                <th>Stock</th>
+                                <th>Imagery</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -172,23 +169,27 @@
                                 <td th:text="${product.name}"></td>
                                 <td th:text="${product.category.description}"></td>
                                 <td th:text="${product.price}"></td>
-                                <td th:text="${product.state}"></td>
+                                <td>
+                                    <span th:text="${product.state}" 
+                                          th:class="'status-badge ' + (${product.state == 'ativo'} ? 'status-active' : 'status-inactive')">
+                                    </span>
+                                </td>
                                 <td th:text="${product.stock}"></td>
                                 <td>
                                     <img th:if="${product.image != null}" th:src="@{'/uploads/' + ${product.image}}"
-                                        alt="Imagem atual"
-                                        style="max-width: 150px; margin-top: 0.5rem; border-radius: 8px;">
+                                        alt="Piece Image"
+                                        style="max-width: 80px; border-radius: 2px; border: 1px solid var(--border-color);">
                                 </td>
-                                <td class="action-buttons">
-                                    <a th:href="@{/product/edit/{id}(id=${product.id})}" class="btn-icon btn-edit"
-                                        title="Editar">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a th:href="@{/product/delete/{id}(id=${product.id})}" class="btn-icon btn-delete"
-                                        title="Excluir"
-                                        onclick="return confirm('Tem certeza que deseja excluir este produto?');">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a th:href="@{/product/edit/{id}(id=${product.id})}" class="btn-icon" title="Edit Piece">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a th:href="@{/product/delete/{id}(id=${product.id})}" class="btn-icon btn-delete" title="Remove Piece"
+                                            onclick="return confirm('Are you certain you wish to archive this piece?');">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -201,5 +202,4 @@
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/admin.js}"></script>
 </body>
-
 </html>

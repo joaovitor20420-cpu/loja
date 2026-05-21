@@ -17,7 +17,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     Product findByImage(String image);
 
-    Product findByCategory(Category category);
+    List<Product> findByCategory(Category category);
 
     Product findByState(String state);
 

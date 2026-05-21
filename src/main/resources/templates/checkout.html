@@ -3,104 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - E-commerce Full Stack Club</title>
+    <title>Checkout - Exclusive E-commerce</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
     <link rel="stylesheet" th:href="@{/css/admin.css}" href="/css/admin.css">
+    <link rel="stylesheet" th:href="@{/css/order-success.css}" href="/css/order-success.css">
 </head>
-<body>
+<body class="dark-luxury">
     <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">
-                <h1><i class="fas fa-shopping-bag"></i> E-commerce</h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#produtos">Produtos</a></li>
-            </ul>
-            <div class="user-actions">
-                <a href="index.html" class="cart-btn" id="cart-btn" title="Carrinho de compras">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count" id="cart-count">0</span>
-                </a>
-                <div class="dropdown">
-                    <button class="btn btn-outline dropdown-toggle" id="profile-dropdown">
-                        <i class="fas fa-user"></i> <span>Perfil</span> <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="dropdown-menu" id="dropdown-menu">
-                        <a href="signin.html" class="dropdown-item">
-                            <i class="fas fa-sign-in-alt"></i> Fazer Login
-                        </a>
-                        <a href="signup.html" class="dropdown-item">
-                            <i class="fas fa-user-plus"></i> Criar Conta
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="admin.html" class="dropdown-item">
-                            <i class="fas fa-cogs"></i> Área Administrativa
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="index.html" class="dropdown-item">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a>
-                    </div>
+    <header class="dark-luxury-header">
+        <div class="logo">
+            <h1><i class="fas fa-gem"></i> EXCLUSIVE</h1>
+        </div>
+        <ul class="dark-luxury-nav">
+            <li><a href="index.html">Boutique</a></li>
+            <li><a href="#produtos">Collections</a></li>
+        </ul>
+        <div class="dark-luxury-actions">
+            <a href="index.html" class="cart-btn" id="cart-btn" title="Shopping Bag">
+                <i class="fas fa-shopping-bag"></i> <span id="cart-count" style="margin-left: 0.2rem;">0</span>
+            </a>
+            
+            <div class="dropdown">
+                <button class="luxury-btn luxury-btn-outline dropdown-toggle" id="profile-dropdown" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+                    <i class="fas fa-user"></i> <span>Client</span> <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
+                </button>
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Register</a>
+                    <hr class="dropdown-divider">
+                    <a href="admin.html" class="dropdown-item"><i class="fas fa-cogs"></i> Administration</a>
+                    <hr class="dropdown-divider">
+                    <a href="index.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
 
     <!-- Checkout Section -->
-    <section class="cart-section">
-        <div class="container">
-            <div class="admin-card">
-                <div class="card-header">
-                    <h3>
-                        <i class="fas fa-credit-card"></i>
-                        Confirmação do Pedido
-                    </h3>
-                </div>
-                <div class="card-content">
-                    <!-- Order Summary -->
-                    <form class="form-grid three-columns" style="margin-bottom: 2rem;">
-                        <div class="form-group">
-                            <label for="checkout-user">Usuário</label>
-                            <input type="text" id="checkout-user" value="João Silva" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="checkout-items">Total de Itens</label>
-                            <input type="text" id="checkout-items" value="2" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="checkout-total">Valor Total</label>
-                            <input type="text" id="checkout-total" value="R$ 3.498,00" readonly>
-                        </div>
-                    </form>
-
-                    <!-- Payment Method -->
-                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid var(--border-color);">
-                        <h4 style="color: var(--text-primary); margin-bottom: 1rem;">
-                            <i class="fas fa-qrcode"></i> Método de Pagamento
-                        </h4>
-                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
-                            <strong>PIX</strong> - Pagamento via QR Code
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
-                            Após confirmar, você receberá um email com o QR Code para pagamento.
-                        </p>
+    <main class="luxury-container">
+        <div class="luxury-card">
+            <div class="luxury-card-header">
+                <h3><i class="fas fa-lock" style="font-size: 1.5rem; opacity: 0.8;"></i> Secure Checkout</h3>
+                <p>Complete your acquisition</p>
+            </div>
+            
+            <div class="luxury-card-content">
+                <!-- Order Summary -->
+                <form class="luxury-grid">
+                    <div class="luxury-form-group">
+                        <label for="checkout-user">Client</label>
+                        <input type="text" id="checkout-user" value="João Silva" readonly>
                     </div>
+                    <div class="luxury-form-group">
+                        <label for="checkout-items">Items Total</label>
+                        <input type="text" id="checkout-items" value="2" readonly>
+                    </div>
+                    <div class="luxury-form-group">
+                        <label for="checkout-total">Total Investment</label>
+                        <input type="text" id="checkout-total" value="R$ 3.498,00" readonly style="color: var(--gold); font-weight: 500;">
+                    </div>
+                </form>
 
-                    <!-- Items Table -->
-                    <div>
-                        <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Itens do Pedido</h4>
-                        <table class="admin-table">
+                <!-- Payment Method -->
+                <div class="luxury-info-box">
+                    <h4 class="luxury-section-title">
+                        <i class="fas fa-qrcode"></i> Method of Payment
+                    </h4>
+                    <p>
+                        <strong>PIX</strong> — Instant Transfer via QR Code
+                    </p>
+                    <p style="font-size: 0.9rem;">
+                        Upon confirmation, you will receive an exclusive email containing the QR Code to complete the transaction.
+                    </p>
+                </div>
+
+                <!-- Items Table -->
+                <div style="margin-bottom: 2rem;">
+                    <h4 class="luxury-section-title">Acquisition Details</h4>
+                    <div class="table-responsive">
+                        <table class="luxury-table">
                             <thead>
                                 <tr>
-                                    <th>Produto</th>
-                                    <th>Preço Unitário</th>
-                                    <th>Quantidade</th>
+                                    <th>Masterpiece</th>
+                                    <th>Value</th>
+                                    <th>Qty</th>
                                     <th>Subtotal</th>
                                 </tr>
                             </thead>
@@ -121,26 +112,20 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer" style="display: flex; justify-content: center; padding-bottom: 2rem;">
-                    <form action="order-success.html" method="POST" style="display: contents;">
-                        <div class="form-actions" style="gap: 1rem;">
-                            <a href="index.html" class="btn btn-outline">
-                                <i class="fas fa-arrow-left"></i> Voltar ao Carrinho
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-check-circle"></i> Confirmar Pedido
-                            </button>
-                        </div>
-                    </form>
-                </div>
+
+                <form action="order-success.html" method="POST" style="display: contents;">
+                    <div class="luxury-actions-wrapper">
+                        <a href="index.html" class="luxury-btn luxury-btn-outline">
+                            <i class="fas fa-arrow-left"></i> Return
+                        </a>
+                        <button type="submit" class="luxury-btn luxury-btn-primary">
+                            <i class="fas fa-check"></i> Authorize Payment
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
-
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
-        <i class="fas fa-sun"></i>
-    </button>
+    </main>
 
     <script th:src="@{/js/main.js}" src="/js/main.js"></script>
 </body>

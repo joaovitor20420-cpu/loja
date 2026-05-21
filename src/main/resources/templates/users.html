@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}"></title>
+    <title th:text="${title}">Clientele - Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/auth.css}">
@@ -17,20 +17,17 @@
         <div class="admin-nav-container">
             <div class="admin-logo">
                 <a th:href="@{/}">
-                    <h1><i class="fas fa-shopping-bag"></i> E-commerce</h1>
+                    <h1><i class="fas fa-crown"></i> L'ÉLÉGANCE</h1>
                 </a>
-                <span class="admin-badge">Admin</span>
+                <span class="admin-badge">Director</span>
             </div>
             <div class="admin-user-actions">
-                <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
-                    <i class="fas fa-sun"></i>
-                </button>
                 <div class="admin-user-info">
-                    <i class="fas fa-user-shield"></i>
+                    <i class="fas fa-user-tie"></i>
                     <span>Admin</span>
                 </div>
                 <a th:href="@{/}" class="btn btn-outline btn-small">
-                    <i class="fas fa-arrow-left"></i> Voltar ao Site
+                    <i class="fas fa-arrow-left"></i> Main Site
                 </a>
             </div>
         </div>
@@ -42,26 +39,26 @@
                 <ul class="admin-nav-list">
                     <li class="admin-nav-item">
                         <a th:href="@{/dashboard}" class="admin-nav-link">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
+                            <i class="fas fa-gem"></i>
+                            <span>Overview</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
                         <a th:href="@{/product}" class="admin-nav-link">
-                            <i class="fas fa-box"></i>
-                            <span>Produtos</span>
+                            <i class="fas fa-box-open"></i>
+                            <span>Collection</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
                         <a th:href="@{/orders}" class="admin-nav-link">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Pedidos</span>
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Acquisitions</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
                         <a th:href="@{/users}" class="admin-nav-link active">
                             <i class="fas fa-users"></i>
-                            <span>Usuários</span>
+                            <span>Clientele</span>
                         </a>
                     </li>
                 </ul>
@@ -72,31 +69,30 @@
             <!-- Delete Confirmation -->
             <section id="delete-confirmation-user" class="admin-section" style="display:none">
                 <div class="admin-card" style="max-width:600px; margin:0 auto;">
-                    <div class="card-header">
-                        <h3>
-                            <i class="fas fa-exclamation-triangle text-warning"></i>
-                            Excluir Usuário
+                    <div class="card-header" style="background:var(--bg-secondary); border-color:var(--danger)">
+                        <h3 style="color:var(--danger)">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Revoke Membership
                         </h3>
                     </div>
                     <div class="card-content">
                         <div class="delete-confirmation">
                             <div class="warning-icon">
-                                <i class="fas fa-exclamation-triangle"></i>
+                                <i class="fas fa-ban"></i>
                             </div>
-                            <h2>Confirmar Exclusão</h2>
-                            <p>Tem certeza que deseja excluir o usuário:</p>
-                            <h4 class="product-name-highlight">Usuário Selecionado</h4>
-                            <p class="warning-text">Esta ação não poderá ser desfeita.</p>
+                            <h2>Confirm Revocation</h2>
+                            <p>Are you sure you wish to permanently revoke access for:</p>
+                            <h4 class="product-name-highlight">Selected VIP Member</h4>
+                            <p class="warning-text">This action is irreversible and immediate.</p>
                         </div>
                     </div>
-
-                    <div class="card-footer delete-footer" style="display: flex; justify-content: center; padding-bottom: 2rem;">
-                        <div class="form-actions" style="gap: 1rem;">
+                    <div class="card-footer delete-footer" style="display: flex; justify-content: center; padding-bottom: 2rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
+                        <div class="form-actions" style="gap: 1rem; margin-top:0;">
                             <button type="button" class="btn btn-outline" onclick="document.getElementById('delete-confirmation-user').style.display='none'; document.getElementById('usuarios-section').style.display='block';">
-                                <i class="fas fa-times"></i> Cancelar
+                                <i class="fas fa-times"></i> Cancel
                             </button>
                             <a href="#" class="btn btn-danger">
-                                <i class="fas fa-trash"></i> Excluir
+                                <i class="fas fa-trash"></i> Revoke
                             </a>
                         </div>
                     </div>
@@ -105,81 +101,64 @@
 
             <section id="usuarios-section" class="admin-section active">
                 <div class="admin-header-section">
-                    <h2><i class="fas fa-users"></i> Gestão de Usuários</h2>
+                    <div>
+                        <h2><i class="fas fa-users"></i> VIP Clientele</h2>
+                        <p>Manage access and details of elite patrons</p>
+                    </div>
                     <button class="btn btn-primary" id="add-usuario-btn" onclick="document.getElementById('usuario-form').style.display='grid';">
-                        <i class="fas fa-plus"></i> Adicionar Usuário
+                        <i class="fas fa-plus"></i> Register Member
                     </button>
                 </div>
 
-                <form id="usuario-form" class="form-grid two-columns" action="/users/save" method="POST" style="display:none; margin-bottom: 2rem;">
+                <form id="usuario-form" class="form-grid two-columns" action="/users/save" method="POST" style="display:none; margin-bottom: 3rem;">
                     <input type="hidden" name="id" value="">
                     <input type="hidden" name="createdAt" value="">
                     <div class="form-group">
-                        <label for="usuario-firstname">Nome</label>
+                        <label for="usuario-firstname">First Name</label>
                         <input type="text" id="usuario-firstname" name="firstName" required>
                     </div>
                     <div class="form-group">
-                        <label for="usuario-lastname">Sobrenome</label>
+                        <label for="usuario-lastname">Last Name</label>
                         <input type="text" id="usuario-lastname" name="lastName" required>
                     </div>
                     <div class="form-group">
-                        <label for="usuario-email">E-mail</label>
+                        <label for="usuario-email">Email Address</label>
                         <input type="email" id="usuario-email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="usuario-phone">Telefone</label>
-                        <input type="tel" id="usuario-phone" name="phone" required placeholder="(11) 99999-9999" maxlength="15">
+                        <label for="usuario-phone">Private Line</label>
+                        <input type="tel" id="usuario-phone" name="phone" required placeholder="(XX) XXXXX-XXXX" maxlength="15">
                     </div>
                     <div class="form-group">
                         <label for="usuario-password">
-                            <i class="fas fa-lock"></i> Senha
+                            <i class="fas fa-lock"></i> Passcode
                         </label>
-                        <div class="password-field">
-                            <input type="password" id="usuario-password" name="password" required placeholder="Digite a senha" minlength="8">
-                            <button type="button" class="password-toggle" id="usuario-password-toggle">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
+                        <input type="password" id="usuario-password" name="password" required placeholder="Enter secure passcode" minlength="8">
                     </div>
                     <div class="form-group">
                         <label for="usuario-confirm-password">
-                            <i class="fas fa-lock"></i> Confirmar Senha
+                            <i class="fas fa-lock"></i> Confirm Passcode
                         </label>
-                        <div class="password-field">
-                            <input type="password" id="usuario-confirm-password" name="confirmPassword" required placeholder="Confirme a senha">
-                            <button type="button" class="password-toggle" id="usuario-confirm-password-toggle">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="password-requirements full-width" id="usuario-password-requirements">
-                        <p><i class="fas fa-info-circle"></i> Sua senha deve ter:</p>
-                        <ul>
-                            <li id="usuario-req-length"><i class="fas fa-times"></i> Pelo menos 8 caracteres</li>
-                            <li id="usuario-req-uppercase"><i class="fas fa-times"></i> Uma letra maiúscula</li>
-                            <li id="usuario-req-number"><i class="fas fa-times"></i> Um número</li>
-                            <li id="usuario-req-special"><i class="fas fa-times"></i> Um caractere especial</li>
-                        </ul>
+                        <input type="password" id="usuario-confirm-password" name="confirmPassword" required placeholder="Confirm secure passcode">
                     </div>
 
                     <div class="form-group">
-                        <label for="usuario-status">Status</label>
+                        <label for="usuario-status">Membership Status</label>
                         <select id="usuario-status" name="status" required>
-                            <option value="">Selecione um status</option>
-                            <option value="ACTIVE">Ativo</option>
-                            <option value="INACTIVE">Inativo</option>
-                            <option value="BLOCKED">Bloqueado</option>
-                            <option value="SUSPENDED">Suspenso</option>
+                            <option value="">Select Status...</option>
+                            <option value="ACTIVE">Active</option>
+                            <option value="INACTIVE">Inactive</option>
+                            <option value="BLOCKED">Blocked</option>
+                            <option value="SUSPENDED">Suspended</option>
                         </select>
                     </div>
 
                     <div class="form-actions">
                         <button type="button" class="btn btn-outline btn-form" onclick="document.getElementById('usuario-form').style.display='none';">
-                            <i class="fas fa-times"></i> Cancelar
+                            <i class="fas fa-times"></i> Cancel
                         </button>
                         <button type="submit" class="btn btn-primary btn-form">
-                            <i class="fas fa-save"></i> Salvar
+                            <i class="fas fa-save"></i> Save Details
                         </button>
                     </div>
                 </form>
@@ -187,13 +166,13 @@
                 <!-- Filters -->
                 <div class="admin-filters">
                     <div class="filter-group">
-                        <input type="text" id="search-usuarios" placeholder="Buscar usuários..." class="admin-input">
+                        <input type="text" id="search-usuarios" placeholder="Search clientele..." class="admin-input">
                         <select id="filter-status" class="admin-select">
-                            <option value="" selected>Todos os status</option>
-                            <option value="ACTIVE">Ativo</option>
-                            <option value="INACTIVE">Inativo</option>
-                            <option value="BLOCKED">Bloqueado</option>
-                            <option value="SUSPENDED">Suspenso</option>
+                            <option value="" selected>All Statuses</option>
+                            <option value="ACTIVE">Active</option>
+                            <option value="INACTIVE">Inactive</option>
+                            <option value="BLOCKED">Blocked</option>
+                            <option value="SUSPENDED">Suspended</option>
                         </select>
                     </div>
                 </div>
@@ -203,12 +182,12 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Telefone</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
                                 <th>Status</th>
-                                <th>Data Cadastro</th>
-                                <th>Ações</th>
+                                <th>Enrolled Date</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="usuarios-tbody">
@@ -217,15 +196,17 @@
                                 <td>Maria Santos</td>
                                 <td>maria.santos@email.com</td>
                                 <td>(11) 98765-4321</td>
-                                <td>ACTIVE</td>
+                                <td><span class="status-badge status-active">ACTIVE</span></td>
                                 <td>15/03/2025 14:30</td>
-                                <td class="action-buttons">
-                                    <button class="btn-icon btn-edit" title="Editar" onclick="document.getElementById('usuario-form').style.display='grid';">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon btn-delete" title="Excluir" onclick="document.getElementById('delete-confirmation-user').style.display='block'; document.getElementById('usuarios-section').style.display='none';">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon btn-edit" title="Edit" onclick="document.getElementById('usuario-form').style.display='grid';">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon btn-delete" title="Revoke" onclick="document.getElementById('delete-confirmation-user').style.display='block'; document.getElementById('usuarios-section').style.display='none';">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -233,15 +214,17 @@
                                 <td>Carlos Oliveira</td>
                                 <td>carlos.oliveira@email.com</td>
                                 <td>(21) 97654-3210</td>
-                                <td>ACTIVE</td>
+                                <td><span class="status-badge status-active">ACTIVE</span></td>
                                 <td>18/03/2025 10:15</td>
-                                <td class="action-buttons">
-                                    <button class="btn-icon btn-edit" title="Editar" onclick="document.getElementById('usuario-form').style.display='grid';">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon btn-delete" title="Excluir" onclick="document.getElementById('delete-confirmation-user').style.display='block'; document.getElementById('usuarios-section').style.display='none';">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon btn-edit" title="Edit" onclick="document.getElementById('usuario-form').style.display='grid';">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon btn-delete" title="Revoke" onclick="document.getElementById('delete-confirmation-user').style.display='block'; document.getElementById('usuarios-section').style.display='none';">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
