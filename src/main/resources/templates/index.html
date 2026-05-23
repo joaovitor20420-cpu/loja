@@ -148,12 +148,13 @@
 
             <!-- Categories Filter -->
             <div class="categories-filter" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap;">
-                <a th:href="@{/}" class="btn btn-primary" th:classappend="${categiresFilter == 'ALL'} ? 'active' "
+                <a th:href="@{/}" class="btn btn-primary" th:classappend="${selectedCategory == 'ALL'} ? 'active'"
                   data-category="all" style="padding: 8px 24px;">Todas as Peças</a>
                 <a class="category-btn"
-                   th:classappend="${categoriesFilter == 'category'} ? 'active'"
+                   th:classappend="${selectedCategory == category.name()} ? 'active'"
                    th:each="category : ${categories}"
-                   th:href="@{/?category={category}(category=${category})}"></a>
+                   th:href="@{/(category=${category.name()})}"
+                   th:text="${category.description}"></a>
             </div>
 
             <!-- Products Grid -->
