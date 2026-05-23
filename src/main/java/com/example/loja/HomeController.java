@@ -17,13 +17,14 @@ public class HomeController {
                         Model model) {
         model.addAttribute("title", "Sua Loja Online Completa");
         model.addAttribute("categories", Category.values());
-        model.addAttribute("selectedCategory", category);
+        model.addAttribute("selectedCategory", category != null ? category : "ALL");
         if(category.equals("ALL")){
             model.addAttribute("products", productRepository.findAll());
         } else {
             Category cat = Category.valueOf(category);
             model.addAttribute("products",productRepository.findByCategory(cat));
         }
+
         
 
         return "index";

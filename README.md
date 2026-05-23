@@ -56,6 +56,8 @@ O projeto adota de forma estrita a arquitetura **MVC (Model-View-Controller)**, 
 - **Controllers:** Orquestração de requisições HTTP, tratamento de validações e integração com a camada de serviços.
 - **Views (Thymeleaf):** Renderização de páginas dinâmicas no servidor, favorecendo tempo de resposta e segurança de dados críticos.
 
+> 📚 **Documentação Detalhada:** Para entender a fundo os fluxos de dados, detalhes das entidades e das decisões técnicas, consulte a [Documentação de Arquitetura Completa](docs/architecture.md).
+
 ---
 
 ## 📁 Estrutura de Pastas (Padrão MVC)
