@@ -148,11 +148,12 @@
 
             <!-- Categories Filter -->
             <div class="categories-filter" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap;">
-                <a href="index.html" class="btn btn-primary" data-category="all" style="padding: 8px 24px;">Todas as Peças</a>
-                <a href="index.html?category=AUTOMOTIVE" class="btn" style="padding: 8px 24px;">Alta Relojoaria</a>
-                <a href="index.html?category=CLOTHING" class="btn" style="padding: 8px 24px;">Alta Costura</a>
-                <a href="index.html?category=BEAUTY" class="btn" style="padding: 8px 24px;">Cosméticos</a>
-                <a href="index.html?category=HOME_GARDEN" class="btn" style="padding: 8px 24px;">Arte e Design</a>
+                <a th:href="@{/}" class="btn btn-primary" th:classappend="${categiresFilter == 'ALL'} ? 'active' "
+                  data-category="all" style="padding: 8px 24px;">Todas as Peças</a>
+                <a class="category-btn"
+                   th:classappend="${categoriesFilter == 'category'} ? 'active'"
+                   th:each="category : ${categories}"
+                   th:href="@{/?category={category}(category=${category})}"></a>
             </div>
 
             <!-- Products Grid -->

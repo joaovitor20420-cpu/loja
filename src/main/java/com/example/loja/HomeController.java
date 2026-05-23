@@ -17,6 +17,7 @@ public class HomeController {
 
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("categories", Category.values());
+        
 
         return "index";
     }
