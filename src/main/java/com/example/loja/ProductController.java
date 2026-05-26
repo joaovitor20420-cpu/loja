@@ -28,7 +28,7 @@ public class ProductController {
         model.addAttribute("title", "Gerenciar Produto");
         model.addAttribute("product", new Product());
         model.addAttribute("categories", Category.values());
-        
+
         if (category != null && !category.isEmpty()) {
             Category cat = Category.valueOf(category);
             model.addAttribute("products", productRepository.findByCategory(cat));
@@ -80,6 +80,7 @@ public class ProductController {
     public String editProduct(@PathVariable Long id, Model model) {
         model.addAttribute("title", "Editar Produto");
         model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("categories", Category.values());
         model.addAttribute("product", ((Optional<Product>) productRepository.findById(id)).get());
         return "product";
     }
