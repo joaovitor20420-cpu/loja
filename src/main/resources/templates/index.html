@@ -167,7 +167,6 @@
             <div class="product-card" th:each="product : ${products}" th:attr="data-category=${product.category}">
                 <div class="product-image">
                     <!-- Puxa a imagem do banco -->
-                    <!-- A forma correta usando Thymeleaf -->
                     <div class="img-bg" th:style="'background-image: url(/uploads/' + ${product.image} + ');'"></div>
                 </div>
                 <div class="product-info">

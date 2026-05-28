@@ -1,5 +1,8 @@
 package com.example.loja;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Categorias de produtos disponíveis na loja")
 public enum Category {
     CLOTHING("Roupas", "fa fa-tshirt"),
     FOOTWEAR("Calçados", "fa fa-shoe-prints"),

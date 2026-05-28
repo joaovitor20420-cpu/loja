@@ -16,30 +16,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
+@Tag(name = "Produtos", description = "Endpoints para gerenciamento de produtos (CRUD)")
 public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
 
+    @Operation(summary = "Listar produtos", description = "Exibe a página de gerenciamento de produtos com filtro opcional por categoria")
     @GetMapping("/product")
-    public String product(@RequestParam(required = false) String category, Model model) {
-        model.addAttribute("title", "Gerenciar Produto");
-        model.addAttribute("product", new Product());
+    public String product(@RequestParam(required = false, defaultValue = "ALL") String category,
+            Model model) {
         model.addAttribute("categories", Category.values());
-
-        if (category != null && !category.isEmpty()) {
+        model.addAttribute("product", new Product());
+        model.addAttribute("selectedCategory", category != null && !category.isEmpty() ? category : "ALL");
+        if ("ALL".equals(category)) {
+            model.addAttribute("products", productRepository.findAll());
+        } else {
             Category cat = Category.valueOf(category);
             model.addAttribute("products", productRepository.findByCategory(cat));
-            model.addAttribute("selectedCategory", category);
-        } else {
-            model.addAttribute("products", productRepository.findAll());
-            model.addAttribute("selectedCategory", "");
         }
+
         return "product";
     }
 
+    @Operation(summary = "Salvar produto", description = "Cria ou atualiza um produto, incluindo upload opcional de imagem")
     @PostMapping("/product/save")
     public String saveProduct(@ModelAttribute Product product,
             @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
@@ -69,6 +74,7 @@ public class ProductController {
         return "redirect:/product";
     }
 
+    @Operation(summary = "Listar todos os produtos", description = "Exibe a lista completa de produtos cadastrados")
     @GetMapping("/product/list")
     public String productList(Model model) {
         model.addAttribute("title", "Lista de Produtos");
@@ -76,6 +82,7 @@ public class ProductController {
         return "product";
     }
 
+    @Operation(summary = "Editar produto", description = "Carrega os dados de um produto específico para edição")
     @GetMapping("/product/edit/{id}")
     public String editProduct(@PathVariable Long id, Model model) {
         model.addAttribute("title", "Editar Produto");
@@ -85,6 +92,7 @@ public class ProductController {
         return "product";
     }
 
+    @Operation(summary = "Excluir produto", description = "Remove um produto pelo seu ID")
     @GetMapping("/product/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productRepository.deleteById(id);

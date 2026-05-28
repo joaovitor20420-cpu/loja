@@ -141,7 +141,7 @@
                     <form action="product" method="get" class="filter-group">
                         <input type="text" id="search-produtos" placeholder="Search collection..." class="admin-input" style="width: 300px;">
                         <select name="category" id="filter-categoria" class="admin-select" onchange="this.form.submit()">
-                            <option value="" th:selected="${selectedCategory == ''}">All Categories</option>
+                            <option value="" th:selected="${selectedCategory == 'ALL' ? 'btn btn-primary active' : 'category-btn'}">All Categories</option>
                             <option th:each="category : ${categories}" th:value="${category.name()}"
                                 th:text="${category.description}">
                             </option>

@@ -70,7 +70,8 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
  ┃ ┣ 📂 main
  ┃ ┃ ┣ 📂 java/com/example/loja
  ┃ ┃ ┃ ┣ 📜 Product.java              <-- 🔵 MODEL (Entidade JPA - Produto)
- ┃ ┃ ┃ ┣ 📜 Category.java             <-- 🔵 MODEL (Enum de Categorias EN/pt-BR)
+ ┃ ┃ ┃ ┣ 📜 User.java                 <-- 🔵 MODEL (Entidade JPA - Usuário)
+ ┃ ┃ ┃ ┣ 📜 Category.java             <-- 🔵 MODEL (Enum de Categorias)
  ┃ ┃ ┃ ┣ 📜 ProductRepository.java    <-- 🔵 REPOSITORY (Acesso ao Banco de Dados)
  ┃ ┃ ┃ ┣ 📜 ProductController.java    <-- 🟢 CONTROLLER (CRUD de Produtos)
  ┃ ┃ ┃ ┣ 📜 HomeController.java       <-- 🟢 CONTROLLER (Página Inicial)
@@ -214,6 +215,7 @@ Após alguns segundos, o servidor Tomcat embutido iniciará. Acesse:
 | :--- | :--- |
 | **Loja Virtual (Público)** | [http://localhost:8080/](http://localhost:8080/) |
 | **Painel Admin** | [http://localhost:8080/admin](http://localhost:8080/admin) |
+| **📚 Documentação da API (Swagger)** | [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) |
 | **Console H2 (Banco)** | [http://localhost:8080/h2-console](http://localhost:8080/h2-console) |
 
 > **Acesso ao Banco H2 (Em Memória):**  

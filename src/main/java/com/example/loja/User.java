@@ -8,29 +8,46 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Entidade que representa um usuário do sistema")
 @Entity
 
 public class User {
+    @Schema(description = "Identificador único do usuário", example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
+    @Schema(description = "Primeiro nome", example = "João")
     private String FirstName;
+    @Schema(description = "Sobrenome", example = "Silva")
     private String LastName;
 
+    @Schema(description = "Endereço de e-mail (único)", example = "joao@email.com")
     @Column(unique = true)
     private String Email;
 
+    @Schema(description = "Senha do usuário", accessMode = Schema.AccessMode.WRITE_ONLY)
     private String Password;
+    @Schema(description = "Telefone de contato", example = "(11) 99999-9999")
     private String Phone;
+    @Schema(description = "Endereço", example = "Rua das Flores, 123")
     private String Address;
+    @Schema(description = "Cidade", example = "São Paulo")
     private String City;
+    @Schema(description = "Estado", example = "SP")
     private String State;
+    @Schema(description = "CEP", example = "01001-000")
     private String Zip;
+    @Schema(description = "País", example = "Brasil")
     private String Country;
+    @Schema(description = "Papel/permissão do usuário")
     @Enumerated(EnumType.STRING)
     private UserRole role;
+    @Schema(description = "Status da conta do usuário")
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+    @Schema(description = "Nome do arquivo de imagem de perfil", example = "avatar.jpg")
     private String Image;
 
     public User() {

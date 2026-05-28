@@ -5,13 +5,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
+@Tag(name = "Home", description = "Página inicial da loja virtual (vitrine pública)")
 public class HomeController {
 
     @Autowired
     private ProductRepository productRepository;
 
+    @Operation(summary = "Página inicial", description = "Exibe o catálogo público de produtos com filtro opcional por categoria")
     @GetMapping("/")
     public String index(@RequestParam(required = false, defaultValue = "ALL") String category,
                         Model model) {

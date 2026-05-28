@@ -7,18 +7,29 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Entidade que representa um produto na loja")
 @Entity
 public class Product {
+    @Schema(description = "Identificador único do produto", example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Schema(description = "Nome do produto", example = "Camiseta Básica")
     private String name;
+    @Schema(description = "Descrição detalhada do produto", example = "Camiseta 100% algodão")
     private String description;
+    @Schema(description = "Preço do produto em reais", example = "49.90")
     private double price;
+    @Schema(description = "Estado/condição do produto (Novo, Usado)", example = "Novo")
     private String state;
+    @Schema(description = "Nome do arquivo de imagem do produto", example = "camiseta.jpg")
     private String image;
+    @Schema(description = "Categoria do produto")
     @Enumerated(EnumType.STRING)
     private Category category;
+    @Schema(description = "Quantidade em estoque", example = "100")
     private int stock;
 
     public Product() {
