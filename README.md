@@ -52,7 +52,7 @@ As ferramentas foram escolhidas a dedo, refletindo o que há de mais moderno e d
 ## 🏗️ Arquitetura e Padrões
 
 O projeto adota de forma estrita a arquitetura **MVC (Model-View-Controller)**, garantindo um código limpo, testável e de fácil manutenção:
-- **Models (Entities):** Mapeamento Objeto-Relacional (ORM) estruturado com Hibernate/JPA.
+- **Models (Entities):** Mapeamento Objeto-Relacional (ORM) estruturado com Hibernate/JPA, explorando recursos de validação e Enums (`@Enumerated(EnumType.STRING)`, `@Column(unique=true)`).
 - **Controllers:** Orquestração de requisições HTTP, tratamento de validações e integração com a camada de serviços.
 - **Views (Thymeleaf):** Renderização de páginas dinâmicas no servidor, favorecendo tempo de resposta e segurança de dados críticos.
 
@@ -146,7 +146,7 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
   - **Update:** Edição inline — ao clicar em "Editar", o formulário é preenchido automaticamente com os dados do produto selecionado.
   - **Delete:** Exclusão com confirmação do navegador para evitar remoções acidentais.
 - **Categorias Dinâmicas:** Enum `Category` com nomes em inglês e descrições em pt-BR, carregadas automaticamente nos selects via `Category.values()`.
-- **Controle de Usuários:** Formulário de cadastro/edição, tabela com listagem, filtro por status (Ativo, Inativo, Bloqueado, Suspenso) e confirmação de exclusão.
+- **Controle de Usuários:** Formulário de cadastro/edição, tabela com listagem e filtro dinâmico através dos Enums `UserStatus` (ACTIVE, INACTIVE) e controle de permissões através do Enum `UserRole` (ADMIN, USER, VIP). Segurança adicional garantindo e-mails únicos no sistema.
 - **Gestão de Pedidos:** Tabela com ID, cliente, total de itens, valor, status, método de pagamento e data. Filtro por status (Pendente, Confirmado, Pago, Enviado, Entregue, Cancelado).
 - **Métricas e Dashboards:** Cards informativos (Total de Produtos, Usuários, Pedidos, Receita), lista de pedidos recentes e ranking de produtos mais vendidos.
 - **Sidebar de Navegação:** Menu lateral com links ativos para Dashboard, Produtos, Pedidos e Usuários.
@@ -193,7 +193,7 @@ Siga o passo a passo abaixo para rodar a aplicação em seu ambiente:
 
 ```bash
 # Clone este repositório
-git clone https://github.com/seu-usuario/seu-repositorio-loja.git
+git clone https://github.com/joaovitor20420/loja.git
 
 # Acesse o diretório do projeto
 cd loja
@@ -242,9 +242,9 @@ Após alguns segundos, o servidor Tomcat embutido iniciará. Acesse:
 
 Gostou da forma como desenvolvo? Estou disponível para novas oportunidades, sinta-se à vontade para me contatar:
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/seu-perfil/)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/seu-usuario)
-[![E-mail](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:seu-email@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joaovitor/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/joaovitor20420)
+[![E-mail](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:joaovitor20420@gmail.com)
 
 ---
 <p align="center">
