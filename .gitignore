@@ -29,8 +29,10 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+database/.vscode/
 *.code-workspace
+.env
+.env.local
 
 ### OS X ###
 .DS_Store

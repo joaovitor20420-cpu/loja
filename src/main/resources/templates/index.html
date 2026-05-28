@@ -148,108 +148,40 @@
 
             <!-- Categories Filter -->
             <div class="categories-filter" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap;">
-                <a th:href="@{/}" class="btn btn-primary" th:classappend="${selectedCategory == 'ALL'} ? 'active'"
-                  data-category="all" style="padding: 8px 24px;">Todas as Peças</a>
-                <a class="category-btn"
-                   th:classappend="${selectedCategory == category.name()} ? 'active'"
-                   th:each="category : ${categories}"
-                   th:href="@{/(category=${category.name()})}"
+                
+                <!-- Botão "Todas as Peças" -->
+                <a th:href="@{/#colecao}" 
+                   th:class="${selectedCategory == 'ALL' ? 'btn btn-primary active' : 'category-btn'}"
+                   style="padding: 8px 24px;">Todas as Peças</a>
+                
+                <!-- Botões Dinâmicos das Categorias -->
+                <a th:each="category : ${categories}"
+                   th:href="@{/(category=${category.name()})} + '#colecao'"
+                   th:class="${selectedCategory == category.name() ? 'btn btn-primary active' : 'category-btn'}"
                    th:text="${category.description}"></a>
+                   
             </div>
 
             <!-- Products Grid -->
-            <div class="products-grid" id="products-container">
-                
-                <!-- Product Card 1 -->
-                <div class="product-card" data-category="AUTOMOTIVE">
-                    <div class="product-image">
-                        <div class="img-bg" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop');"></div>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" style="font-family: 'Cinzel', serif;">Chronograph Tourbillon</h4>
-                        <p class="product-description">Ouro Rosé 18k, Cristal de Safira, Mecanismo Automático Suíço.</p>
-                        <div class="product-price">R$ 145.000,00</div>
-                        <div class="product-actions">
-                            <a href="index.html?addToCart=1" class="btn btn-primary">Adicionar à Sacola</a>
-                        </div>
+             <div class="products-grid" id="products-container">
+            <div class="product-card" th:each="product : ${products}" th:attr="data-category=${product.category}">
+                <div class="product-image">
+                    <!-- Puxa a imagem do banco -->
+                    <!-- A forma correta usando Thymeleaf -->
+                    <div class="img-bg" th:style="'background-image: url(/uploads/' + ${product.image} + ');'"></div>
+                </div>
+                <div class="product-info">
+                    <!-- Puxa o Nome e a Descrição -->
+                    <h4 class="product-title" style="font-family: 'Cinzel', serif;" th:text="${product.name}">Nome Padrão</h4>
+                    <p class="product-description" th:text="${product.description}">Descrição Padrão</p>
+
+                    <!-- Puxa o Preço e formata para o padrão Brasileiro -->
+                    <div class="product-price" th:text="'R$ ' + ${#numbers.formatDecimal(product.price, 1, 'POINT', 2, 'COMMA')}">R$ 0,00</div>
+
+                    <div class="product-actions">
+                        <a th:href="@{/(addToCart=${product.id})}" class="btn btn-primary">Adicionar à Sacola</a>
                     </div>
                 </div>
-
-                <!-- Product Card 2 -->
-                <div class="product-card" data-category="CLOTHING">
-                    <div class="product-image">
-                        <div class="img-bg" style="background-image: url('https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop');"></div>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" style="font-family: 'Cinzel', serif;">Trench Coat Midnight</h4>
-                        <p class="product-description">100% Lã de Alpaca Italiana. Corte milimétrico e caimento impecável.</p>
-                        <div class="product-price">R$ 12.890,00</div>
-                        <div class="product-actions">
-                            <a href="index.html?addToCart=2" class="btn btn-primary">Adicionar à Sacola</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 3 -->
-                <div class="product-card" data-category="HOME_GARDEN">
-                    <div class="product-image">
-                        <div class="img-bg" style="background-image: url('https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?q=80&w=800&auto=format&fit=crop');"></div>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" style="font-family: 'Cinzel', serif;">Poltrona Eames Vintage</h4>
-                        <p class="product-description">Couro legítimo artesanal e base de Nogueira escura. Edição Limitada.</p>
-                        <div class="product-price">R$ 38.500,00</div>
-                        <div class="product-actions">
-                            <a href="index.html?addToCart=3" class="btn btn-primary">Adicionar à Sacola</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 4 -->
-                <div class="product-card" data-category="BEAUTY">
-                    <div class="product-image">
-                        <div class="img-bg" style="background-image: url('https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop');"></div>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" style="font-family: 'Cinzel', serif;">Elixir d'Or 50ml</h4>
-                        <p class="product-description">Sérum facial infundido com partículas de Ouro 24k e trufas brancas.</p>
-                        <div class="product-price">R$ 4.250,00</div>
-                        <div class="product-actions">
-                            <a href="index.html?addToCart=4" class="btn btn-primary">Adicionar à Sacola</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 5 -->
-                <div class="product-card" data-category="ELECTRONICS">
-                    <div class="product-image">
-                        <div class="img-bg" style="background-image: url('https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=800&auto=format&fit=crop');"></div>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" style="font-family: 'Cinzel', serif;">MacBook Pro Max Custom</h4>
-                        <p class="product-description">Chip M3 Max, 128GB RAM unificada, 4TB SSD. Edição Especial Stealth.</p>
-                        <div class="product-price">R$ 54.999,00</div>
-                        <div class="product-actions">
-                            <a href="index.html?addToCart=5" class="btn btn-primary">Adicionar à Sacola</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 6 -->
-                <div class="product-card" data-category="ELECTRONICS">
-                    <div class="product-image">
-                        <div class="img-bg" style="background-image: url('https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=800&auto=format&fit=crop');"></div>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" style="font-family: 'Cinzel', serif;">Headphone Bang & Olufsen</h4>
-                        <p class="product-description">Alumínio anodizado, couro de bezerro. Som impecável e isolamento absoluto.</p>
-                        <div class="product-price">R$ 6.800,00</div>
-                        <div class="product-actions">
-                            <a href="index.html?addToCart=6" class="btn btn-primary">Adicionar à Sacola</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
