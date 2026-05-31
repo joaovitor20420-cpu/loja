@@ -43,3 +43,4 @@ database/.vscode/
 *.log
 uploads/
 database/
+src/main/resources/application.properties
