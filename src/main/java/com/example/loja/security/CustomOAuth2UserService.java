@@ -1,4 +1,10 @@
-package com.example.loja;
+package com.example.loja.security;
+
+import com.example.loja.models.*;
+import com.example.loja.repositories.*;
+import com.example.loja.security.*;
+import com.example.loja.config.*;
+import com.example.loja.controllers.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

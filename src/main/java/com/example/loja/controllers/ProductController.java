@@ -1,4 +1,10 @@
-package com.example.loja;
+package com.example.loja.controllers;
+
+import com.example.loja.models.*;
+import com.example.loja.repositories.*;
+import com.example.loja.security.*;
+import com.example.loja.config.*;
+import com.example.loja.controllers.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,7 +33,7 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    @Operation(summary = "Listar produtos", description = "Exibe a página de gerenciamento de produtos com filtro opcional por categoria")
+    @Operation(summary = "Listar produtos", description = "Exibe a pÃ¡gina de gerenciamento de produtos com filtro opcional por categoria")
     @GetMapping("/product")
     public String product(@RequestParam(required = false, defaultValue = "ALL") String category,
             Model model) {
@@ -82,7 +88,7 @@ public class ProductController {
         return "product";
     }
 
-    @Operation(summary = "Editar produto", description = "Carrega os dados de um produto específico para edição")
+    @Operation(summary = "Editar produto", description = "Carrega os dados de um produto especÃ­fico para ediÃ§Ã£o")
     @GetMapping("/product/edit/{id}")
     public String editProduct(@PathVariable Long id, Model model) {
         model.addAttribute("title", "Editar Produto");
@@ -100,3 +106,4 @@ public class ProductController {
     }
 
 }
+

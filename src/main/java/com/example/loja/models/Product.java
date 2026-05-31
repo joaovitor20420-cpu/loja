@@ -1,4 +1,10 @@
-package com.example.loja;
+package com.example.loja.models;
+
+import com.example.loja.models.*;
+import com.example.loja.repositories.*;
+import com.example.loja.security.*;
+import com.example.loja.config.*;
+import com.example.loja.controllers.*;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,17 +18,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Entidade que representa um produto na loja")
 @Entity
 public class Product {
-    @Schema(description = "Identificador único do produto", example = "1")
+    @Schema(description = "Identificador Ãºnico do produto", example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Schema(description = "Nome do produto", example = "Camiseta Básica")
+    @Schema(description = "Nome do produto", example = "Camiseta BÃ¡sica")
     private String name;
-    @Schema(description = "Descrição detalhada do produto", example = "Camiseta 100% algodão")
+    @Schema(description = "DescriÃ§Ã£o detalhada do produto", example = "Camiseta 100% algodÃ£o")
     private String description;
-    @Schema(description = "Preço do produto em reais", example = "49.90")
+    @Schema(description = "PreÃ§o do produto em reais", example = "49.90")
     private double price;
-    @Schema(description = "Estado/condição do produto (Novo, Usado)", example = "Novo")
+    @Schema(description = "Estado/condiÃ§Ã£o do produto (Novo, Usado)", example = "Novo")
     private String state;
     @Schema(description = "Nome do arquivo de imagem do produto", example = "camiseta.jpg")
     private String image;
@@ -116,3 +122,4 @@ public class Product {
                 + ", image=" + image + ", category=" + category + ", stock=" + stock + "]";
     }
 }
+

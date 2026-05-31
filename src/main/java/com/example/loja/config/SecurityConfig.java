@@ -1,4 +1,10 @@
-package com.example.loja;
+package com.example.loja.config;
+
+import com.example.loja.models.*;
+import com.example.loja.repositories.*;
+import com.example.loja.security.*;
+import com.example.loja.config.*;
+import com.example.loja.controllers.*;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,24 +32,24 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // AQUI É ONDE A MÁGICA ACONTECE! As regras da alfândega:
+    // AQUI Ã‰ ONDE A MÃGICA ACONTECE! As regras da alfÃ¢ndega:
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                        // Deixamos todo mundo acessar o CSS, imagens, Home e a página de Signin/Signup
+                        // Deixamos todo mundo acessar o CSS, imagens, Home e a pÃ¡gina de Signin/Signup
                         .requestMatchers("/", "/css/**", "/images/**", "/uploads/**", "/js/**","/signin", "/signup").permitAll()
-                        // Qualquer outra página (ex: /admin, /checkout) vai exigir login
+                        // Qualquer outra pÃ¡gina (ex: /admin, /checkout) vai exigir login
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        // Dizemos qual é a nossa página de login customizada (aquele seu HTML bonito)
+                        // Dizemos qual Ã© a nossa pÃ¡gina de login customizada (aquele seu HTML bonito)
                         .loginPage("/signin")
                         .permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        // E também ativamos o Login do Google, usando o seu Consulado!
+                        // E tambÃ©m ativamos o Login do Google, usando o seu Consulado!
                         .loginPage("/signin")
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)

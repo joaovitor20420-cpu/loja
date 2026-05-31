@@ -1,4 +1,10 @@
-package com.example.loja;
+package com.example.loja.controllers;
+
+import com.example.loja.models.*;
+import com.example.loja.repositories.*;
+import com.example.loja.security.*;
+import com.example.loja.config.*;
+import com.example.loja.controllers.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +16,13 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
-@Tag(name = "Home", description = "Página inicial da loja virtual (vitrine pública)")
+@Tag(name = "Home", description = "PÃ¡gina inicial da loja virtual (vitrine pÃºblica)")
 public class HomeController {
 
     @Autowired
     private ProductRepository productRepository;
 
-    @Operation(summary = "Página inicial", description = "Exibe o catálogo público de produtos com filtro opcional por categoria")
+    @Operation(summary = "PÃ¡gina inicial", description = "Exibe o catÃ¡logo pÃºblico de produtos com filtro opcional por categoria")
     @GetMapping("/")
     public String index(@RequestParam(required = false, defaultValue = "ALL") String category,
                         Model model) {
@@ -36,3 +42,4 @@ public class HomeController {
     }
 
 }
+

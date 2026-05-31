@@ -1,44 +1,50 @@
-package com.example.loja;
+package com.example.loja.models;
+
+import com.example.loja.models.*;
+import com.example.loja.repositories.*;
+import com.example.loja.security.*;
+import com.example.loja.config.*;
+import com.example.loja.controllers.*;
 
 import jakarta.persistence.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Entidade que representa um usuário do sistema")
+@Schema(description = "Entidade que representa um usuÃ¡rio do sistema")
 @Entity
 @Table(name = "users")
 public class User {
-    @Schema(description = "Identificador único do usuário", example = "1")
+    @Schema(description = "Identificador Ãºnico do usuÃ¡rio", example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
-    @Schema(description = "Primeiro nome", example = "João")
+    @Schema(description = "Primeiro nome", example = "JoÃ£o")
     private String FirstName;
     @Schema(description = "Sobrenome", example = "Silva")
     private String LastName;
 
-    @Schema(description = "Endereço de e-mail (único)", example = "joao@email.com")
+    @Schema(description = "EndereÃ§o de e-mail (Ãºnico)", example = "joao@email.com")
     @Column(unique = true)
     private String email;
 
-    @Schema(description = "Senha do usuário", accessMode = Schema.AccessMode.WRITE_ONLY)
+    @Schema(description = "Senha do usuÃ¡rio", accessMode = Schema.AccessMode.WRITE_ONLY)
     private String Password;
     @Schema(description = "Telefone de contato", example = "(11) 99999-9999")
     private String Phone;
-    @Schema(description = "Endereço", example = "Rua das Flores, 123")
+    @Schema(description = "EndereÃ§o", example = "Rua das Flores, 123")
     private String Address;
-    @Schema(description = "Cidade", example = "São Paulo")
+    @Schema(description = "Cidade", example = "SÃ£o Paulo")
     private String City;
     @Schema(description = "Estado", example = "SP")
     private String State;
     @Schema(description = "CEP", example = "01001-000")
     private String Zip;
-    @Schema(description = "País", example = "Brasil")
+    @Schema(description = "PaÃ­s", example = "Brasil")
     private String Country;
-    @Schema(description = "Papel/permissão do usuário")
+    @Schema(description = "Papel/permissÃ£o do usuÃ¡rio")
     @Enumerated(EnumType.STRING)
     private UserRole role;
-    @Schema(description = "Status da conta do usuário")
+    @Schema(description = "Status da conta do usuÃ¡rio")
     @Enumerated(EnumType.STRING)
     private UserStatus status;
     @Schema(description = "Nome do arquivo de imagem de perfil", example = "avatar.jpg")
@@ -179,3 +185,4 @@ public class User {
     }
 
 }
+
