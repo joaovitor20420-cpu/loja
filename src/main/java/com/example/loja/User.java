@@ -1,18 +1,12 @@
 package com.example.loja;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Entidade que representa um usuário do sistema")
 @Entity
-
+@Table(name = "users")
 public class User {
     @Schema(description = "Identificador único do usuário", example = "1")
     @Id
@@ -25,7 +19,7 @@ public class User {
 
     @Schema(description = "Endereço de e-mail (único)", example = "joao@email.com")
     @Column(unique = true)
-    private String Email;
+    private String email;
 
     @Schema(description = "Senha do usuário", accessMode = Schema.AccessMode.WRITE_ONLY)
     private String Password;
@@ -82,11 +76,11 @@ public class User {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String Email) {
-        this.Email = Email;
+        this.email = Email;
     }
 
     public String getPassword() {
@@ -170,7 +164,7 @@ public class User {
     }
 
     public String ToString() {
-        return "User [Id=" + Id + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Email=" + Email
+        return "User [Id=" + Id + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Email=" + email
                 + ", Password=" + Password + ", Phone=" + Phone + ", Address=" + Address + ", City=" + City + ", State="
                 + State + ", Zip=" + Zip + ", Country=" + Country + ", Role=" + role + ", Status=" + status + ", Image="
                 + Image + "]";
