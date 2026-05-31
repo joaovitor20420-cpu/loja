@@ -40,12 +40,12 @@
                     <span>Email ou senha incorretos</span>
                 </div>
 
-                <form class="auth-form" th:href="@{/}" method="post">
+                <form class="auth-form" th:action="@{/signin}" method="post">
                     <div class="form-group">
                         <label for="email">
                             <i class="fas fa-envelope"></i> Email Address
                         </label>
-                        <input type="email" id="email" name="email" required placeholder="Enter Email Address">
+                        <input type="email" id="email" name="username" required placeholder="Enter Email Address">
                     </div>
 
                     <div class="form-group">

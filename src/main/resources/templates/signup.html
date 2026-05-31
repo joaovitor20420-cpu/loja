@@ -35,7 +35,7 @@
                     <p>Register to unlock our exclusive catalog</p>
                 </div>
 
-                <form class="auth-form" action="index.html" method="post">
+                <form class="auth-form" th:action="@{/signup}" th:object="${user}" method="post">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">
