@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive Access - Login</title>
+    <title>Suburbio Store - Login</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
     <link rel="stylesheet" th:href="@{/css/auth.css}" href="/css/auth.css">
@@ -16,7 +16,7 @@
         <nav class="nav-container">
             <div class="logo">
                 <a th:href="@{/}">
-                    <h1><i class="fas fa-crown"></i> E-commerce</h1>
+                    <h1><i class="fas fa-fire"></i> Suburbio Store</h1>
                 </a>
             </div>
             <div class="user-actions">
@@ -31,8 +31,8 @@
         <div class="auth-container">
             <div class="auth-card">
                 <div class="auth-header">
-                    <h2><i class="fas fa-key"></i> Exclusive Access</h2>
-                    <p>Enter your credentials to access your private collection</p>
+                    <h2><i class="fas fa-bolt"></i> Acesse sua Conta</h2>
+                    <p>Entre pra conferir os drops e novidades da Suburbio</p>
                 </div>
 
                 <div class="alert alert-error" th:if="${error}">
@@ -43,17 +43,17 @@
                 <form class="auth-form" th:action="@{/signin}" method="post">
                     <div class="form-group">
                         <label for="email">
-                            <i class="fas fa-envelope"></i> Email Address
+                            <i class="fas fa-envelope"></i> Seu E-mail
                         </label>
-                        <input type="email" id="email" name="username" required placeholder="Enter Email Address">
+                        <input type="email" id="email" name="username" required placeholder="Digite seu e-mail">
                     </div>
 
                     <div class="form-group">
                         <label for="password">
-                            <i class="fas fa-lock"></i> Passcode
+                            <i class="fas fa-lock"></i> Senha
                         </label>
                         <div class="password-field">
-                            <input type="password" id="password" name="password" required placeholder="Enter Passcode" minlength="8">
+                            <input type="password" id="password" name="password" required placeholder="Digite sua senha" minlength="8">
                             <button type="button" class="password-toggle" id="password-toggle">
                                 <i class="fas fa-eye"></i>
                             </button>
@@ -74,23 +74,23 @@
                         <label class="checkbox-container">
                             <input type="checkbox" id="remember" name="remember">
                             <span class="checkmark"></span>
-                            Remember my credentials
+                            Lembrar de mim
                         </label>
-                        <a href="#" class="forgot-link">Recover Passcode</a>
+                        <a href="#" class="forgot-link">Esqueci a Senha</a>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-auth">
-                        Enter Vault <i class="fas fa-arrow-right"></i>
+                        Entrar <i class="fas fa-arrow-right"></i>
                     </button>
 
                     <div class="divider">
-                        <span>or</span>
+                        <span>ou</span>
                     </div>
 
                     <div class="social-login">
-                        <button type="button" class="btn btn-social btn-google">
+                        <a th:href="@{/oauth2/authorization/google}" class="btn btn-social btn-google">
                             <i class="fab fa-google"></i> Google
-                        </button>
+                        </a>
                         <button type="button" class="btn btn-social btn-facebook">
                             <i class="fab fa-facebook-f"></i> Facebook
                         </button>
@@ -98,26 +98,26 @@
                 </form>
 
                 <div class="auth-footer">
-                    <p>Not a member yet? <a th:href="@{/signup}" class="auth-link">Request Invitation</a></p>
+                    <p>Ainda não tem conta? <a th:href="@{/signup}" class="auth-link">Crie a sua agora</a></p>
                 </div>
             </div>
 
             <div class="auth-side">
                 <div class="auth-side-content">
-                    <h3>The Club</h3>
-                    <p>A curated experience of absolute luxury and refinement. Step inside the vault and discover our exclusive collections.</p>
+                    <h3>Suburbio Store</h3>
+                    <p>Streetwear de verdade pra quem vive o estilo urbano. Peças únicas, drops limitados e atitude na veia.</p>
                     <div class="auth-side-features">
                         <div class="feature-item">
-                            <i class="fas fa-gem"></i>
-                            <span>Unparalleled Quality</span>
+                            <i class="fas fa-tshirt"></i>
+                            <span>Streetwear Original</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-concierge-bell"></i>
-                            <span>White-Glove Delivery</span>
+                            <i class="fas fa-truck-fast"></i>
+                            <span>Entrega Rápida</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-user-shield"></i>
-                            <span>Private & Secure</span>
+                            <i class="fas fa-shield-halved"></i>
+                            <span>Compra Segura</span>
                         </div>
                     </div>
                 </div>

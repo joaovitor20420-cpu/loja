@@ -1,25 +1,16 @@
 package com.example.loja.models;
 
-import com.example.loja.models.*;
-import com.example.loja.repositories.*;
-import com.example.loja.security.*;
-import com.example.loja.config.*;
-import com.example.loja.controllers.*;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Categorias de produtos disponÃ­veis na loja")
+@Schema(description = "Categorias de produtos de Streetwear")
 public enum Category {
-    CLOTHING("Roupas", "fa fa-tshirt"),
-    FOOTWEAR("CalÃ§ados", "fa fa-shoe-prints"),
-    ACCESSORIES("AcessÃ³rios", "fa fa-gem"),
-    ELECTRONICS("EletrÃ´nicos", "fa fa-laptop"),
-    HOME_DECOR("Casa e DecoraÃ§Ã£o", "fa fa-home"),
-    BEAUTY_HEALTH("Beleza e SaÃºde", "fa fa-heart"),
-    SPORTS_LEISURE("Esportes e Lazer", "fa fa-football-ball"),
-    BOOKS_MUSIC_MOVIES("Livros, MÃºsicas e Filmes", "fa fa-book"),
-    FOOD("Alimentos", "fa fa-utensils"),
-    OTHERS("Outros", "fa fa-th");
+    TSHIRTS("Camisetas", "fas fa-tshirt"),
+    HOODIES("Hoodies & Moletons", "fas fa-user-ninja"),
+    SNEAKERS("Sneakers", "fas fa-shoe-prints"),
+    PANTS("Calças & Cargo", "fas fa-grip-lines"),
+    HEADWEAR("Bonés & Toucas", "fas fa-crown"),
+    ACCESSORIES("Acessórios", "fas fa-gem"),
+    OUTERWEAR("Jaquetas & Corta-vento", "fas fa-wind");
 
     private final String description;
     private final String icon;
@@ -37,4 +28,3 @@ public enum Category {
         return icon;
     }
 }
-

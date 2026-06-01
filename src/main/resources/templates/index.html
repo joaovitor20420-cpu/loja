@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-commerce - Dark Luxury</title>
+    <title>Suburbio Store - StreetWear</title>
     <!-- Google Fonts for Dark Luxury -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS Links -->
@@ -20,11 +20,11 @@
         <nav class="nav-container">
             <div class="logo">
                 <a th:href="@{/}">
-                    <h1>Maison <span>D'Or</span></h1>
+                    <h1>Suburbio <span>Store</span></h1>
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a th:href="@{/}">Boutique</a></li>
+                <li><a th:href="@{/}">Drops</a></li>
                 <li><a th:href="@{/product}">Coleção</a></li>
                 <li><a th:href="@{/orders}">Meus Pedidos</a></li>
             </ul>
@@ -61,9 +61,9 @@
     <!-- Hero Section Imersiva -->
     <section class="hero" id="home">
         <div class="hero-container">
-            <h2>Luxo sem concessões</h2>
-            <p>Descubra a coleção exclusiva de relógios, alta costura e artefatos de precisão. Onde a tradição encontra o design moderno.</p>
-            <a th:href="@{#colecao}" class="btn btn-primary">Explorar a Coleção</a>
+            <h2>Vista a Atitude</h2>
+            <p>As peças mais desejadas do streetwear urbano. Edições limitadas, drops exclusivos e estilo sem limites.</p>
+            <a th:href="@{#colecao}" class="btn btn-primary">Ver os Drops</a>
         </div>
     </section>
 
@@ -142,8 +142,8 @@
     <section class="products-section" id="colecao">
         <div class="container">
             <div class="section-header">
-                <h3>Coleção Exclusiva</h3>
-                <p>Peças selecionadas para os mais exigentes</p>
+                <h3>Drops da Semana</h3>
+                <p>Edições limitadas que não vão durar</p>
             </div>
 
             <!-- Categories Filter -->
@@ -187,7 +187,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2026 Maison D'Or. Todos os direitos reservados. Experiência exclusiva.</p>
+        <p>&copy; 2026 Suburbio Store. Todos os direitos reservados. Streetwear culture.</p>
     </footer>
 
     <script th:src="@{/js/main.js}" src="/js/main.js"></script>

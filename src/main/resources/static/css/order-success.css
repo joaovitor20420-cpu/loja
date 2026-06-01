@@ -1,17 +1,17 @@
 /* ====================================
-   DARK LUXURY HIGH-TICKET AESTHETIC
+   SUBURBIO STORE — STREETWEAR AESTHETIC
    ==================================== */
 
 :root {
     --bg-dark: #0a0a0a;
     --bg-surface: #111111;
-    --gold: #D4AF37;
-    --gold-hover: #C5A059;
-    --gold-muted: rgba(212, 175, 55, 0.2);
-    --gold-faint: rgba(212, 175, 55, 0.05);
+    --gold: #FF6B00;
+    --gold-hover: #FF8C33;
+    --gold-muted: rgba(255, 107, 0, 0.2);
+    --gold-faint: rgba(255, 107, 0, 0.05);
     --text-light: #f5f5f5;
     --text-muted: #a0a0a0;
-    --border-subtle: rgba(212, 175, 55, 0.2);
+    --border-subtle: rgba(255, 107, 0, 0.2);
     --transition: all 0.4s ease;
 }
 
@@ -32,7 +32,7 @@ body.dark-luxury {
 .dark-luxury h4, 
 .dark-luxury h5, 
 .dark-luxury h6 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Bebas Neue', sans-serif;
     color: var(--gold);
     font-weight: 400;
     margin-top: 0;
@@ -344,7 +344,7 @@ body.dark-luxury {
 .luxury-btn-primary:hover {
     background: var(--gold-hover);
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
+    box-shadow: 0 10px 20px rgba(255, 107, 0, 0.15);
 }
 
 .luxury-btn-outline {
@@ -386,10 +386,10 @@ body.dark-luxury {
 
 @keyframes luxuryGlow {
     from {
-        text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        text-shadow: 0 0 10px rgba(255, 107, 0, 0.2);
     }
     to {
-        text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+        text-shadow: 0 0 30px rgba(255, 107, 0, 0.6);
     }
 }
 
@@ -410,14 +410,14 @@ body.dark-luxury {
     display: inline-flex;
     align-items: center;
     gap: 0.8rem;
-    background: rgba(212, 175, 55, 0.1);
+    background: rgba(255, 107, 0, 0.1);
     border: 1px solid var(--gold);
     padding: 1rem 2rem;
     margin-top: 2rem;
     font-size: 1.2rem;
     color: var(--gold);
     letter-spacing: 2px;
-    font-family: 'Cinzel', serif;
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 .luxury-steps-list {
