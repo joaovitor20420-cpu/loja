@@ -1,26 +1,35 @@
 package com.example.loja.controllers;
 
 import com.example.loja.models.*;
-import com.example.loja.repositories.*;
-import com.example.loja.security.*;
-import com.example.loja.config.*;
-import com.example.loja.controllers.*;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 
 @Controller
-@Tag(name = "AutenticaÃ§Ã£o", description = "Endpoints de login e cadastro de usuÃ¡rios")
+@Tag(name = "Autenticação", description = "Endpoints de login e cadastro de usuários")
 public class SignInController {
 
-    @Operation(summary = "PÃ¡gina de login", description = "Exibe o formulÃ¡rio de login do usuÃ¡rio")
+    @Operation(summary = "Página de login", description = "Exibe o formulário de login do usuário")
     @GetMapping("/signin")
-    public String signIn(Model model) {
-        model.addAttribute("title", "Login");
+    public String signin(Authentication authentication, jakarta.servlet.http.HttpServletRequest request, org.springframework.ui.Model model) {
+
+        if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
+            return "redirect:/";
+        }
+
+        // Recuperar o erro exato do Spring Security para debug
+        Object exception = request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
+        if (exception != null) {
+            model.addAttribute("detailedError", ((Exception) exception).getMessage());
+            System.out.println("ERRO DE LOGIN: " + ((Exception) exception).getMessage());
+            ((Exception) exception).printStackTrace();
+        }
+
         return "signin";
     }
+
 }
 

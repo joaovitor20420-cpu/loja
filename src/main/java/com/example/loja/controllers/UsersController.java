@@ -13,14 +13,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
-@Tag(name = "UsuÃ¡rios", description = "GestÃ£o de usuÃ¡rios da plataforma")
+@Tag(name = "Usuários", description = "Gestão de usuários da plataforma")
 public class UsersController {
 
-    @Operation(summary = "GestÃ£o de usuÃ¡rios", description = "Exibe a pÃ¡gina de gerenciamento de usuÃ¡rios")
-    @GetMapping("/users")
+    @Operation(summary = "Gestão de usuários", description = "Exibe a página de gerenciamento de usuários")
+    @GetMapping("/admin/users")
     public String users(Model model) {
-        model.addAttribute("title", "UsuÃ¡rios");
+        model.addAttribute("title", "Usuários");
         return "users";
     }
 }
-

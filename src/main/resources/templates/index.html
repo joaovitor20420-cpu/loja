@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,20 +38,27 @@
                         <i class="fas fa-user-circle"></i>
                     </button>
                     <div class="dropdown-menu" id="dropdown-menu">
-                        <a th:href="@{/signin}" class="dropdown-item">
+                        <!-- Só aparece se NÃO estiver logado -->
+                        <a sec:authorize="isAnonymous()" th:href="@{/signin}" class="dropdown-item">
                             Entrar
                         </a>
-                        <a th:href="@{/signup}" class="dropdown-item">
+                        <a sec:authorize="isAnonymous()" th:href="@{/signup}" class="dropdown-item">
                             Criar Conta VIP
                         </a>
-                        <hr class="dropdown-divider">
-                        <a th:href="@{/admin}" class="dropdown-item">
-                            Administração
+                        <hr sec:authorize="isAnonymous()" class="dropdown-divider">
+
+                        <!-- Só aparece se for o CHEFÃO (Admin) -->
+                        <a sec:authorize="hasAuthority('ROLE_ADMIN') or hasRole('ADMIN')" th:href="@{/admin}" class="dropdown-item">
+                            <i class="fas fa-shield-alt"></i> Administração
                         </a>
-                        <hr class="dropdown-divider">
-                        <a th:href="@{/}" class="dropdown-item">
-                            Sair
-                        </a>
+                        <hr sec:authorize="hasRole('ADMIN')" class="dropdown-divider">
+
+                        <!-- Só aparece se ESTIVER logado. Spring Security exige que o Sair seja um formulário POST -->
+                        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" style="margin:0;">
+                            <button type="submit" class="dropdown-item" style="width: 100%; text-align: left; background: none; border: none; font: inherit; cursor: pointer;">
+                                Sair
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

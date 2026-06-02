@@ -13,14 +13,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
-@Tag(name = "Pedidos", description = "GestÃ£o de pedidos da loja")
+@Tag(name = "Pedidos", description = "Gestão de pedidos da loja")
 public class OrdersController {
 
-    @Operation(summary = "GestÃ£o de pedidos", description = "Exibe a pÃ¡gina de gerenciamento de pedidos")
-    @GetMapping("/orders")
+    @Operation(summary = "Gestão de pedidos", description = "Exibe a página de gerenciamento de pedidos")
+    @GetMapping("/admin/orders")
     public String orders(Model model) {
         model.addAttribute("title", "Pedidos");
         return "orders";
     }
 }
-

@@ -37,7 +37,14 @@ public class SignUpController {
     @PostMapping("/signup")
     public String registerUser(@ModelAttribute User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(User.UserRole.USER);
+        
+        // Verifica se é o dono da loja
+        if ("joaovitor20420@gmail.com".equals(user.getEmail())) {
+            user.setRole(User.UserRole.ADMIN);
+        } else {
+            user.setRole(User.UserRole.USER);
+        }
+        
         user.setStatus(User.UserStatus.ACTIVE);
         userRepository.save(user);
 

@@ -35,9 +35,11 @@
                     <p>Entre pra conferir os drops e novidades da Suburbio</p>
                 </div>
 
-                <div class="alert alert-error" th:if="${error}">
+                <div class="alert alert-error" th:if="${param.error}">
                     <i class="fas fa-exclamation-triangle"></i>
-                    <span>Email ou senha incorretos</span>
+                    <span>Falha no Login (ou credenciais inválidas)</span>
+                    <br>
+                    <small th:if="${detailedError}" th:text="${detailedError}" style="opacity: 0.8; font-size: 0.8em;"></small>
                 </div>
 
                 <form class="auth-form" th:action="@{/signin}" method="post">

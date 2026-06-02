@@ -15,12 +15,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Controller
 @Tag(name = "Admin", description = "Ãrea administrativa da plataforma")
 public class AdmimController {
-    
+
     @Operation(summary = "Painel administrativo", description = "Exibe a pÃ¡gina principal da Ã¡rea administrativa")
     @GetMapping("/admin")
     public String admin(Model model) {
         model.addAttribute("title", "Ãrea Administrativa");
         return "admin";
     }
-}   
+}
 

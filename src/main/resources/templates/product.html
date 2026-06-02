@@ -38,25 +38,25 @@
             <nav class="admin-nav">
                 <ul class="admin-nav-list">
                     <li class="admin-nav-item">
-                        <a th:href="@{/dashboard}" class="admin-nav-link">
+                        <a th:href="@{/admin/dashboard}" class="admin-nav-link">
                             <i class="fas fa-gem"></i>
                             <span>Overview</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
-                        <a th:href="@{/product}" class="admin-nav-link active">
+                        <a th:href="@{/admin/products}" class="admin-nav-link active">
                             <i class="fas fa-box-open"></i>
                             <span>Collection</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
-                        <a th:href="@{/orders}" class="admin-nav-link">
+                        <a th:href="@{/admin/orders}" class="admin-nav-link">
                             <i class="fas fa-file-invoice-dollar"></i>
                             <span>Acquisitions</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
-                        <a th:href="@{/users}" class="admin-nav-link">
+                        <a th:href="@{/admin/users}" class="admin-nav-link">
                             <i class="fas fa-users"></i>
                             <span>Clientele</span>
                         </a>
@@ -79,7 +79,7 @@
                 </div>
 
                 <!-- Products Form -->
-                <form id="produto-form" class="form-grid two-columns" th:object="${product}" action="/product/save"
+                <form id="produto-form" class="form-grid two-columns" th:object="${product}" action="/admin/products/save"
                     method="POST" enctype="multipart/form-data"
                     th:style="${product.id != null} ? 'display:grid; margin-bottom: 3rem;' : 'display:none; margin-bottom: 3rem;'">
                     <input type="text" name="id" th:field="*{id}" style="display:none;">
@@ -138,7 +138,7 @@
 
                 <!-- Filters -->
                 <div class="admin-filters">
-                    <form action="product" method="get" class="filter-group">
+                    <form action="/admin/products" method="get" class="filter-group">
                         <input type="text" id="search-produtos" placeholder="Search collection..." class="admin-input" style="width: 300px;">
                         <select name="category" id="filter-categoria" class="admin-select" onchange="this.form.submit()">
                             <option value="" th:selected="${selectedCategory == 'ALL' ? 'btn btn-primary active' : 'category-btn'}">All Categories</option>
@@ -182,10 +182,10 @@
                                 </td>
                                 <td>
                                     <div class="action-buttons">
-                                        <a th:href="@{/product/edit/{id}(id=${product.id})}" class="btn-icon" title="Edit Piece">
+                                        <a th:href="@{/admin/products/edit/{id}(id=${product.id})}" class="btn-icon" title="Edit Piece">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a th:href="@{/product/delete/{id}(id=${product.id})}" class="btn-icon btn-delete" title="Remove Piece"
+                                        <a th:href="@{/admin/products/delete/{id}(id=${product.id})}" class="btn-icon btn-delete" title="Remove Piece"
                                             onclick="return confirm('Are you certain you wish to archive this piece?');">
                                             <i class="fas fa-trash"></i>
                                         </a>

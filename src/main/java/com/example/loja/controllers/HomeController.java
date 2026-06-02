@@ -6,6 +6,7 @@ import com.example.loja.security.*;
 import com.example.loja.config.*;
 import com.example.loja.controllers.*;
 
+import com.example.loja.services.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
@@ -20,7 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class HomeController {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @Operation(summary = "PÃ¡gina inicial", description = "Exibe o catÃ¡logo pÃºblico de produtos com filtro opcional por categoria")
     @GetMapping("/")
@@ -30,10 +31,10 @@ public class HomeController {
         model.addAttribute("categories", Category.values());
         model.addAttribute("selectedCategory", category != null ? category : "ALL");
         if(category.equals("ALL")){
-            model.addAttribute("products", productRepository.findAll());
+            model.addAttribute("products", productService.getAllProducts());
         } else {
             Category cat = Category.valueOf(category);
-            model.addAttribute("products",productRepository.findByCategory(cat));
+            model.addAttribute("products", productService.getProductsByCategory(cat));
         }
 
         

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Gerenciar Produtos - Suburbio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    
+    <style>
+        .admin-layout { display: flex; min-height: calc(100vh - 80px); background: #0f0f13; }
+        .admin-sidebar { width: 250px; background: #1a1a24; border-right: 1px solid #333; padding: 2rem 0; }
+        .admin-sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .admin-sidebar-menu li a { display: flex; align-items: center; padding: 1rem 2rem; color: #aaa; text-decoration: none; transition: 0.3s; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; letter-spacing: 1px; }
+        .admin-sidebar-menu li a i { margin-right: 15px; font-size: 1.2rem; width: 20px; text-align: center; }
+        .admin-sidebar-menu li a:hover, .admin-sidebar-menu li.active a { color: #00ffcc; background: rgba(0, 255, 204, 0.1); border-left: 3px solid #00ffcc; }
+        .admin-content { flex: 1; padding: 3rem; overflow-y: auto; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; border-bottom: 1px solid #333; padding-bottom: 1rem; }
+        .admin-header h1 { font-family: 'Orbitron', sans-serif; color: #fff; margin: 0; font-size: 2rem; }
+        
+        .products-table { width: 100%; border-collapse: collapse; background: #1a1a24; border-radius: 8px; overflow: hidden; border: 1px solid #333; }
+        .products-table th, .products-table td { padding: 1rem; text-align: left; border-bottom: 1px solid #333; }
+        .products-table th { background: #222230; color: #00ffcc; font-family: 'Orbitron', sans-serif; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        .products-table td { color: #fff; vertical-align: middle; }
+        .products-table tr:hover { background: rgba(255, 255, 255, 0.02); }
+        
+        .prod-img-mini { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #333; }
+        .action-btn { background: none; border: none; color: #888; cursor: pointer; padding: 5px; transition: 0.3s; margin-right: 5px; }
+        .action-btn:hover.edit { color: #00ffcc; }
+        .action-btn:hover.delete { color: #ff3366; }
+        
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+        .badge-category { background: #333; color: #fff; }
+        
+        .empty-state { text-align: center; padding: 3rem; color: #888; }
+        .empty-state i { font-size: 3rem; margin-bottom: 1rem; color: #333; }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">SUBURBIO</div>
+        <nav class="main-nav">
+            <a th:href="@{/}">Loja</a>
+            <a th:href="@{/admin}" class="active">Admin</a>
+        </nav>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <ul class="admin-sidebar-menu">
+                <li><a th:href="@{/admin}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li class="active"><a th:href="@{/admin/produtos}"><i class="fas fa-box-open"></i> Produtos</a></li>
+            </ul>
+        </aside>
+        
+        <main class="admin-content">
+            <div class="admin-header">
+                <h1>Gerenciar Produtos</h1>
+                <a href="#" class="btn btn-primary" onclick="alert('Funcionalidade de adicionar produto em breve!')">
+                    <i class="fas fa-plus"></i> Novo Produto
+                </a>
+            </div>
+            
+            <div th:if="${products.empty}" class="empty-state">
+                <i class="fas fa-box-open"></i>
+                <h2>Nenhum produto cadastrado</h2>
+                <p>Você ainda não adicionou nenhum produto à sua loja.</p>
+            </div>
+            
+            <table th:unless="${products.empty}" class="products-table">
+                <thead>
+                    <tr>
+                        <th width="80">Imagem</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Preço</th>
+                        <th width="100">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${products}">
+                        <td>
+                            <img th:src="@{'/uploads/' + ${product.imageFileName}}" alt="Produto" class="prod-img-mini" onerror="this.src='https://via.placeholder.com/50x50/333/888?text=Img'">
+                        </td>
+                        <td th:text="${product.name}">Nome do Produto</td>
+                        <td><span class="badge badge-category" th:text="${product.category}">CATEGORIA</span></td>
+                        <td th:text="'R$ ' + ${product.price}">R$ 0,00</td>
+                        <td>
+                            <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete" title="Excluir"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+</body>
+</html>

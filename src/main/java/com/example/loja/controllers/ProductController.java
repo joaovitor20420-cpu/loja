@@ -5,12 +5,8 @@ import com.example.loja.repositories.*;
 import com.example.loja.security.*;
 import com.example.loja.config.*;
 import com.example.loja.controllers.*;
+import com.example.loja.services.ProductService;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,79 +27,57 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class ProductController {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @Operation(summary = "Listar produtos", description = "Exibe a pÃ¡gina de gerenciamento de produtos com filtro opcional por categoria")
-    @GetMapping("/product")
+    @GetMapping("/admin/products")
     public String product(@RequestParam(required = false, defaultValue = "ALL") String category,
             Model model) {
         model.addAttribute("categories", Category.values());
         model.addAttribute("product", new Product());
         model.addAttribute("selectedCategory", category != null && !category.isEmpty() ? category : "ALL");
         if ("ALL".equals(category)) {
-            model.addAttribute("products", productRepository.findAll());
+            model.addAttribute("products", productService.getAllProducts());
         } else {
             Category cat = Category.valueOf(category);
-            model.addAttribute("products", productRepository.findByCategory(cat));
+            model.addAttribute("products", productService.getProductsByCategory(cat));
         }
 
         return "product";
     }
 
     @Operation(summary = "Salvar produto", description = "Cria ou atualiza um produto, incluindo upload opcional de imagem")
-    @PostMapping("/product/save")
+    @PostMapping("/admin/products/save")
     public String saveProduct(@ModelAttribute Product product,
             @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
 
-        if (imageFile != null && !imageFile.isEmpty()) {
-            try {
-                String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
-                Path uploadPath = Paths.get("uploads");
-                if (!Files.exists(uploadPath)) {
-                    Files.createDirectories(uploadPath);
-                }
-                Files.copy(imageFile.getInputStream(), uploadPath.resolve(fileName),
-                        StandardCopyOption.REPLACE_EXISTING);
-                product.setImage(fileName);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (product.getId() != null) {
-            // Editando sem trocar a imagem: manter a imagem antiga
-            Product existing = productRepository.findById(product.getId()).orElse(null);
-            if (existing != null) {
-                product.setImage(existing.getImage());
-            }
-        }
-
-        productRepository.save(product);
-        return "redirect:/product";
+        productService.saveProduct(product, imageFile);
+        return "redirect:/admin/products";
     }
 
     @Operation(summary = "Listar todos os produtos", description = "Exibe a lista completa de produtos cadastrados")
-    @GetMapping("/product/list")
+    @GetMapping("/admin/products/list")
     public String productList(Model model) {
         model.addAttribute("title", "Lista de Produtos");
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("products", productService.getAllProducts());
         return "product";
     }
 
     @Operation(summary = "Editar produto", description = "Carrega os dados de um produto especÃ­fico para ediÃ§Ã£o")
-    @GetMapping("/product/edit/{id}")
+    @GetMapping("/admin/products/edit/{id}")
     public String editProduct(@PathVariable Long id, Model model) {
         model.addAttribute("title", "Editar Produto");
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("products", productService.getAllProducts());
         model.addAttribute("categories", Category.values());
-        model.addAttribute("product", ((Optional<Product>) productRepository.findById(id)).get());
+        model.addAttribute("product", productService.getProductById(id).get());
         return "product";
     }
 
     @Operation(summary = "Excluir produto", description = "Remove um produto pelo seu ID")
-    @GetMapping("/product/delete/{id}")
+    @GetMapping("/admin/products/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
-        productRepository.deleteById(id);
-        return "redirect:/product";
+        productService.deleteProduct(id);
+        return "redirect:/admin/products";
     }
 
 }
-

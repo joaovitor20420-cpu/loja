@@ -20,10 +20,12 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final CustomOidcUserService customOidcUserService;
 
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService, CustomOAuth2UserService customOAuth2UserService) {
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService, CustomOAuth2UserService customOAuth2UserService, CustomOidcUserService customOidcUserService) {
         this.customUserDetailsService = customUserDetailsService;
         this.customOAuth2UserService = customOAuth2UserService;
+        this.customOidcUserService = customOidcUserService;
     }
 
     // O Spring exige que a gente ensine ele a criptografar senhas (BCrypt)
@@ -38,9 +40,10 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                        // Deixamos todo mundo acessar o CSS, imagens, Home e a pÃ¡gina de Signin/Signup
-                        .requestMatchers("/", "/css/**", "/images/**", "/uploads/**", "/js/**","/signin", "/signup").permitAll()
-                        // Qualquer outra pÃ¡gina (ex: /admin, /checkout) vai exigir login
+                        // Deixamos todo mundo acessar o CSS, imagens, Home e a página de Signin/Signup
+                        .requestMatchers("/", "/css/**", "/images/**", "/uploads/**", "/js/**","/signin", "/signup", "/oauth2/authorization/**", "/login/oauth2/code/**").permitAll()
+                        .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -53,6 +56,7 @@ public class SecurityConfig {
                         .loginPage("/signin")
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)
+                                .oidcUserService(customOidcUserService)
                         )
                 );
 

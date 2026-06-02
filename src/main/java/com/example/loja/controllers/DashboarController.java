@@ -13,14 +13,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
-@Tag(name = "Dashboard", description = "Dashboard com mÃ©tricas e indicadores")
+@Tag(name = "Dashboard", description = "Dashboard com métricas e indicadores")
 public class DashboarController {
 
-    @Operation(summary = "Dashboard", description = "Exibe o dashboard com mÃ©tricas de vendas, produtos e usuÃ¡rios")
-    @GetMapping("/dashboard")
+    @Operation(summary = "Dashboard", description = "Exibe o dashboard com métricas de vendas, produtos e usuários")
+    @GetMapping("/admin/dashboard")
     public String dashboard(Model model) {
         model.addAttribute("title", "Painel Administrativo");
         return "dashboard";
     }
 }
-
