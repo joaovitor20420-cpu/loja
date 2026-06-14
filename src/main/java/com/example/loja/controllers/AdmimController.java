@@ -19,7 +19,7 @@ public class AdmimController {
     @Operation(summary = "Painel administrativo", description = "Exibe a pÃ¡gina principal da Ã¡rea administrativa")
     @GetMapping("/admin")
     public String admin(Model model) {
-        model.addAttribute("title", "Ãrea Administrativa");
+        model.addAttribute("title", "Area Administrativa");
         return "admin";
     }
 }

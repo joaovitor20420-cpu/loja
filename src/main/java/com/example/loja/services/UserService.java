@@ -1,0 +1,23 @@
+package com.example.loja.services;
+
+import com.example.loja.models.User;
+import com.example.loja.repositories.UserRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+    public List<User> findAllUsers() {
+        return (List<User>) userRepository.findAll();
+    }
+    public long countUsers(){
+        return userRepository.count();
+    }
+}

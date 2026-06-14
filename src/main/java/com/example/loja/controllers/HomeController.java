@@ -23,7 +23,7 @@ public class HomeController {
     @Autowired
     private ProductService productService;
 
-    @Operation(summary = "PÃ¡gina inicial", description = "Exibe o catÃ¡logo pÃºblico de produtos com filtro opcional por categoria")
+    @Operation(summary = "Pagina inicial", description = "Exibe o catalogo publico de produtos com filtro opcional por categoria")
     @GetMapping("/")
     public String index(@RequestParam(required = false, defaultValue = "ALL") String category,
                         Model model) {
