@@ -1,11 +1,6 @@
 package com.example.loja.controllers;
 
-import com.example.loja.models.*;
-import com.example.loja.repositories.*;
-import com.example.loja.security.*;
-import com.example.loja.config.*;
-import com.example.loja.controllers.*;
-
+import com.example.loja.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +11,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Usuários", description = "Gestão de usuários da plataforma")
 public class UsersController {
 
+    private final UserService userService;
+
+    public UsersController(UserService userService) {
+        this.userService = userService;
+    }
+
     @Operation(summary = "Gestão de usuários", description = "Exibe a página de gerenciamento de usuários")
     @GetMapping("/admin/users")
     public String users(Model model) {
-        model.addAttribute("title", "Usuários");
+        model.addAttribute("title", "Clientele - Admin");
+        model.addAttribute("users", userService.findAllUsers());
         return "users";
     }
 }

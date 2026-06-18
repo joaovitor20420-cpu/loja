@@ -24,10 +24,10 @@
 
 Este projeto é uma **plataforma completa de E-commerce** desenvolvida do zero para demonstrar habilidades avançadas no ecossistema Java. A aplicação foi projetada para resolver problemas reais de lojas virtuais, dividindo-se em duas áreas principais:
 
-1. **Storefront (Área do Cliente):** Interface amigável e intuitiva para navegação de produtos, carrinho de compras e checkout.
-2. **Admin Dashboard (Painel Administrativo):** Um robusto sistema de gestão (CRM/ERP simplificado) protegido sob a rota `/admin`, que permite controle total sobre o inventário, pedidos e usuários.
+1. **Storefront (Área do Cliente):** Interface amigável para navegação do catálogo de produtos (Carrinho e Checkout em desenvolvimento).
+2. **Admin Dashboard (Painel Administrativo):** Sistema de gestão integrado sob a rota `/admin`, com controle total sobre inventário, painel de métricas financeiras dinâmicas e listagem de usuários e pedidos.
 
-> **💡 Foco para Recrutadores:** O código foi construído prezando pelas melhores práticas de engenharia de software, incluindo **Design Patterns**, **Separação de Responsabilidades (MVC)**, renderização do lado do servidor (SSR) otimizada para SEO, Autenticação Segura (Google OIDC) e uma interface de usuário rica com responsividade.
+> **💡 Foco para Recrutadores:** O código foi construído prezando pelas melhores práticas de engenharia de software, incluindo **SOLID**, **Design Patterns**, **Separação em Camadas (Model-Service-Controller)**, renderização do lado do servidor (SSR) otimizada para SEO, Autenticação Segura e interface responsiva.
 
 ## 🛠️ Tecnologias e Ferramentas
 
@@ -87,9 +87,12 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
  ┃ ┃ ┃ ┃ ┗ 📜 UsersController.java      <-- 🟢 CONTROLLER (Usuários /admin)
  ┃ ┃ ┃ ┣ 📂 models
  ┃ ┃ ┃ ┃ ┣ 📜 Category.java             <-- 🔵 MODEL (Enum de Categorias)
- ┃ ┃ ┃ ┃ ┣ 📜 Product.java              <-- 🔵 MODEL (Entidade JPA)
- ┃ ┃ ┃ ┃ ┗ 📜 User.java                 <-- 🔵 MODEL (Entidade JPA)
+ ┃ ┃ ┃ ┃ ┣ 📜 Order.java                <-- 🔵 MODEL (Entidade JPA - Pedido)
+ ┃ ┃ ┃ ┃ ┣ 📜 OrderItem.java            <-- 🔵 MODEL (Entidade JPA - Item do Pedido)
+ ┃ ┃ ┃ ┃ ┣ 📜 Product.java              <-- 🔵 MODEL (Entidade JPA - Produto)
+ ┃ ┃ ┃ ┃ ┗ 📜 User.java                 <-- 🔵 MODEL (Entidade JPA - Usuário)
  ┃ ┃ ┃ ┣ 📂 repositories
+ ┃ ┃ ┃ ┃ ┣ 📜 OrderRepository.java      <-- 🔵 REPOSITORY (Acesso Pedidos)
  ┃ ┃ ┃ ┃ ┣ 📜 ProductRepository.java    <-- 🔵 REPOSITORY (Acesso Produtos)
  ┃ ┃ ┃ ┃ ┗ 📜 UserRepository.java       <-- 🔵 REPOSITORY (Acesso Usuários)
  ┃ ┃ ┃ ┣ 📂 security
@@ -97,7 +100,9 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
  ┃ ┃ ┃ ┃ ┣ 📜 CustomUserDetails.java    <-- 🔐 SECURITY (Detalhes do Usuário Logado)
  ┃ ┃ ┃ ┃ ┗ 📜 CustomUserDetailsService.java <-- 🔐 SECURITY (Login Manual)
  ┃ ┃ ┃ ┣ 📂 services
- ┃ ┃ ┃ ┃ ┗ 📜 ProductService.java       <-- 🟠 SERVICE (Regras de Negócio e Uploads)
+ ┃ ┃ ┃ ┃ ┣ 📜 OrderService.java         <-- 🟠 SERVICE (Regras Financeiras/Pedidos)
+ ┃ ┃ ┃ ┃ ┣ 📜 ProductService.java       <-- 🟠 SERVICE (Regras de Produto e Uploads)
+ ┃ ┃ ┃ ┃ ┗ 📜 UserService.java          <-- 🟠 SERVICE (Regras de Clientes)
  ┃ ┃ ┃ ┗ 📜 LojaApplication.java        <-- Setup Inicial
  ┃ ┃ ┃
  ┃ ┃ ┣ 📂 resources
@@ -126,7 +131,7 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
 
 ### 🛍️ Storefront (Experiência do Usuário)
 - **Catálogo Dinâmico:** Navegação fluida com filtros categóricos (Eletrônicos, Vestuário, etc.).
-- **Gestão de Carrinho:** Adição, edição de quantidade e remoção de itens com atualização intuitiva.
+- *(Em Construção)* **Gestão de Carrinho:** Sistema de adição de itens na sessão e integração de pagamento (Stripe).
 - **Tema Personalizado:** Suporte nativo completo a **Dark Mode / Light Mode** na interface visual.
 - **Mobile-First:** Design completamente responsivo e agradável para dispositivos móveis, tablets e web.
 
@@ -142,10 +147,8 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
 - **Login social com Google (OIDC):** Sincronização automática com o banco de dados e atribuição dinâmica de perfis (User/Admin).
 - Requisitos de senha exibidos em tempo real
 
-### 💳 Checkout e Confirmação (`checkout.html` / `order-success.html`)
-- Resumo do pedido com detalhes do cliente, total de itens e valor
-- Método de pagamento via PIX com QR Code
-- Tela de sucesso com confirmação visual e número do pedido
+### 💳 Checkout e Confirmação (Work In Progress)
+- Integração de Gateway de Pagamento (Stripe) em desenvolvimento para processamento real de cartões de crédito.
 
 ### 📊 Dashboard Administrativo (Gestão em `/admin`)
 - **Blindagem Completa:** Todas as rotas restritas via `hasAuthority('ROLE_ADMIN')` no `SecurityConfig`.
@@ -156,7 +159,8 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
   - **Update:** Edição inline de produtos.
   - **Delete:** Exclusão com confirmação do navegador.
 - **Categorias Dinâmicas:** Enum `Category` com nomes em inglês e descrições em pt-BR.
-- **Controle de Usuários e Pedidos:** Listagens robustas com métricas integradas na visão de Dashboard.
+- **Dashboard Analítico:** Painel (`/admin/dashboard`) 100% dinâmico calculando Receita Total (Vault Total), quantidade de produtos, usuários VIPs e listagem em tempo real das últimas aquisições.
+- **Controle de Usuários e Pedidos:** Camada de Serviço (Service Layer) estruturada seguindo os princípios SOLID para injetar e listar dados reais do banco de dados na View.
 
 ### 🎨 Interface & UX
 - Design moderno e luxuoso (foco Streetwear)

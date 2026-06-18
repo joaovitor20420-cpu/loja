@@ -81,7 +81,7 @@
                             <i class="fas fa-box-open"></i>
                         </div>
                         <div class="stat-content">
-                            <h3>48</h3>
+                            <h3 th:text="${totalProducts}">48</h3>
                             <p>Exclusive Items</p>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="stat-content">
-                            <h3>234</h3>
+                            <h3 th:text="${totalUsers}">234</h3>
                             <p>VIP Clientele</p>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                             <i class="fas fa-file-invoice-dollar"></i>
                         </div>
                         <div class="stat-content">
-                            <h3>127</h3>
+                            <h3 th:text="${totalOrders}">127</h3>
                             <p>Recent Acquisitions</p>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                             <i class="fas fa-coins"></i>
                         </div>
                         <div class="stat-content">
-                            <h3>R$ 68.450,00</h3>
+                            <h3 th:text="${'R$ ' + #numbers.formatDecimal(totalRevenue != null ? totalRevenue : 0, 1, 'POINT', 2, 'COMMA')}">R$ 68.450,00</h3>
                             <p>Vault Total</p>
                         </div>
                     </div>
@@ -122,28 +122,18 @@
                         </div>
                         <div class="card-content">
                             <div class="activity-list">
-                                <div class="activity-item">
+                                <div class="activity-item" th:each="order : ${recentOrders}">
                                     <i class="fas fa-gem"></i>
                                     <div>
-                                        <strong>Order #125</strong>
-                                        <span>Maria Santos</span>
-                                        <small>R$ 450,00 - Delivered</small>
+                                        <strong th:text="${'Order #' + order.id}">Order #125</strong>
+                                        <span th:text="${order.user != null ? order.user.fullName : 'Cliente Removido'}">Maria Santos</span>
+                                        <small th:text="${'R$ ' + #numbers.formatDecimal(order.totalAmount != null ? order.totalAmount : 0, 1, 'POINT', 2, 'COMMA') + ' - ' + order.status}">R$ 450,00 - Delivered</small>
                                     </div>
                                 </div>
-                                <div class="activity-item">
-                                    <i class="fas fa-gem"></i>
+                                <div class="activity-item" th:if="${recentOrders == null or recentOrders.empty}">
+                                    <i class="fas fa-info-circle"></i>
                                     <div>
-                                        <strong>Order #124</strong>
-                                        <span>Carlos Oliveira</span>
-                                        <small>R$ 1.200,00 - In Transit</small>
-                                    </div>
-                                </div>
-                                <div class="activity-item">
-                                    <i class="fas fa-gem"></i>
-                                    <div>
-                                        <strong>Order #123</strong>
-                                        <span>Ana Costa</span>
-                                        <small>R$ 320,00 - Cancelled</small>
+                                        <strong>Nenhum pedido recente</strong>
                                     </div>
                                 </div>
                             </div>

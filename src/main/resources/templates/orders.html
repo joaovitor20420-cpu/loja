@@ -105,14 +105,14 @@
                             </tr>
                         </thead>
                         <tbody id="pedidos-tbody">
-                            <tr>
-                                <td>#125</td>
-                                <td>Maria Santos</td>
-                                <td>3</td>
-                                <td>R$ 450,00</td>
-                                <td><span class="status-badge status-delivered">Delivered</span></td>
-                                <td>Credit Card</td>
-                                <td>15/03/2025 14:30</td>
+                            <tr th:each="order : ${orders}">
+                                <td th:text="${'#' + order.id}">#125</td>
+                                <td th:text="${order.user != null ? order.user.fullName : 'Cliente Removido'}">Maria Santos</td>
+                                <td th:text="${order.items.size()}">3</td>
+                                <td th:text="${'R$ ' + #numbers.formatDecimal(order.totalAmount != null ? order.totalAmount : 0, 1, 'POINT', 2, 'COMMA')}">R$ 450,00</td>
+                                <td><span th:class="${'status-badge status-' + (order.status != null ? #strings.toLowerCase(order.status) : 'pending')}" th:text="${order.status}">Delivered</span></td>
+                                <td th:text="${order.paymentMethod != null ? order.paymentMethod : 'N/A'}">Credit Card</td>
+                                <td th:text="${#temporals.format(order.createdAt, 'dd/MM/yyyy HH:mm')}">15/03/2025 14:30</td>
                                 <td>
                                     <div class="action-buttons">
                                         <button class="btn-icon" title="View Details">
@@ -121,37 +121,8 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>#124</td>
-                                <td>Carlos Oliveira</td>
-                                <td>5</td>
-                                <td>R$ 1.200,00</td>
-                                <td><span class="status-badge status-shipped">Shipped</span></td>
-                                <td>PIX</td>
-                                <td>18/03/2025 10:15</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-icon" title="View Details">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#123</td>
-                                <td>Ana Costa</td>
-                                <td>2</td>
-                                <td>R$ 320,00</td>
-                                <td><span class="status-badge status-cancelled">Cancelled</span></td>
-                                <td>Bank Slip</td>
-                                <td>20/03/2025 16:45</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-icon" title="View Details">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </td>
+                            <tr th:if="${orders == null or orders.empty}">
+                                <td colspan="8" style="text-align: center;">Nenhum pedido encontrado.</td>
                             </tr>
                         </tbody>
                     </table>

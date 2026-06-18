@@ -186,18 +186,18 @@
                                 <th>Email</th>
                                 <th>Contact</th>
                                 <th>Status</th>
-                                <th>Enrolled Date</th>
+                                <th>Role</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="usuarios-tbody">
-                            <tr>
-                                <td>1</td>
-                                <td>Maria Santos</td>
-                                <td>maria.santos@email.com</td>
-                                <td>(11) 98765-4321</td>
-                                <td><span class="status-badge status-active">ACTIVE</span></td>
-                                <td>15/03/2025 14:30</td>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.id}">1</td>
+                                <td th:text="${user.fullName}">Maria Santos</td>
+                                <td th:text="${user.email}">maria.santos@email.com</td>
+                                <td th:text="${user.phone}">(11) 98765-4321</td>
+                                <td><span th:class="${'status-badge status-' + (user.status != null ? #strings.toLowerCase(user.status) : 'inactive')}" th:text="${user.status}">ACTIVE</span></td>
+                                <td th:text="${user.role}">USER</td>
                                 <td>
                                     <div class="action-buttons">
                                         <button class="btn-icon btn-edit" title="Edit" onclick="document.getElementById('usuario-form').style.display='grid';">
@@ -209,23 +209,8 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Carlos Oliveira</td>
-                                <td>carlos.oliveira@email.com</td>
-                                <td>(21) 97654-3210</td>
-                                <td><span class="status-badge status-active">ACTIVE</span></td>
-                                <td>18/03/2025 10:15</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-icon btn-edit" title="Edit" onclick="document.getElementById('usuario-form').style.display='grid';">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn-icon btn-delete" title="Revoke" onclick="document.getElementById('delete-confirmation-user').style.display='block'; document.getElementById('usuarios-section').style.display='none';">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
+                            <tr th:if="${users == null or users.empty}">
+                                <td colspan="7" style="text-align: center;">Nenhum cliente cadastrado.</td>
                             </tr>
                         </tbody>
                     </table>
