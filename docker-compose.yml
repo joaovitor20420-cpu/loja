@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  suburbio-store:
+    build: .
+    container_name: suburbio-store-app
+    ports:
+      - "8080:8080"
+    # Montamos os volumes locais para que você não perca os produtos, fotos ou os dados 
+    # do banco de dados quando desligar e ligar o container do Docker.
+    volumes:
+      - ./database:/app/database
+      - ./uploads:/app/uploads
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      # Você pode injetar sua chave do Stripe por aqui no futuro sem precisar expor no código
+      # - STRIPE_API_KEY=sk_test_...
+    restart: unless-stopped

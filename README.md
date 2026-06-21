@@ -118,7 +118,7 @@ Durante a arquitetura e desenvolvimento completo desta plataforma E-commerce, co
 - **Java 21** (ou superior) instalado e configurado no seu PATH.
 - (Opcional) Chaves de Teste da API do Stripe para processamento completo.
 
-### 2. Passo a Passo
+### 2. Passo a Passo (Via Maven)
 
 ```bash
 # Clone este repositório
@@ -131,7 +131,21 @@ cd loja
 .\mvnw.cmd spring-boot:run
 ```
 
-### 3. Acessando a Aplicação
+### 3. Passo a Passo (Via Docker) 🐳
+
+Para rodar a aplicação sem instalar o Java na sua máquina, utilize o Docker. O projeto já inclui um `Dockerfile` otimizado (Multi-stage) e um `docker-compose.yml` pré-configurado.
+
+```bash
+# Inicia a aplicação construindo a imagem do zero
+docker-compose up --build -d
+
+# Para ver os logs em tempo real
+docker-compose logs -f
+```
+
+*(O Docker Compose criará automaticamente diretórios locais `/database` e `/uploads` para persistir as fotos dos produtos e o seu banco de dados H2, mesmo após reiniciar o container).*
+
+### 4. Acessando a Aplicação
 | Ambiente | URL |
 | :--- | :--- |
 | **Loja Virtual (Público)** | [http://localhost:8080/](http://localhost:8080/) |
