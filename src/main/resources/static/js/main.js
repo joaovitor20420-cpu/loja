@@ -34,6 +34,12 @@ function setupSmoothScroll() {
             const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
+                
+                // Se o alvo for a sacola de compras e ela estiver oculta, mostra ela primeiro
+                if (target.id === 'cart-section' && (target.style.display === 'none' || target.style.display === '')) {
+                    target.style.display = 'block';
+                }
+                
                 target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'

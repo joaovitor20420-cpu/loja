@@ -20,4 +20,8 @@ public class UserService {
     public long countUsers(){
         return userRepository.count();
     }
+    
+    public java.util.Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

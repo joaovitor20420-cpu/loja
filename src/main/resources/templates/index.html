@@ -29,9 +29,9 @@
                 <li><a th:href="@{/orders}">Meus Pedidos</a></li>
             </ul>
             <div class="user-actions">
-                <a th:href="@{/}" class="cart-btn" id="cart-btn" title="Carrinho">
+                <a th:href="@{#cart-section}" class="cart-btn" id="cart-btn" title="Carrinho">
                     <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-count" id="cart-count">0</span>
+                    <span class="cart-count" id="cart-count" th:text="${cartTotalQuantity != null ? cartTotalQuantity : 0}">0</span>
                 </a>
                 <div class="dropdown">
                     <button class="btn btn-outline dropdown-toggle" id="profile-dropdown">
@@ -90,15 +90,15 @@
                     <form class="form-grid three-columns">
                         <div class="form-group">
                             <label for="cart-user" style="color: var(--gold-primary);">Cliente</label>
-                            <input type="text" id="cart-user" value="João Silva" readonly style="background: transparent; border-color: var(--border-color); color: white;">
+                            <input type="text" id="cart-user" th:value="${#authentication.principal != 'anonymousUser' ? #authentication.name : 'Visitante VIP'}" readonly style="background: transparent; border-color: var(--border-color); color: white;">
                         </div>
                         <div class="form-group">
                             <label for="cart-items" style="color: var(--gold-primary);">Itens</label>
-                            <input type="text" id="cart-items" value="1" readonly style="background: transparent; border-color: var(--border-color); color: white;">
+                            <input type="text" id="cart-items" th:value="${cartTotalQuantity != null ? cartTotalQuantity : 0}" readonly style="background: transparent; border-color: var(--border-color); color: white;">
                         </div>
                         <div class="form-group">
                             <label for="cart-total" style="color: var(--gold-primary);">Total Estimado</label>
-                            <input type="text" id="cart-total" value="R$ 145.000,00" readonly style="background: transparent; border-color: var(--gold-primary); color: var(--gold-primary); font-weight: bold;">
+                            <input type="text" id="cart-total" th:value="${cartTotalAmount != null ? 'R$ ' + #numbers.formatDecimal(cartTotalAmount, 1, 'POINT', 2, 'COMMA') : 'R$ 0,00'}" readonly style="background: transparent; border-color: var(--gold-primary); color: var(--gold-primary); font-weight: bold;">
                         </div>
                     </form>
 
@@ -114,19 +114,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td style="font-family: 'Cinzel', serif;">Chronograph Tourbillon Gold</td>
-                                    <td>R$ 145.000,00</td>
-                                    <td>1</td>
-                                    <td style="color: var(--gold-primary);">R$ 145.000,00</td>
+                                <tr th:each="item : ${cartItems}">
+                                    <td style="font-family: 'Cinzel', serif;" th:text="${item.product.name}">Chronograph Tourbillon Gold</td>
+                                    <td th:text="${'R$ ' + #numbers.formatDecimal(item.product.price, 1, 'POINT', 2, 'COMMA')}">R$ 145.000,00</td>
+                                    <td th:text="${item.quantity}">1</td>
+                                    <td style="color: var(--gold-primary);" th:text="${'R$ ' + #numbers.formatDecimal(item.subtotal, 1, 'POINT', 2, 'COMMA')}">R$ 145.000,00</td>
+                                    <td>
+                                        <a th:href="@{/(removeFromCart=${item.product.id})}" style="color: #ff4444;" title="Remover Peça">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <!-- Empty Cart Message -->
-                    <!-- ⚠️ THYMELEAF: Remover style="display: none;" e adicionar th:if="${shoppingCartView == null or shoppingCartView.isEmpty()}" -->
-                    <div class="cart-empty" style="display: none; text-align: center; padding: 4rem;">
+                    <div class="cart-empty" th:style="${cartItems == null or cartItems.isEmpty() ? 'display: block; text-align: center; padding: 4rem;' : 'display: none;'}">
                         <i class="fas fa-gem" style="font-size: 48px; color: var(--border-color); margin-bottom: 20px;"></i>
                         <p style="font-family: 'Cinzel', serif; color: var(--text-secondary);">Sua sacola aguarda suas seleções.</p>
                     </div>
@@ -136,7 +140,7 @@
                         <a href="#colecao" class="btn">
                             Continuar Explorando
                         </a>
-                        <a href="checkout.html" class="btn btn-primary">
+                        <a th:href="@{/checkout}" class="btn btn-primary" th:if="${cartItems != null and !cartItems.isEmpty()}">
                             Finalizar Compra
                         </a>
                     </div>

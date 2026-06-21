@@ -7,6 +7,7 @@ import com.example.loja.config.*;
 import com.example.loja.controllers.*;
 
 import com.example.loja.services.ProductService;
+import com.example.loja.services.CartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
@@ -17,19 +18,39 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
-@Tag(name = "Home", description = "PÃ¡gina inicial da loja virtual (vitrine pÃºblica)")
+@Tag(name = "Home", description = "Página inicial da loja virtual (vitrine pública)")
 public class HomeController {
 
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CartService cartService;
+
     @Operation(summary = "Pagina inicial", description = "Exibe o catalogo publico de produtos com filtro opcional por categoria")
     @GetMapping("/")
     public String index(@RequestParam(required = false, defaultValue = "ALL") String category,
+                        @RequestParam(required = false) Long addToCart,
+                        @RequestParam(required = false) Long removeFromCart,
                         Model model) {
+
+        // Adiciona ao carrinho
+        if (addToCart != null) {
+            productService.getProductById(addToCart).ifPresent(p -> cartService.addItem(p, 1));
+            // Redireciona para limpar a URL para não adicionar repetidamente ao atualizar a página
+            return "redirect:/#colecao";
+        }
+
+        // Remove do carrinho
+        if (removeFromCart != null) {
+            cartService.removeItem(removeFromCart);
+            return "redirect:/";
+        }
+
         model.addAttribute("title", "Sua Loja Online Completa");
         model.addAttribute("categories", Category.values());
         model.addAttribute("selectedCategory", category != null ? category : "ALL");
+
         if(category.equals("ALL")){
             model.addAttribute("products", productService.getAllProducts());
         } else {
@@ -37,7 +58,10 @@ public class HomeController {
             model.addAttribute("products", productService.getProductsByCategory(cat));
         }
 
-        
+        // Injeta o carrinho para o HTML renderizar a sacola
+        model.addAttribute("cartItems", cartService.getItems());
+        model.addAttribute("cartTotalAmount", cartService.getTotalAmount());
+        model.addAttribute("cartTotalQuantity", cartService.getTotalItems());
 
         return "index";
     }

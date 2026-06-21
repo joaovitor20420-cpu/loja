@@ -1,17 +1,15 @@
 <div align="center">
-  <img src="https://via.placeholder.com/800x200.png?text=Suburbio+Store" alt="Loja E-commerce Banner">
-  
   # 🛒 Suburbio Store - Plataforma de E-commerce
 
-  *Uma solução completa de comércio eletrônico desenvolvida com Java, Spring Boot e arquitetura MVC.*
+  *Uma solução completa de comércio eletrônico desenvolvida com Java, Spring Boot e arquitetura MVC focada em moda Streetwear.*
   
   <p align="center">
     <a href="#-sobre-o-projeto">Sobre</a> •
     <a href="#-tecnologias-e-ferramentas">Tecnologias</a> •
     <a href="#%EF%B8%8F-arquitetura-e-padrões">Arquitetura</a> •
     <a href="#-funcionalidades-em-destaque">Funcionalidades</a> •
-    <a href="#-como-executar-localmente">Como Executar</a> •
-    <a href="#-contato">Contato</a>
+    <a href="#-skills-i-learned-habilidades-adquiridas">Habilidades Adquiridas</a> •
+    <a href="#-como-executar-localmente">Como Executar</a>
   </p>
 
   ![Status Concluído](https://img.shields.io/badge/Status-Concluído-brightgreen?style=for-the-badge)
@@ -24,10 +22,10 @@
 
 Este projeto é uma **plataforma completa de E-commerce** desenvolvida do zero para demonstrar habilidades avançadas no ecossistema Java. A aplicação foi projetada para resolver problemas reais de lojas virtuais, dividindo-se em duas áreas principais:
 
-1. **Storefront (Área do Cliente):** Interface amigável para navegação do catálogo de produtos (Carrinho e Checkout em desenvolvimento).
-2. **Admin Dashboard (Painel Administrativo):** Sistema de gestão integrado sob a rota `/admin`, com controle total sobre inventário, painel de métricas financeiras dinâmicas e listagem de usuários e pedidos.
+1. **Storefront (Área do Cliente):** Interface amigável para navegação do catálogo de produtos, sistema de carrinho de compras via sessão e integração real com gateway de pagamentos.
+2. **Admin Dashboard (Painel Administrativo):** Sistema de gestão integrado sob a rota `/admin`, com controle total sobre inventário, gestão de pedidos e controle de usuários VIPs.
 
-> **💡 Foco para Recrutadores:** O código foi construído prezando pelas melhores práticas de engenharia de software, incluindo **SOLID**, **Design Patterns**, **Separação em Camadas (Model-Service-Controller)**, renderização do lado do servidor (SSR) otimizada para SEO, Autenticação Segura e interface responsiva.
+> **💡 Foco para Recrutadores:** O código foi construído prezando pelas melhores práticas de engenharia de software, incluindo **SOLID**, **Design Patterns**, **Separação em Camadas (Model-Service-Controller)**, renderização do lado do servidor (SSR) otimizada para SEO, Autenticação Segura (OAuth2) e interface responsiva "Mobile-First".
 
 ## 🛠️ Tecnologias e Ferramentas
 
@@ -39,90 +37,42 @@ As ferramentas foram escolhidas a dedo, refletindo o que há de mais moderno e d
 ![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![Spring Data JPA](https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![H2 Database](https://img.shields.io/badge/H2_Database-4479A1?style=for-the-badge&logo=database&logoColor=white)
-![Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
+![Stripe](https://img.shields.io/badge/Stripe-008CDD?style=for-the-badge&logo=stripe&logoColor=white)
 
 ### 🎨 Front-end
 ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![Font Awesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
 
 ---
 
 ## 🏗️ Arquitetura e Padrões
 
 O projeto adota de forma estrita a arquitetura **MVC (Model-View-Controller)**, garantindo um código limpo, testável e de fácil manutenção:
-- **Models (Entities):** Mapeamento Objeto-Relacional (ORM) estruturado com Hibernate/JPA, explorando recursos de validação e Enums (`@Enumerated(EnumType.STRING)`, `@Column(unique=true)`).
-- **Controllers:** Orquestração de requisições HTTP, tratamento de validações e integração com a camada de serviços. Agrupamento seguro de rotas sob `/admin`.
-- **Views (Thymeleaf):** Renderização de páginas dinâmicas no servidor, favorecendo tempo de resposta e segurança de dados críticos.
-- **Security (OIDC/OAuth2):** Serviço customizado (`CustomOidcUserService`) para integrar o login do Google ao banco de dados relacional e promover administradores com base no e-mail.
+- **Models (Entities):** Mapeamento Objeto-Relacional (ORM) estruturado com Hibernate/JPA, explorando recursos de validação e Enums.
+- **Controllers:** Orquestração de requisições HTTP, tratamento de validações e integração com a camada de serviços.
+- **Views (Thymeleaf):** Renderização de páginas dinâmicas no servidor, favorecendo tempo de resposta e segurança de dados.
+- **Security (OIDC/OAuth2):** Integração segura e moderna com o Google OIDC para sincronização de contas.
 
 ---
 
 ## 📁 Estrutura de Pastas (Padrão MVC)
 
-A organização do código foi cuidadosamente estruturada para facilitar a manutenção e a escalabilidade, separando claramente as responsabilidades (Model, View e Controller):
-
 ```text
 📦 loja
- ┣ 📂 src
- ┃ ┣ 📂 main
- ┃ ┃ ┣ 📂 java/com/example/loja
- ┃ ┃ ┃ ┣ 📂 config
- ┃ ┃ ┃ ┃ ┣ 📜 AdminSeeder.java          <-- ⚙️ CONFIG (Injeção da Chave Mestra / Admin)
- ┃ ┃ ┃ ┃ ┣ 📜 SecurityConfig.java       <-- ⚙️ CONFIG (Segurança de Rotas e OAuth2)
- ┃ ┃ ┃ ┃ ┣ 📜 SwaggerConfig.java        <-- ⚙️ CONFIG (Documentação OpenAPI)
- ┃ ┃ ┃ ┃ ┗ 📜 WebConfig.java            <-- ⚙️ CONFIG (Recursos Estáticos / Uploads)
- ┃ ┃ ┃ ┣ 📂 controllers
- ┃ ┃ ┃ ┃ ┣ 📜 AdmimController.java      <-- 🟢 CONTROLLER (Página Raiz do Admin)
- ┃ ┃ ┃ ┃ ┣ 📜 CheckoutController.java   <-- 🟢 CONTROLLER (Checkout)
- ┃ ┃ ┃ ┃ ┣ 📜 DashboarController.java   <-- 🟢 CONTROLLER (Dashboard /admin)
- ┃ ┃ ┃ ┃ ┣ 📜 HomeController.java       <-- 🟢 CONTROLLER (Página Inicial)
- ┃ ┃ ┃ ┃ ┣ 📜 OrderSuccessController.java <-- 🟢 CONTROLLER (Confirmação)
- ┃ ┃ ┃ ┃ ┣ 📜 OrdersController.java     <-- 🟢 CONTROLLER (Pedidos /admin)
- ┃ ┃ ┃ ┃ ┣ 📜 ProductController.java    <-- 🟢 CONTROLLER (Produtos /admin)
- ┃ ┃ ┃ ┃ ┣ 📜 SignInController.java     <-- 🟢 CONTROLLER (Login)
- ┃ ┃ ┃ ┃ ┣ 📜 SignUpController.java     <-- 🟢 CONTROLLER (Cadastro)
- ┃ ┃ ┃ ┃ ┗ 📜 UsersController.java      <-- 🟢 CONTROLLER (Usuários /admin)
- ┃ ┃ ┃ ┣ 📂 models
- ┃ ┃ ┃ ┃ ┣ 📜 Category.java             <-- 🔵 MODEL (Enum de Categorias)
- ┃ ┃ ┃ ┃ ┣ 📜 Order.java                <-- 🔵 MODEL (Entidade JPA - Pedido)
- ┃ ┃ ┃ ┃ ┣ 📜 OrderItem.java            <-- 🔵 MODEL (Entidade JPA - Item do Pedido)
- ┃ ┃ ┃ ┃ ┣ 📜 Product.java              <-- 🔵 MODEL (Entidade JPA - Produto)
- ┃ ┃ ┃ ┃ ┗ 📜 User.java                 <-- 🔵 MODEL (Entidade JPA - Usuário)
- ┃ ┃ ┃ ┣ 📂 repositories
- ┃ ┃ ┃ ┃ ┣ 📜 OrderRepository.java      <-- 🔵 REPOSITORY (Acesso Pedidos)
- ┃ ┃ ┃ ┃ ┣ 📜 ProductRepository.java    <-- 🔵 REPOSITORY (Acesso Produtos)
- ┃ ┃ ┃ ┃ ┗ 📜 UserRepository.java       <-- 🔵 REPOSITORY (Acesso Usuários)
- ┃ ┃ ┃ ┣ 📂 security
- ┃ ┃ ┃ ┃ ┣ 📜 CustomOidcUserService.java<-- 🔐 SECURITY (Integração Google OIDC DB)
- ┃ ┃ ┃ ┃ ┣ 📜 CustomUserDetails.java    <-- 🔐 SECURITY (Detalhes do Usuário Logado)
- ┃ ┃ ┃ ┃ ┗ 📜 CustomUserDetailsService.java <-- 🔐 SECURITY (Login Manual)
- ┃ ┃ ┃ ┣ 📂 services
- ┃ ┃ ┃ ┃ ┣ 📜 OrderService.java         <-- 🟠 SERVICE (Regras Financeiras/Pedidos)
- ┃ ┃ ┃ ┃ ┣ 📜 ProductService.java       <-- 🟠 SERVICE (Regras de Produto e Uploads)
- ┃ ┃ ┃ ┃ ┗ 📜 UserService.java          <-- 🟠 SERVICE (Regras de Clientes)
- ┃ ┃ ┃ ┗ 📜 LojaApplication.java        <-- Setup Inicial
- ┃ ┃ ┃
- ┃ ┃ ┣ 📂 resources
- ┃ ┃ ┃ ┣ 📂 static                    <-- Arquivos Estáticos (CSS e JS)
- ┃ ┃ ┃ ┃ ┣ 📂 css                    
- ┃ ┃ ┃ ┃ ┗ 📂 js                     
- ┃ ┃ ┃ ┣ 📂 templates                 <-- 🟡 VIEWS (Páginas Thymeleaf)
- ┃ ┃ ┃ ┃ ┣ 📜 index.html             <-- 🟡 VIEW (Catálogo da Loja)
- ┃ ┃ ┃ ┃ ┣ 📜 admin.html             <-- 🟡 VIEW (Raiz do Painel Administrativo)
- ┃ ┃ ┃ ┃ ┣ 📜 dashboard.html         <-- 🟡 VIEW (Admin - Dashboard)
- ┃ ┃ ┃ ┃ ┣ 📜 product.html           <-- 🟡 VIEW (Admin - Gestão de Produtos)
- ┃ ┃ ┃ ┃ ┣ 📜 orders.html            <-- 🟡 VIEW (Admin - Pedidos)
- ┃ ┃ ┃ ┃ ┣ 📜 users.html             <-- 🟡 VIEW (Admin - Usuários)
- ┃ ┃ ┃ ┃ ┣ 📜 checkout.html          <-- 🟡 VIEW (Tela de Compra)
- ┃ ┃ ┃ ┃ ┣ 📜 order-success.html     <-- 🟡 VIEW (Confirmação de Pedido)
- ┃ ┃ ┃ ┃ ┣ 📜 signin.html            <-- 🟡 VIEW (Login)
- ┃ ┃ ┃ ┃ ┗ 📜 signup.html            <-- 🟡 VIEW (Cadastro)
- ┃ ┃ ┃ ┗ 📜 application.properties    <-- Configurações
- ┣ 📜 pom.xml                         <-- Gerenciador de Dependências (Maven)
- ┗ 📜 README.md                       <-- Documentação do Projeto
+ ┣ 📂 src/main/java/com/example/loja
+ ┃ ┣ 📂 config       <-- Configurações Globais (Segurança, AdminSeeder, Swagger)
+ ┃ ┣ 📂 controllers  <-- Camada de Rotas e Requests HTTP
+ ┃ ┣ 📂 models       <-- Entidades JPA e Enums do Banco de Dados
+ ┃ ┣ 📂 repositories <-- Interfaces de Acesso a Dados (Spring Data)
+ ┃ ┣ 📂 security     <-- Filtros e Serviços Customizados do Spring Security
+ ┃ ┗ 📂 services     <-- Camada de Regras de Negócio, Integração Stripe e Uploads
+ ┣ 📂 src/main/resources
+ ┃ ┣ 📂 static/css   <-- Estilos e UX/UI da aplicação
+ ┃ ┣ 📂 static/js    <-- Lógica assíncrona e DOM local
+ ┃ ┗ 📂 templates    <-- Arquivos HTML dinâmicos do Thymeleaf
+ ┗ 📜 pom.xml        <-- Gerenciamento do ecossistema e dependências Maven
 ```
 
 ---
@@ -130,71 +80,43 @@ A organização do código foi cuidadosamente estruturada para facilitar a manut
 ## ✨ Funcionalidades em Destaque
 
 ### 🛍️ Storefront (Experiência do Usuário)
-- **Catálogo Dinâmico:** Navegação fluida com filtros categóricos (Eletrônicos, Vestuário, etc.).
-- *(Em Construção)* **Gestão de Carrinho:** Sistema de adição de itens na sessão e integração de pagamento (Stripe).
-- **Tema Personalizado:** Suporte nativo completo a **Dark Mode / Light Mode** na interface visual.
-- **Mobile-First:** Design completamente responsivo e agradável para dispositivos móveis, tablets e web.
-
-### 🏠 Página Inicial (`index.html`)
-- Hero section com chamada para ação e título dinâmico via Thymeleaf
-- Listagem de produtos em grid responsivo com imagens servidas do banco
-- Filtro visual de produtos por categoria (botões categóricos)
-- Menu de navegação e dropdown de perfil integrado com o Spring Security
+- **Catálogo Dinâmico:** Navegação fluida com filtros categóricos voltados a Moda Urbana e Streetwear.
+- **Carrinho e Checkout Real:** Sistema de adição de itens na sessão com cálculo de subtotais e integração real com API do **Stripe** para finalização de compras.
+- **Tema Personalizado:** Suporte nativo completo a **Dark Mode / Light Mode** salvo localmente.
+- **Mobile-First:** Design completamente responsivo e agradável para dispositivos móveis e desktop.
 
 ### 🔐 Autenticação (`signin.html` / `signup.html`)
-- Tela de **Login** com validação de senha, "Lembrar de mim" e "Esqueceu a senha?"
-- Tela de **Cadastro** com campos de nome, e-mail, senha e verificação de e-mails duplicados
+- Tela de **Login** com validação de credenciais de banco.
 - **Login social com Google (OIDC):** Sincronização automática com o banco de dados e atribuição dinâmica de perfis (User/Admin).
-- Requisitos de senha exibidos em tempo real
-
-### 💳 Checkout e Confirmação (Work In Progress)
-- Integração de Gateway de Pagamento (Stripe) em desenvolvimento para processamento real de cartões de crédito.
+- Proteção total de rotas (`CSRF` e restrição de acesso a `/admin`).
 
 ### 📊 Dashboard Administrativo (Gestão em `/admin`)
 - **Blindagem Completa:** Todas as rotas restritas via `hasAuthority('ROLE_ADMIN')` no `SecurityConfig`.
-- **CRUD Completo de Produtos:** ✅ Totalmente funcional — Criar, Listar, Editar e Excluir produtos com persistência no banco de dados H2 via Spring Data JPA.
-  - **Create:** Formulário dinâmico para cadastro de novos produtos.
-  - **Upload de Imagens:** Suporte a upload de arquivos de imagem (`MultipartFile`), com salvamento em diretório local (`uploads/`).
-  - **Read:** Listagem em tabela com busca e filtro por categoria.
-  - **Update:** Edição inline de produtos.
-  - **Delete:** Exclusão com confirmação do navegador.
-- **Categorias Dinâmicas:** Enum `Category` com nomes em inglês e descrições em pt-BR.
-- **Dashboard Analítico:** Painel (`/admin/dashboard`) 100% dinâmico calculando Receita Total (Vault Total), quantidade de produtos, usuários VIPs e listagem em tempo real das últimas aquisições.
-- **Controle de Usuários e Pedidos:** Camada de Serviço (Service Layer) estruturada seguindo os princípios SOLID para injetar e listar dados reais do banco de dados na View.
-
-### 🎨 Interface & UX
-- Design moderno e luxuoso (foco Streetwear)
-- Ícones **Font Awesome 6.4** em toda a aplicação
-- Alternância de tema claro/escuro nativa
-- 4 arquivos CSS especializados: `styles.css`, `admin.css`, `auth.css`, `order-success.css`
+- **CRUD Completo de Produtos:** Criar, Listar, Editar e Excluir produtos com persistência no banco de dados H2.
+- **Upload de Arquivos:** Processamento local de envio de imagens e exibição assíncrona.
+- **Gestão de Pedidos:** Acompanhamento dinâmico do banco após checkout finalizado via Stripe.
+- **Dashboard Analítico:** Painel dinâmico listando estoque crítico, ganhos totais e transações recentes.
 
 ---
 
-## 🗺️ Mapa de Rotas Atualizado
+## 🧠 Skills I Learned (Habilidades Adquiridas)
 
-| Rota | Controller | Acesso | Descrição |
-| :--- | :--- | :--- | :--- |
-| `GET /` | `HomeController` | Público | Vitrine da loja com catálogo de produtos |
-| `GET /signin` | `SignInController` | Público | Tela de login (Manual e Google OAuth2) |
-| `GET /signup` | `SignUpController` | Público | Tela de cadastro |
-| `GET /checkout` | `CheckoutController` | Público | Finalizar compra |
-| `GET /order-success` | `OrderSuccessController`| Público | Pedido confirmado |
-| `GET /admin` | `AdmimController` | **`ADMIN`** | Página raiz do painel administrativo |
-| `GET /admin/dashboard` | `DashboarController` | **`ADMIN`** | Dashboard com métricas globais |
-| `GET /admin/products` | `ProductController` | **`ADMIN`** | CRUD de produtos |
-| `POST /admin/products/save` | `ProductController` | **`ADMIN`** | Salvar/atualizar produto com imagem |
-| `GET /admin/orders` | `OrdersController` | **`ADMIN`** | Gestão de pedidos efetuados |
-| `GET /admin/users` | `UsersController` | **`ADMIN`** | Gestão da base de clientes |
+Durante a arquitetura e desenvolvimento completo desta plataforma E-commerce, conquistei conhecimento prático e profundo nas seguintes áreas:
+
+- **Desenvolvimento Backend Robusto (Java & Spring Boot):** Estruturação limpa de pacotes usando Arquitetura em Camadas (Model, Repository, Service, Controller).
+- **Segurança da Informação (Spring Security):** Implementação de Proteção contra ataques (CSRF, restrições de URL), login híbrido manual e via Auth Providers (Google OAuth2/OIDC).
+- **Bancos de Dados Relacionais e ORM:** Modelagem estruturada com Spring Data JPA, Hibernate, uso avançado de Queries, relacionamentos de Entidades, Sequences e Enums controlados.
+- **Integração de APIs de Pagamento (Stripe):** Criação de _Payment Intents_, controle de _Sessions_, manipulação de API keys de terceiros e redirecionamento dinâmico no E-commerce.
+- **Design de Interfaces e SSR (Thymeleaf & Front-end):** Compreensão do ciclo de requisição HTTP e renderização no lado do Servidor com Thymeleaf integrado ao ecossistema Spring. Refino técnico de UI/UX, Flexbox/Grid CSS e manipulação de DOM via JS.
+- **Engenharia de Software (Clean Code & SOLID):** Delegação de responsabilidades entre serviços garantindo alta coesão e baixo acoplamento no desenvolvimento do ciclo de vida das requisições (por exemplo, desacoplando `StripeService` e `CartService`).
 
 ---
 
 ## 🚀 Como Executar Localmente
 
-Siga o passo a passo abaixo para rodar a aplicação em seu ambiente:
-
 ### 1. Pré-requisitos
 - **Java 21** (ou superior) instalado e configurado no seu PATH.
-- Git instalado.
+- (Opcional) Chaves de Teste da API do Stripe para processamento completo.
 
 ### 2. Passo a Passo
 
@@ -205,54 +127,16 @@ git clone https://github.com/joaovitor20420/loja.git
 # Acesse o diretório do projeto
 cd loja
 
-# Execute a aplicação via Maven Wrapper (sem necessidade de instalar o Maven globalmente)
-
-# 💻 No Windows:
+# Inicie o Servidor Tomcat embutido (Windows)
 .\mvnw.cmd spring-boot:run
-
-# 🐧/🍏 No Linux/Mac:
-./mvnw spring-boot:run
 ```
 
 ### 3. Acessando a Aplicação
-Após alguns segundos, o servidor Tomcat embutido iniciará. Acesse:
-
 | Ambiente | URL |
 | :--- | :--- |
 | **Loja Virtual (Público)** | [http://localhost:8080/](http://localhost:8080/) |
 | **Painel Admin** | [http://localhost:8080/admin/dashboard](http://localhost:8080/admin/dashboard) |
-| **📚 Documentação da API (Swagger)** | [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) |
 | **Console H2 (Banco)** | [http://localhost:8080/h2-console](http://localhost:8080/h2-console) |
-
-> **Acesso ao Banco H2 (Persistente):**  
-> **JDBC URL:** `jdbc:h2:file:./database/ecommerce-db` | **User:** `sa` | **Password:** *(deixe em branco)*
-
----
-
-## 📸 Demonstração Visual
-
-*(Sugestão: Substitua os placeholders abaixo pelas capturas de tela reais do seu projeto para impressionar quem visita seu repositório)*
-
-<table>
-  <tr>
-    <td align="center"><strong>Visão da Loja Virtual</strong></td>
-    <td align="center"><strong>Painel Administrativo</strong></td>
-  </tr>
-  <tr>
-    <td><img src="https://via.placeholder.com/450x280.png?text=Insira+Print+da+Loja+Aqui" alt="Loja"></td>
-    <td><img src="https://via.placeholder.com/450x280.png?text=Insira+Print+do+Admin+Aqui" alt="Admin Dashboard"></td>
-  </tr>
-</table>
-
----
-
-## 📞 Contato
-
-Gostou da forma como desenvolvo? Estou disponível para novas oportunidades, sinta-se à vontade para me contatar:
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joaovitor/)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/joaovitor20420)
-[![E-mail](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:joaovitor20420@gmail.com)
 
 ---
 <p align="center">

@@ -11,12 +11,12 @@ import java.util.Map;
 
 @Controller
 @Tag(name = "Dashboard", description = "Dashboard com métricas e indicadores")
-public class DashboarController {
+public class DashboardController {
 
     // 1. O Garçom precisa conhecer o Chef! Vamos Injetar o DashboardService
     private final DashboardService dashboardService;
 
-    public DashboarController(DashboardService dashboardService) {
+    public DashboardController(DashboardService dashboardService) {
         this.dashboardService = dashboardService;
     }
 
@@ -24,21 +24,15 @@ public class DashboarController {
     @GetMapping("/admin/dashboard")
     public String dashboard(Model model) {
 
-        // 2. O Garçom pede a "sacola" de dados para o Chef
         Map<String, Object> metrics = dashboardService.getDashboardMetrics();
 
-        // Colocando o Título da Página na Bandeja (Model)
         model.addAttribute("title", "Painel Administrativo");
-
-        // DESAFIO: Tire as coisas da 'sacola' (metrics) e coloque na Bandeja (model)
-        // Dica: Use a sintaxe metrics.get("nomeDaChave") para tirar da sacola
         model.addAttribute("totalProducts", metrics.get("totalProducts"));
         model.addAttribute("totalUsers", metrics.get("totalUsers"));
         model.addAttribute("totalOrders", metrics.get("totalOrders"));
         model.addAttribute("totalRevenue", metrics.get("totalRevenue"));
         model.addAttribute("recentOrders", metrics.get("recentOrders"));
 
-        // O Garçom entrega a página pronta
         return "dashboard";
     }
 }

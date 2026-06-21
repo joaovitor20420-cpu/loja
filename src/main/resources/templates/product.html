@@ -79,7 +79,7 @@
                 </div>
 
                 <!-- Products Form -->
-                <form id="produto-form" class="form-grid two-columns" th:object="${product}" action="/admin/products/save"
+                <form id="produto-form" class="form-grid two-columns" th:object="${product}" th:action="@{/admin/products/save}"
                     method="POST" enctype="multipart/form-data"
                     th:style="${product.id != null} ? 'display:grid; margin-bottom: 3rem;' : 'display:none; margin-bottom: 3rem;'">
                     <input type="text" name="id" th:field="*{id}" style="display:none;">

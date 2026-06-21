@@ -22,4 +22,8 @@ public class OrderService {
     public long countOrders(){
         return orderRepository.count();
     }
+    
+    public void saveOrder(Order order) {
+        orderRepository.save(order);
+    }
 }
