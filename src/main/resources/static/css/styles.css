@@ -1,37 +1,23 @@
-/* ====================================
-   DESIGN SYSTEM — SUBURBIO STORE · STREETWEAR
-   ==================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
-
 :root {
-    /* Brand Palette — StreetWear Orange */
     --gold-primary: #FF6B00;
     --gold-light: #FF8C33;
     --gold-dark: #CC5500;
     --gold-glow: rgba(255, 107, 0, 0.15);
     --gold-gradient: linear-gradient(135deg, #FF6B00 0%, #CC5500 100%);
-    
-    /* Semantic */
     --success: #2e7d32;
     --warning: #f57f17;
     --danger: #c62828;
     --info: #0277bd;
-
-    /* Theme — Deep Black */
     --bg-primary: #0A0A0A;
     --bg-secondary: #111111;
     --bg-elevated: #1A1A1A;
     --bg-card: #141414;
     --bg-card-solid: #141414;
     --bg-glass: rgba(10, 10, 10, 0.9);
-    
-    /* Text */
     --text-primary: #ffffff;
     --text-secondary: #b0b0b0;
     --text-muted: #666666;
-    
-    /* Borders & Shadows */
     --border-color: #2a2a2a;
     --border-gold: rgba(255, 107, 0, 0.3);
     --border-hover: rgba(255, 107, 0, 0.6);
@@ -41,24 +27,18 @@
     --shadow-md: 0 8px 24px rgba(0,0,0,0.7);
     --shadow-lg: 0 16px 48px rgba(0,0,0,0.9);
     --shadow-glow: 0 0 25px rgba(255, 107, 0, 0.15);
-
-    /* Legacy Compat */
     --accent: var(--gold-primary);
     --accent-hover: var(--gold-light);
     --accent-light: var(--gold-glow);
     --accent-gradient: var(--gold-gradient);
     --card-bg: var(--bg-card);
 }
-
-/* ── Reset & Base ───────────────────── */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 html { scroll-behavior: smooth; }
-
 body {
     font-family: "Inter", sans-serif;
     font-size: 1rem;
@@ -69,24 +49,18 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
 h1, h2, h3, h4, h5, h6 {
     font-family: "Bebas Neue", sans-serif;
     font-weight: 400;
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
-
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
-
-/* ── Scrollbar ──────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--gold-primary); }
-
-/* ── Header ─────────────────────────── */
 .header {
     background: var(--header-bg);
     backdrop-filter: blur(12px);
@@ -96,7 +70,6 @@ img { max-width: 100%; display: block; }
     top: 0;
     z-index: 1000;
 }
-
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -106,20 +79,17 @@ img { max-width: 100%; display: block; }
     align-items: center;
     height: 80px;
 }
-
 .logo h1 {
     font-size: 1.8rem;
     color: var(--gold-primary);
     letter-spacing: 0.12em;
     text-shadow: 0 0 15px rgba(255, 107, 0, 0.25);
 }
-
 .nav-menu {
     display: flex;
     list-style: none;
     gap: 2rem;
 }
-
 .nav-menu a {
     color: var(--text-secondary);
     font-family: "Bebas Neue", sans-serif;
@@ -128,19 +98,15 @@ img { max-width: 100%; display: block; }
     transition: color 0.3s ease, text-shadow 0.3s ease;
     text-transform: uppercase;
 }
-
 .nav-menu a:hover {
     color: var(--gold-primary);
     text-shadow: 0 0 8px rgba(255, 107, 0, 0.3);
 }
-
 .user-actions {
     display: flex;
     gap: 1.5rem;
     align-items: center;
 }
-
-/* ── Buttons ────────────────────────── */
 .btn {
     padding: 12px 28px;
     border: none;
@@ -159,26 +125,21 @@ img { max-width: 100%; display: block; }
     border: 2px solid var(--gold-primary);
     color: var(--gold-primary);
 }
-
 .btn:hover {
     background: var(--gold-primary);
     color: #000000;
     box-shadow: 0 0 20px rgba(255, 107, 0, 0.3), var(--shadow-glow);
 }
-
 .btn-primary {
     background: var(--gold-gradient);
     color: #000000;
     border: none;
 }
-
 .btn-primary:hover {
     background: var(--gold-light);
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(255, 107, 0, 0.35);
 }
-
-/* ── Hero Section ───────────────────── */
 .hero {
     position: relative;
     height: 90vh;
@@ -188,13 +149,11 @@ img { max-width: 100%; display: block; }
     text-align: center;
     background: linear-gradient(to bottom, rgba(10,10,10,0.4), var(--bg-primary)), url('https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
 }
-
 .hero-container {
     max-width: 900px;
     padding: 2rem;
     z-index: 1;
 }
-
 .hero h2 {
     font-size: clamp(3.5rem, 7vw, 6rem);
     color: #ffffff;
@@ -202,7 +161,6 @@ img { max-width: 100%; display: block; }
     text-shadow: 0 4px 30px rgba(0,0,0,0.9), 0 0 40px rgba(255, 107, 0, 0.15);
     letter-spacing: 0.08em;
 }
-
 .hero p {
     font-size: 1.2rem;
     color: var(--text-secondary);
@@ -213,31 +171,25 @@ img { max-width: 100%; display: block; }
     margin-left: auto;
     margin-right: auto;
 }
-
-/* ── Product Grid ───────────────────── */
 .products-section {
     padding: 100px 0;
     background: var(--bg-primary);
 }
-
 .container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
 }
-
 .section-header {
     text-align: center;
     margin-bottom: 60px;
 }
-
 .section-header h3 {
     font-size: 3rem;
     color: var(--gold-primary);
     margin-bottom: 1rem;
     text-shadow: 0 0 20px rgba(255, 107, 0, 0.1);
 }
-
 .section-header p {
     font-family: "Inter", sans-serif;
     color: var(--text-secondary);
@@ -245,13 +197,11 @@ img { max-width: 100%; display: block; }
     letter-spacing: 0.2em;
     text-transform: uppercase;
 }
-
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 40px;
 }
-
 .product-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -260,20 +210,17 @@ img { max-width: 100%; display: block; }
     overflow: hidden;
     cursor: pointer;
 }
-
 .product-card:hover {
     border-color: var(--gold-primary);
     transform: translateY(-8px);
     box-shadow: 0 0 25px rgba(255, 107, 0, 0.15), 0 20px 40px rgba(0,0,0,0.5);
 }
-
 .product-image {
     width: 100%;
     height: 350px;
     overflow: hidden;
     position: relative;
 }
-
 .product-image .img-bg {
     width: 100%;
     height: 100%;
@@ -281,28 +228,23 @@ img { max-width: 100%; display: block; }
     background-position: center;
     transition: transform 0.6s ease;
 }
-
 .product-card:hover .product-image .img-bg {
     transform: scale(1.08);
 }
-
 .product-info {
     padding: 30px;
     text-align: center;
 }
-
 .product-title {
     font-size: 1.2rem;
     color: #ffffff;
     margin-bottom: 10px;
 }
-
 .product-description {
     color: var(--text-secondary);
     font-size: 0.85rem;
     margin-bottom: 20px;
 }
-
 .product-price {
     font-family: "Bebas Neue", sans-serif;
     font-size: 1.6rem;
@@ -310,14 +252,10 @@ img { max-width: 100%; display: block; }
     margin-bottom: 25px;
     letter-spacing: 0.04em;
 }
-
 .product-actions .btn {
     width: 100%;
 }
-
-/* ── Dropdown ───────────────────────── */
 .dropdown { position: relative; display: inline-block; }
-
 .dropdown-menu {
     position: absolute;
     top: calc(100% + 10px);
@@ -333,13 +271,11 @@ img { max-width: 100%; display: block; }
     transition: all 0.3s ease;
     padding: 10px 0;
 }
-
 .dropdown.active .dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
-
 .dropdown-item {
     display: block;
     padding: 12px 20px;
@@ -349,19 +285,15 @@ img { max-width: 100%; display: block; }
     letter-spacing: 0.1em;
     transition: all 0.3s ease;
 }
-
 .dropdown-item:hover {
     color: var(--gold-primary);
     background: var(--bg-secondary);
     padding-left: 24px;
 }
-
 .dropdown-divider {
     border-top: 1px solid var(--border-color);
     margin: 5px 0;
 }
-
-/* ── Cart ───────────────────────────── */
 .cart-btn {
     background: transparent;
     border: none;
@@ -371,11 +303,9 @@ img { max-width: 100%; display: block; }
     position: relative;
     transition: color 0.3s ease;
 }
-
 .cart-btn:hover {
     color: var(--gold-primary);
 }
-
 .cart-count {
     position: absolute;
     top: -8px;
@@ -392,15 +322,12 @@ img { max-width: 100%; display: block; }
     justify-content: center;
     border-radius: 50%;
 }
-
-/* ── Footer ─────────────────────────── */
 .footer {
     background: var(--bg-secondary);
     border-top: 2px solid var(--gold-primary);
     padding: 60px 0;
     text-align: center;
 }
-
 .footer p {
     color: var(--text-muted);
     font-size: 1rem;

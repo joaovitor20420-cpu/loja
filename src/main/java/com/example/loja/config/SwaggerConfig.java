@@ -1,24 +1,17 @@
 package com.example.loja.config;
-
 import com.example.loja.models.*;
 import com.example.loja.repositories.*;
 import com.example.loja.security.*;
 import com.example.loja.config.*;
 import com.example.loja.controllers.*;
-
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-/**
- * ConfiguraÃ§Ã£o centralizada do Swagger/OpenAPI para documentaÃ§Ã£o da API.
- */
 @Configuration
 public class SwaggerConfig {
-
     @Bean
     public OpenAPI lojaOpenAPI() {
         return new OpenAPI()
@@ -37,4 +30,3 @@ public class SwaggerConfig {
                                 .url("https://opensource.org/licenses/MIT")));
     }
 }
-

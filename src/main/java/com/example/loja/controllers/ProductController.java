@@ -1,83 +1,1 @@
-package com.example.loja.controllers;
-
-import com.example.loja.models.*;
-import com.example.loja.repositories.*;
-import com.example.loja.security.*;
-import com.example.loja.config.*;
-import com.example.loja.controllers.*;
-import com.example.loja.services.ProductService;
-
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
-
-@Controller
-@Tag(name = "Produtos", description = "Endpoints para gerenciamento de produtos (CRUD)")
-public class ProductController {
-
-    @Autowired
-    private ProductService productService;
-
-    @Operation(summary = "Listar produtos", description = "Exibe a pÃ¡gina de gerenciamento de produtos com filtro opcional por categoria")
-    @GetMapping("/admin/products")
-    public String product(@RequestParam(required = false, defaultValue = "ALL") String category,
-            Model model) {
-        model.addAttribute("categories", Category.values());
-        model.addAttribute("product", new Product());
-        model.addAttribute("selectedCategory", category != null && !category.isEmpty() ? category : "ALL");
-        if ("ALL".equals(category)) {
-            model.addAttribute("products", productService.getAllProducts());
-        } else {
-            Category cat = Category.valueOf(category);
-            model.addAttribute("products", productService.getProductsByCategory(cat));
-        }
-
-        return "product";
-    }
-
-    @Operation(summary = "Salvar produto", description = "Cria ou atualiza um produto, incluindo upload opcional de imagem")
-    @PostMapping("/admin/products/save")
-    public String saveProduct(@ModelAttribute Product product,
-            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
-
-        productService.saveProduct(product, imageFile);
-        return "redirect:/admin/products";
-    }
-
-    @Operation(summary = "Listar todos os produtos", description = "Exibe a lista completa de produtos cadastrados")
-    @GetMapping("/admin/products/list")
-    public String productList(Model model) {
-        model.addAttribute("title", "Lista de Produtos");
-        model.addAttribute("products", productService.getAllProducts());
-        return "product";
-    }
-
-    @Operation(summary = "Editar produto", description = "Carrega os dados de um produto especÃ­fico para ediÃ§Ã£o")
-    @GetMapping("/admin/products/edit/{id}")
-    public String editProduct(@PathVariable Long id, Model model) {
-        model.addAttribute("title", "Editar Produto");
-        model.addAttribute("products", productService.getAllProducts());
-        model.addAttribute("categories", Category.values());
-        model.addAttribute("product", productService.getProductById(id).get());
-        return "product";
-    }
-
-    @Operation(summary = "Excluir produto", description = "Remove um produto pelo seu ID")
-    @GetMapping("/admin/products/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        productService.deleteProduct(id);
-        return "redirect:/admin/products";
-    }
-
-}
+package com.example.loja.controllers;import com.example.loja.models.*;import com.example.loja.repositories.*;import com.example.loja.security.*;import com.example.loja.config.*;import com.example.loja.controllers.*;import com.example.loja.services.ProductService;import java.util.Optional;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Controller;import org.springframework.ui.Model;import org.springframework.web.bind.annotation.GetMapping;import org.springframework.web.bind.annotation.ModelAttribute;import org.springframework.web.bind.annotation.PathVariable;import org.springframework.web.bind.annotation.PostMapping;import org.springframework.web.bind.annotation.RequestParam;import org.springframework.web.multipart.MultipartFile;import io.swagger.v3.oas.annotations.Operation;import io.swagger.v3.oas.annotations.Parameter;import io.swagger.v3.oas.annotations.tags.Tag;@Controller@Tag(name = "Produtos", description = "Endpoints para gerenciamento de produtos (CRUD)")public class ProductController {    @Autowired    private ProductService productService;    @Operation(summary = "Listar produtos", description = "Exibe a pÃ¡gina de gerenciamento de produtos com filtro opcional por categoria")    @GetMapping("/admin/products")    public String product(@RequestParam(required = false, defaultValue = "ALL") String category,            Model model) {        model.addAttribute("categories", Category.values());        model.addAttribute("product", new Product());        model.addAttribute("selectedCategory", category != null && !category.isEmpty() ? category : "ALL");        if ("ALL".equals(category)) {            model.addAttribute("products", productService.getAllProducts());        } else {            Category cat = Category.valueOf(category);            model.addAttribute("products", productService.getProductsByCategory(cat));        }        return "product";    }    @Operation(summary = "Salvar produto", description = "Cria ou atualiza um produto, incluindo upload opcional de imagem")    @PostMapping("/admin/products/save")    public String saveProduct(@ModelAttribute Product product,            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {        productService.saveProduct(product, imageFile);        return "redirect:/admin/products";    }    @Operation(summary = "Listar todos os produtos", description = "Exibe a lista completa de produtos cadastrados")    @GetMapping("/admin/products/list")    public String productList(Model model) {        model.addAttribute("title", "Lista de Produtos");        model.addAttribute("products", productService.getAllProducts());        return "product";    }    @Operation(summary = "Editar produto", description = "Carrega os dados de um produto especÃ­fico para ediÃ§Ã£o")    @GetMapping("/admin/products/edit/{id}")    public String editProduct(@PathVariable Long id, Model model) {        model.addAttribute("title", "Editar Produto");        model.addAttribute("products", productService.getAllProducts());        model.addAttribute("categories", Category.values());        model.addAttribute("product", productService.getProductById(id).get());        return "product";    }    @Operation(summary = "Excluir produto", description = "Remove um produto pelo seu ID")    @GetMapping("/admin/products/delete/{id}")    public String deleteProduct(@PathVariable Long id) {        productService.deleteProduct(id);        return "redirect:/admin/products";    }}

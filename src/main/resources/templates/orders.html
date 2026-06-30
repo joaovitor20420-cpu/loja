@@ -1,137 +1,1 @@
-<!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}">Acquisitions - Admin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/auth.css}">
-    <link rel="stylesheet" th:href="@{/css/admin.css}">
-</head>
-<body>
-    <header class="admin-header">
-        <div class="admin-nav-container">
-            <div class="admin-logo">
-                <a th:href="@{/}">
-                    <h1><i class="fas fa-crown"></i> L'ÉLÉGANCE</h1>
-                </a>
-                <span class="admin-badge">Director</span>
-            </div>
-            <div class="admin-user-actions">
-                <div class="admin-user-info">
-                    <i class="fas fa-user-tie"></i>
-                    <span>Admin</span>
-                </div>
-                <a th:href="@{/}" class="btn btn-outline btn-small">
-                    <i class="fas fa-arrow-left"></i> Main Site
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <div class="admin-layout">
-        <aside class="admin-sidebar">
-            <nav class="admin-nav">
-                <ul class="admin-nav-list">
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/dashboard}" class="admin-nav-link">
-                            <i class="fas fa-gem"></i>
-                            <span>Overview</span>
-                        </a>
-                    </li>
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/products}" class="admin-nav-link">
-                            <i class="fas fa-box-open"></i>
-                            <span>Collection</span>
-                        </a>
-                    </li>
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/orders}" class="admin-nav-link active">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Acquisitions</span>
-                        </a>
-                    </li>
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/users}" class="admin-nav-link">
-                            <i class="fas fa-users"></i>
-                            <span>Clientele</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="admin-main">
-            <section id="pedidos-section" class="admin-section active">
-                <div class="admin-header-section">
-                    <div>
-                        <h2><i class="fas fa-file-invoice-dollar"></i> Client Acquisitions</h2>
-                        <p>Track exclusive orders and transactions</p>
-                    </div>
-                </div>
-
-                <!-- Filters -->
-                <div class="admin-filters">
-                    <div class="filter-group">
-                        <input type="text" id="search-pedidos" placeholder="Search by client or reference..." class="admin-input" style="width: 300px;">
-                        <select id="filter-status-pedido" class="admin-select">
-                            <option value="" selected>All Statuses</option>
-                            <option value="PENDING">Pending</option>
-                            <option value="CONFIRMED">Confirmed</option>
-                            <option value="PAID">Paid</option>
-                            <option value="SHIPPED">Shipped</option>
-                            <option value="DELIVERED">Delivered</option>
-                            <option value="CANCELLED">Cancelled</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="admin-table-container">
-                    <table class="admin-table" id="pedidos-table">
-                        <thead>
-                            <tr>
-                                <th>Ref ID</th>
-                                <th>Client Name</th>
-                                <th>Pieces</th>
-                                <th>Total Value</th>
-                                <th>Status</th>
-                                <th>Method</th>
-                                <th>Date</th>
-                                <th>View</th>
-                            </tr>
-                        </thead>
-                        <tbody id="pedidos-tbody">
-                            <tr th:each="order : ${orders}">
-                                <td th:text="${'#' + order.id}">#125</td>
-                                <td th:text="${order.user != null ? order.user.fullName : 'Cliente Removido'}">Maria Santos</td>
-                                <td th:text="${order.items.size()}">3</td>
-                                <td th:text="${'R$ ' + #numbers.formatDecimal(order.totalAmount != null ? order.totalAmount : 0, 1, 'POINT', 2, 'COMMA')}">R$ 450,00</td>
-                                <td><span th:class="${'status-badge status-' + (order.status != null ? #strings.toLowerCase(order.status) : 'pending')}" th:text="${order.status}">Delivered</span></td>
-                                <td th:text="${order.paymentMethod != null ? order.paymentMethod : 'N/A'}">Credit Card</td>
-                                <td th:text="${#temporals.format(order.createdAt, 'dd/MM/yyyy HH:mm')}">15/03/2025 14:30</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-icon" title="View Details">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr th:if="${orders == null or orders.empty}">
-                                <td colspan="8" style="text-align: center;">Nenhum pedido encontrado.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/admin.js}"></script>
-</body>
-</html>
+<!DOCTYPE html><html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title th:text="${title}">Acquisitions - Admin</title>    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <link rel="stylesheet" th:href="@{/css/styles.css}">    <link rel="stylesheet" th:href="@{/css/auth.css}">    <link rel="stylesheet" th:href="@{/css/admin.css}"></head><body>    <header class="admin-header">        <div class="admin-nav-container">            <div class="admin-logo">                <a th:href="@{/}">                    <h1><i class="fas fa-crown"></i> L'ÉLÉGANCE</h1>                </a>                <span class="admin-badge">Director</span>            </div>            <div class="admin-user-actions">                <div class="admin-user-info">                    <i class="fas fa-user-tie"></i>                    <span>Admin</span>                </div>                <a th:href="@{/}" class="btn btn-outline btn-small">                    <i class="fas fa-arrow-left"></i> Main Site                </a>            </div>        </div>    </header>    <div class="admin-layout">        <aside class="admin-sidebar">            <nav class="admin-nav">                <ul class="admin-nav-list">                    <li class="admin-nav-item">                        <a th:href="@{/admin/dashboard}" class="admin-nav-link">                            <i class="fas fa-gem"></i>                            <span>Overview</span>                        </a>                    </li>                    <li class="admin-nav-item">                        <a th:href="@{/admin/products}" class="admin-nav-link">                            <i class="fas fa-box-open"></i>                            <span>Collection</span>                        </a>                    </li>                    <li class="admin-nav-item">                        <a th:href="@{/admin/orders}" class="admin-nav-link active">                            <i class="fas fa-file-invoice-dollar"></i>                            <span>Acquisitions</span>                        </a>                    </li>                    <li class="admin-nav-item">                        <a th:href="@{/admin/users}" class="admin-nav-link">                            <i class="fas fa-users"></i>                            <span>Clientele</span>                        </a>                    </li>                </ul>            </nav>        </aside>        <main class="admin-main">            <section id="pedidos-section" class="admin-section active">                <div class="admin-header-section">                    <div>                        <h2><i class="fas fa-file-invoice-dollar"></i> Client Acquisitions</h2>                        <p>Track exclusive orders and transactions</p>                    </div>                </div>                <div class="admin-filters">                    <div class="filter-group">                        <input type="text" id="search-pedidos" placeholder="Search by client or reference..." class="admin-input" style="width: 300px;">                        <select id="filter-status-pedido" class="admin-select">                            <option value="" selected>All Statuses</option>                            <option value="PENDING">Pending</option>                            <option value="CONFIRMED">Confirmed</option>                            <option value="PAID">Paid</option>                            <option value="SHIPPED">Shipped</option>                            <option value="DELIVERED">Delivered</option>                            <option value="CANCELLED">Cancelled</option>                        </select>                    </div>                </div>                <div class="admin-table-container">                    <table class="admin-table" id="pedidos-table">                        <thead>                            <tr>                                <th>Ref ID</th>                                <th>Client Name</th>                                <th>Pieces</th>                                <th>Total Value</th>                                <th>Status</th>                                <th>Method</th>                                <th>Date</th>                                <th>View</th>                            </tr>                        </thead>                        <tbody id="pedidos-tbody">                            <tr th:each="order : ${orders}">                                <td th:text="${'#' + order.id}">#125</td>                                <td th:text="${order.user != null ? order.user.fullName : 'Cliente Removido'}">Maria Santos</td>                                <td th:text="${order.items.size()}">3</td>                                <td th:text="${'R$ ' + #numbers.formatDecimal(order.totalAmount != null ? order.totalAmount : 0, 1, 'POINT', 2, 'COMMA')}">R$ 450,00</td>                                <td><span th:class="${'status-badge status-' + (order.status != null ? #strings.toLowerCase(order.status) : 'pending')}" th:text="${order.status}">Delivered</span></td>                                <td th:text="${order.paymentMethod != null ? order.paymentMethod : 'N/A'}">Credit Card</td>                                <td th:text="${#temporals.format(order.createdAt, 'dd/MM/yyyy HH:mm')}">15/03/2025 14:30</td>                                <td>                                    <div class="action-buttons">                                        <button class="btn-icon" title="View Details">                                            <i class="fas fa-eye"></i>                                        </button>                                    </div>                                </td>                            </tr>                            <tr th:if="${orders == null or orders.empty}">                                <td colspan="8" style="text-align: center;">Nenhum pedido encontrado.</td>                            </tr>                        </tbody>                    </table>                </div>            </section>        </main>    </div>    <script th:src="@{/js/main.js}"></script>    <script th:src="@{/js/admin.js}"></script></body></html>

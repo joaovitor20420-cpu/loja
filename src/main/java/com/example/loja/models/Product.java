@@ -1,125 +1,6 @@
 package com.example.loja.models;
-
 import com.example.loja.models.*;
 import com.example.loja.repositories.*;
 import com.example.loja.security.*;
 import com.example.loja.config.*;
-import com.example.loja.controllers.*;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-
-@Schema(description = "Entidade que representa um produto na loja")
-@Entity
-public class Product {
-    @Schema(description = "Identificador Ãºnico do produto", example = "1")
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Schema(description = "Nome do produto", example = "Camiseta BÃ¡sica")
-    private String name;
-    @Schema(description = "DescriÃ§Ã£o detalhada do produto", example = "Camiseta 100% algodÃ£o")
-    private String description;
-    @Schema(description = "PreÃ§o do produto em reais", example = "49.90")
-    private double price;
-    @Schema(description = "Estado/condiÃ§Ã£o do produto (Novo, Usado)", example = "Novo")
-    private String state;
-    @Schema(description = "Nome do arquivo de imagem do produto", example = "camiseta.jpg")
-    private String image;
-    @Schema(description = "Categoria do produto")
-    @Enumerated(EnumType.STRING)
-    private Category category;
-    @Schema(description = "Quantidade em estoque", example = "100")
-    private int stock;
-
-    public Product() {
-    }
-
-    public Product(Long id, String name, String description, double price, String state, String image,
-            Category category, int stock) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.state = state;
-        this.image = image;
-        this.category = category;
-        this.stock = stock;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public String toString() {
-        return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
-                + ", image=" + image + ", category=" + category + ", stock=" + stock + "]";
-    }
-}
-
+import com.example.loja.controllers.*;import jakarta.persistence.Entity;import jakarta.persistence.EnumType;import jakarta.persistence.Enumerated;import jakarta.persistence.GeneratedValue;import jakarta.persistence.GenerationType;import jakarta.persistence.Id;import io.swagger.v3.oas.annotations.media.Schema;@Schema(description = "Entidade que representa um produto na loja")@Entitypublic class Product {    @Schema(description = "Identificador Ãºnico do produto", example = "1")    @Id    @GeneratedValue(strategy = GenerationType.AUTO)    private Long id;    @Schema(description = "Nome do produto", example = "Camiseta BÃ¡sica")    private String name;    @Schema(description = "DescriÃ§Ã£o detalhada do produto", example = "Camiseta 100% algodÃ£o")    private String description;    @Schema(description = "PreÃ§o do produto em reais", example = "49.90")    private double price;    @Schema(description = "Estado/condiÃ§Ã£o do produto (Novo, Usado)", example = "Novo")    private String state;    @Schema(description = "Nome do arquivo de imagem do produto", example = "camiseta.jpg")    private String image;    @Schema(description = "Categoria do produto")    @Enumerated(EnumType.STRING)    private Category category;    @Schema(description = "Quantidade em estoque", example = "100")    private int stock;    public Product() {    }    public Product(Long id, String name, String description, double price, String state, String image,            Category category, int stock) {        this.id = id;        this.name = name;        this.description = description;        this.price = price;        this.state = state;        this.image = image;        this.category = category;        this.stock = stock;    }    public Long getId() {        return id;    }    public void setId(Long id) {        this.id = id;    }    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public String getDescription() {        return description;    }    public void setDescription(String description) {        this.description = description;    }    public String getState() {        return state;    }    public void setState(String state) {        this.state = state;    }    public double getPrice() {        return price;    }    public void setPrice(double price) {        this.price = price;    }    public String getImage() {        return image;    }    public void setImage(String image) {        this.image = image;    }    public Category getCategory() {        return category;    }    public void setCategory(Category category) {        this.category = category;    }    public int getStock() {        return stock;    }    public void setStock(int stock) {        this.stock = stock;    }    public String toString() {        return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price                + ", image=" + image + ", category=" + category + ", stock=" + stock + "]";    }}

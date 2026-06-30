@@ -1,35 +1,1 @@
-package com.example.loja.controllers;
-
-import com.example.loja.models.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-
-@Controller
-@Tag(name = "Autenticação", description = "Endpoints de login e cadastro de usuários")
-public class SignInController {
-
-    @Operation(summary = "Página de login", description = "Exibe o formulário de login do usuário")
-    @GetMapping("/signin")
-    public String signin(Authentication authentication, jakarta.servlet.http.HttpServletRequest request, org.springframework.ui.Model model) {
-
-        if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
-            return "redirect:/";
-        }
-
-        // Recuperar o erro exato do Spring Security para debug
-        Object exception = request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
-        if (exception != null) {
-            model.addAttribute("detailedError", ((Exception) exception).getMessage());
-            System.out.println("ERRO DE LOGIN: " + ((Exception) exception).getMessage());
-            ((Exception) exception).printStackTrace();
-        }
-
-        return "signin";
-    }
-
-}
-
+package com.example.loja.controllers;import com.example.loja.models.*;import org.springframework.stereotype.Controller;import org.springframework.web.bind.annotation.GetMapping;import io.swagger.v3.oas.annotations.Operation;import io.swagger.v3.oas.annotations.tags.Tag;import org.springframework.security.core.Authentication;import org.springframework.security.authentication.AnonymousAuthenticationToken;@Controller@Tag(name = "Autenticação", description = "Endpoints de login e cadastro de usuários")public class SignInController {    @Operation(summary = "Página de login", description = "Exibe o formulário de login do usuário")    @GetMapping("/signin")    public String signin(Authentication authentication, jakarta.servlet.http.HttpServletRequest request, org.springframework.ui.Model model) {        if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {            return "redirect:/";        }        Object exception = request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");        if (exception != null) {            model.addAttribute("detailedError", ((Exception) exception).getMessage());            System.out.println("ERRO DE LOGIN: " + ((Exception) exception).getMessage());            ((Exception) exception).printStackTrace();        }        return "signin";    }}

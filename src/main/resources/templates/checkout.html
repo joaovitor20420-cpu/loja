@@ -1,168 +1,1 @@
-<!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Exclusive E-commerce</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
-    <link rel="stylesheet" th:href="@{/css/admin.css}" href="/css/admin.css">
-    <link rel="stylesheet" th:href="@{/css/order-success.css}" href="/css/order-success.css">
-</head>
-<body class="dark-luxury">
-    <!-- Header -->
-    <header class="dark-luxury-header">
-        <div class="logo">
-            <h1><i class="fas fa-gem"></i> EXCLUSIVE</h1>
-        </div>
-        <ul class="dark-luxury-nav">
-            <li><a href="index.html">Boutique</a></li>
-            <li><a href="#produtos">Collections</a></li>
-        </ul>
-        <div class="dark-luxury-actions">
-            <a href="index.html" class="cart-btn" id="cart-btn" title="Shopping Bag">
-                <i class="fas fa-shopping-bag"></i> <span id="cart-count" style="margin-left: 0.2rem;">0</span>
-            </a>
-            
-            <div class="dropdown">
-                <button class="luxury-btn luxury-btn-outline dropdown-toggle" id="profile-dropdown" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
-                    <i class="fas fa-user"></i> <span>Client</span> <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
-                </button>
-                <div class="dropdown-menu" id="dropdown-menu">
-                    <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Login</a>
-                    <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Register</a>
-                    <hr class="dropdown-divider">
-                    <a href="admin.html" class="dropdown-item"><i class="fas fa-cogs"></i> Administration</a>
-                    <hr class="dropdown-divider">
-                    <a href="index.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Checkout Section -->
-    <main class="luxury-container">
-        <div class="luxury-card">
-            <div class="luxury-card-header">
-                <h3><i class="fas fa-lock" style="font-size: 1.5rem; opacity: 0.8;"></i> Secure Checkout</h3>
-                <p>Complete your acquisition</p>
-            </div>
-            
-            <div class="luxury-card-content">
-                <!-- Order Summary -->
-                <form class="luxury-grid">
-                    <div class="luxury-form-group">
-                        <label for="checkout-user">Client</label>
-                        <input type="text" id="checkout-user" th:value="${#authentication.principal != 'anonymousUser' ? #authentication.name : 'Visitante VIP'}" readonly>
-                    </div>
-                    <div class="luxury-form-group">
-                        <label for="checkout-items">Items Total</label>
-                        <input type="text" id="checkout-items" th:value="${#lists.size(cartItems)}" readonly>
-                    </div>
-                    <div class="luxury-form-group">
-                        <label for="checkout-total">Total Investment</label>
-                        <input type="text" id="checkout-total" th:value="${'R$ ' + #numbers.formatDecimal(cartTotalAmount, 1, 'POINT', 2, 'COMMA')}" readonly style="color: var(--gold); font-weight: 500;">
-                    </div>
-                </form>
-
-                <div class="luxury-info-box">
-                    <h4 class="luxury-section-title">
-                        <i class="fas fa-credit-card"></i> Method of Payment (Stripe)
-                    </h4>
-                    <p style="font-size: 0.9rem; margin-bottom: 20px;">
-                        Processed securely by Stripe. We do not store your card details.
-                    </p>
-                    <form id="payment-form" th:action="@{/checkout/process}" method="POST">
-                        <div id="payment-element" style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <!-- Stripe Injects UI here -->
-                        </div>
-                        <div id="payment-message" style="color: #ff4444; margin-top: 10px;"></div>
-                        
-                        <div class="luxury-actions-wrapper" style="margin-top: 30px;">
-                            <a th:href="@{/}" class="luxury-btn luxury-btn-outline">
-                                <i class="fas fa-arrow-left"></i> Return
-                            </a>
-                            <button type="submit" id="submit" class="luxury-btn luxury-btn-primary">
-                                <span id="button-text"><i class="fas fa-lock"></i> Authorize Payment</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Items Table -->
-                <div style="margin-bottom: 2rem;">
-                    <h4 class="luxury-section-title">Acquisition Details</h4>
-                    <div class="table-responsive">
-                        <table class="luxury-table">
-                            <thead>
-                                <tr>
-                                    <th>Masterpiece</th>
-                                    <th>Value</th>
-                                    <th>Qty</th>
-                                    <th>Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="item : ${cartItems}">
-                                    <td th:text="${item.product.name}">Notebook Dell Inspiron</td>
-                                    <td th:text="${'R$ ' + #numbers.formatDecimal(item.product.price, 1, 'POINT', 2, 'COMMA')}">R$ 2.199,00</td>
-                                    <td th:text="${item.quantity}">1</td>
-                                    <td th:text="${'R$ ' + #numbers.formatDecimal(item.subtotal, 1, 'POINT', 2, 'COMMA')}">R$ 2.199,00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script th:src="@{/js/main.js}" src="/js/main.js"></script>
-
-    <!-- Stripe.js SDK -->
-    <script src="https://js.stripe.com/v3/"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        const stripePublicKey = /*[[${stripePublicKey}]]*/ 'pk_test_...';
-        const clientSecret = /*[[${clientSecret}]]*/ 'pi_...';
-        /*]]>*/
-
-        const stripe = Stripe(stripePublicKey);
-        const elements = stripe.elements({ 
-            clientSecret, 
-            appearance: { theme: 'stripe' } 
-        });
-
-        const paymentElement = elements.create("payment", { layout: "tabs" });
-        paymentElement.mount("#payment-element");
-
-        const form = document.getElementById('payment-form');
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            
-            const submitBtn = document.getElementById('submit');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
-
-            // Confirm payment with Stripe. "if_required" prevents redirect unless Bank forces it
-            const { error, paymentIntent } = await stripe.confirmPayment({
-                elements,
-                redirect: 'if_required' 
-            });
-
-            if (error) {
-                const messageContainer = document.querySelector('#payment-message');
-                messageContainer.textContent = error.message;
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-lock"></i> Authorize Payment';
-            } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-                // Payment was successful! Submit the form to our backend to generate the Order
-                form.submit();
-            }
-        });
-    </script>
-</html>
+<!DOCTYPE html><html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Checkout - Exclusive E-commerce</title>    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">    <link rel="stylesheet" th:href="@{/css/admin.css}" href="/css/admin.css">    <link rel="stylesheet" th:href="@{/css/order-success.css}" href="/css/order-success.css"></head><body class="dark-luxury">    <header class="dark-luxury-header">        <div class="logo">            <h1><i class="fas fa-gem"></i> EXCLUSIVE</h1>        </div>        <ul class="dark-luxury-nav">            <li><a href="index.html">Boutique</a></li>            <li><a href="#produtos">Collections</a></li>        </ul>        <div class="dark-luxury-actions">            <a href="index.html" class="cart-btn" id="cart-btn" title="Shopping Bag">                <i class="fas fa-shopping-bag"></i> <span id="cart-count" style="margin-left: 0.2rem;">0</span>            </a>            <div class="dropdown">                <button class="luxury-btn luxury-btn-outline dropdown-toggle" id="profile-dropdown" style="padding: 0.5rem 1rem; font-size: 0.8rem;">                    <i class="fas fa-user"></i> <span>Client</span> <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>                </button>                <div class="dropdown-menu" id="dropdown-menu">                    <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Login</a>                    <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Register</a>                    <hr class="dropdown-divider">                    <a href="admin.html" class="dropdown-item"><i class="fas fa-cogs"></i> Administration</a>                    <hr class="dropdown-divider">                    <a href="index.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>                </div>            </div>        </div>    </header>    <main class="luxury-container">        <div class="luxury-card">            <div class="luxury-card-header">                <h3><i class="fas fa-lock" style="font-size: 1.5rem; opacity: 0.8;"></i> Secure Checkout</h3>                <p>Complete your acquisition</p>            </div>            <div class="luxury-card-content">                <form class="luxury-grid">                    <div class="luxury-form-group">                        <label for="checkout-user">Client</label>                        <input type="text" id="checkout-user" th:value="${#authentication.principal != 'anonymousUser' ? #authentication.name : 'Visitante VIP'}" readonly>                    </div>                    <div class="luxury-form-group">                        <label for="checkout-items">Items Total</label>                        <input type="text" id="checkout-items" th:value="${#lists.size(cartItems)}" readonly>                    </div>                    <div class="luxury-form-group">                        <label for="checkout-total">Total Investment</label>                        <input type="text" id="checkout-total" th:value="${'R$ ' + #numbers.formatDecimal(cartTotalAmount, 1, 'POINT', 2, 'COMMA')}" readonly style="color: var(--gold); font-weight: 500;">                    </div>                </form>                <div class="luxury-info-box">                    <h4 class="luxury-section-title">                        <i class="fas fa-credit-card"></i> Method of Payment (Stripe)                    </h4>                    <p style="font-size: 0.9rem; margin-bottom: 20px;">                        Processed securely by Stripe. We do not store your card details.                    </p>                    <form id="payment-form" th:action="@{/checkout/process}" method="POST">                        <div id="payment-element" style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">                        </div>                        <div id="payment-message" style="color: #ff4444; margin-top: 10px;"></div>                        <div class="luxury-actions-wrapper" style="margin-top: 30px;">                            <a th:href="@{/}" class="luxury-btn luxury-btn-outline">                                <i class="fas fa-arrow-left"></i> Return                            </a>                            <button type="submit" id="submit" class="luxury-btn luxury-btn-primary">                                <span id="button-text"><i class="fas fa-lock"></i> Authorize Payment</span>                            </button>                        </div>                    </form>                </div>                <div style="margin-bottom: 2rem;">                    <h4 class="luxury-section-title">Acquisition Details</h4>                    <div class="table-responsive">                        <table class="luxury-table">                            <thead>                                <tr>                                    <th>Masterpiece</th>                                    <th>Value</th>                                    <th>Qty</th>                                    <th>Subtotal</th>                                </tr>                            </thead>                            <tbody>                                <tr th:each="item : ${cartItems}">                                    <td th:text="${item.product.name}">Notebook Dell Inspiron</td>                                    <td th:text="${'R$ ' + #numbers.formatDecimal(item.product.price, 1, 'POINT', 2, 'COMMA')}">R$ 2.199,00</td>                                    <td th:text="${item.quantity}">1</td>                                    <td th:text="${'R$ ' + #numbers.formatDecimal(item.subtotal, 1, 'POINT', 2, 'COMMA')}">R$ 2.199,00</td>                                </tr>                            </tbody>                        </table>                    </div>                </div>            </div>        </div>    </main>    <script th:src="@{/js/main.js}" src="/js/main.js"></script>    <script src="https://js.stripe.com/v3/"></script>    <script th:inline="javascript">        /*<![CDATA[*/        const stripePublicKey = /*[[${stripePublicKey}]]*/ 'pk_test_...';        const clientSecret = /*[[${clientSecret}]]*/ 'pi_...';        /*]]>*/        const stripe = Stripe(stripePublicKey);        const elements = stripe.elements({             clientSecret,             appearance: { theme: 'stripe' }         });        const paymentElement = elements.create("payment", { layout: "tabs" });        paymentElement.mount("#payment-element");        const form = document.getElementById('payment-form');        form.addEventListener('submit', async (event) => {            event.preventDefault();            const submitBtn = document.getElementById('submit');            submitBtn.disabled = true;            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';            // Confirm payment with Stripe. "if_required" prevents redirect unless Bank forces it            const { error, paymentIntent } = await stripe.confirmPayment({                elements,                redirect: 'if_required'             });            if (error) {                const messageContainer = document.querySelector('#payment-message');                messageContainer.textContent = error.message;                submitBtn.disabled = false;                submitBtn.innerHTML = '<i class="fas fa-lock"></i> Authorize Payment';            } else if (paymentIntent && paymentIntent.status === 'succeeded') {                // Payment was successful! Submit the form to our backend to generate the Order                form.submit();            }        });    </script></html>

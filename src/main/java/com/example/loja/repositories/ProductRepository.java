@@ -1,48 +1,6 @@
 package com.example.loja.repositories;
-
 import com.example.loja.models.*;
 import com.example.loja.repositories.*;
 import com.example.loja.security.*;
 import com.example.loja.config.*;
-import com.example.loja.controllers.*;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface ProductRepository extends CrudRepository<Product, Long> {
-    Product findByname(String name);
-
-    Product findByPrice(double price);
-
-    Product findByDescription(String description);
-
-    Product findByImage(String image);
-
-    List<Product> findByCategory(Category category);
-
-    Product findByState(String state);
-
-
-
-    Product findByStock(int stock);
-
-    @Override
-    @NonNull
-    Product save(@NonNull Product product);
-
-    @Override
-    @NonNull
-    List<Product> findAll();
-
-    @Override
-    @NonNull
-    Optional<Product> findById(Long id);
-
-    @Override
-    void deleteById(Long id);
-}
+import com.example.loja.controllers.*;import java.util.List;import java.util.Optional;import org.springframework.data.repository.CrudRepository;import org.springframework.lang.NonNull;import org.springframework.stereotype.Repository;@Repositorypublic interface ProductRepository extends CrudRepository<Product, Long> {    Product findByname(String name);    Product findByPrice(double price);    Product findByDescription(String description);    Product findByImage(String image);    List<Product> findByCategory(Category category);    Product findByState(String state);    Product findByStock(int stock);    @Override    @NonNull    Product save(@NonNull Product product);    @Override    @NonNull    List<Product> findAll();    @Override    @NonNull    Optional<Product> findById(Long id);    @Override    void deleteById(Long id);}

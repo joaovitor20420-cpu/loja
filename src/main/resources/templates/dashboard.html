@@ -1,175 +1,1 @@
-<!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}">Dashboard - Admin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/auth.css}">
-    <link rel="stylesheet" th:href="@{/css/admin.css}">
-</head>
-<body>
-    <header class="admin-header">
-        <div class="admin-nav-container">
-            <div class="admin-logo">
-                <a th:href="@{/}">
-                    <h1><i class="fas fa-crown"></i> L'ÉLÉGANCE</h1>
-                </a>
-                <span class="admin-badge">Director</span>
-            </div>
-            <div class="admin-user-actions">
-                <div class="admin-user-info">
-                    <i class="fas fa-user-tie"></i>
-                    <span>Admin</span>
-                </div>
-                <a th:href="@{/}" class="btn btn-outline btn-small">
-                    <i class="fas fa-arrow-left"></i> Main Site
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <div class="admin-layout">
-        <aside class="admin-sidebar">
-            <nav class="admin-nav">
-                <ul class="admin-nav-list">
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/dashboard}" class="admin-nav-link active">
-                            <i class="fas fa-gem"></i>
-                            <span>Overview</span>
-                        </a>
-                    </li>
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/products}" class="admin-nav-link">
-                            <i class="fas fa-box-open"></i>
-                            <span>Collection</span>
-                        </a>
-                    </li>
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/orders}" class="admin-nav-link">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Acquisitions</span>
-                        </a>
-                    </li>
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/users}" class="admin-nav-link">
-                            <i class="fas fa-users"></i>
-                            <span>Clientele</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="admin-main">
-            <section id="dashboard-section" class="admin-section active">
-                <div class="admin-header-section">
-                    <div>
-                        <h2><i class="fas fa-gem"></i> Dashboard Overview</h2>
-                        <p>Executive summary of luxury operations</p>
-                    </div>
-                </div>
-
-                <!-- Stats Cards -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-box-open"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 th:text="${totalProducts}">48</h3>
-                            <p>Exclusive Items</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 th:text="${totalUsers}">234</h3>
-                            <p>VIP Clientele</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 th:text="${totalOrders}">127</h3>
-                            <p>Recent Acquisitions</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-coins"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 th:text="${'R$ ' + #numbers.formatDecimal(totalRevenue != null ? totalRevenue : 0, 1, 'POINT', 2, 'COMMA')}">R$ 68.450,00</h3>
-                            <p>Vault Total</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Activity -->
-                <div class="admin-grid">
-                    <div class="admin-card">
-                        <div class="card-header">
-                            <h3>Latest Acquisitions</h3>
-                        </div>
-                        <div class="card-content">
-                            <div class="activity-list">
-                                <div class="activity-item" th:each="order : ${recentOrders}">
-                                    <i class="fas fa-gem"></i>
-                                    <div>
-                                        <strong th:text="${'Order #' + order.id}">Order #125</strong>
-                                        <span th:text="${order.user != null ? order.user.fullName : 'Cliente Removido'}">Maria Santos</span>
-                                        <small th:text="${'R$ ' + #numbers.formatDecimal(order.totalAmount != null ? order.totalAmount : 0, 1, 'POINT', 2, 'COMMA') + ' - ' + order.status}">R$ 450,00 - Delivered</small>
-                                    </div>
-                                </div>
-                                <div class="activity-item" th:if="${recentOrders == null or recentOrders.empty}">
-                                    <i class="fas fa-info-circle"></i>
-                                    <div>
-                                        <strong>Nenhum pedido recente</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="admin-card">
-                        <div class="card-header">
-                            <h3>Most Desired Pieces</h3>
-                        </div>
-                        <div class="card-content">
-                            <div class="product-ranking">
-                                <div class="ranking-item">
-                                    <span class="rank">I</span>
-                                    <span class="product-name">Diamond Encrusted Watch</span>
-                                    <span class="sales-count">45 reserved</span>
-                                </div>
-                                <div class="ranking-item">
-                                    <span class="rank">II</span>
-                                    <span class="product-name">Gold Platinum Bracelet</span>
-                                    <span class="sales-count">38 reserved</span>
-                                </div>
-                                <div class="ranking-item">
-                                    <span class="rank">III</span>
-                                    <span class="product-name">Obsidian Cufflinks</span>
-                                    <span class="sales-count">32 reserved</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/admin.js}"></script>
-</body>
-</html>
+<!DOCTYPE html><html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title th:text="${title}">Dashboard - Admin</title>    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <link rel="stylesheet" th:href="@{/css/styles.css}">    <link rel="stylesheet" th:href="@{/css/auth.css}">    <link rel="stylesheet" th:href="@{/css/admin.css}"></head><body>    <header class="admin-header">        <div class="admin-nav-container">            <div class="admin-logo">                <a th:href="@{/}">                    <h1><i class="fas fa-crown"></i> L'ÉLÉGANCE</h1>                </a>                <span class="admin-badge">Director</span>            </div>            <div class="admin-user-actions">                <div class="admin-user-info">                    <i class="fas fa-user-tie"></i>                    <span>Admin</span>                </div>                <a th:href="@{/}" class="btn btn-outline btn-small">                    <i class="fas fa-arrow-left"></i> Main Site                </a>            </div>        </div>    </header>    <div class="admin-layout">        <aside class="admin-sidebar">            <nav class="admin-nav">                <ul class="admin-nav-list">                    <li class="admin-nav-item">                        <a th:href="@{/admin/dashboard}" class="admin-nav-link active">                            <i class="fas fa-gem"></i>                            <span>Overview</span>                        </a>                    </li>                    <li class="admin-nav-item">                        <a th:href="@{/admin/products}" class="admin-nav-link">                            <i class="fas fa-box-open"></i>                            <span>Collection</span>                        </a>                    </li>                    <li class="admin-nav-item">                        <a th:href="@{/admin/orders}" class="admin-nav-link">                            <i class="fas fa-file-invoice-dollar"></i>                            <span>Acquisitions</span>                        </a>                    </li>                    <li class="admin-nav-item">                        <a th:href="@{/admin/users}" class="admin-nav-link">                            <i class="fas fa-users"></i>                            <span>Clientele</span>                        </a>                    </li>                </ul>            </nav>        </aside>        <main class="admin-main">            <section id="dashboard-section" class="admin-section active">                <div class="admin-header-section">                    <div>                        <h2><i class="fas fa-gem"></i> Dashboard Overview</h2>                        <p>Executive summary of luxury operations</p>                    </div>                </div>                <div class="stats-grid">                    <div class="stat-card">                        <div class="stat-icon">                            <i class="fas fa-box-open"></i>                        </div>                        <div class="stat-content">                            <h3 th:text="${totalProducts}">48</h3>                            <p>Exclusive Items</p>                        </div>                    </div>                    <div class="stat-card">                        <div class="stat-icon">                            <i class="fas fa-users"></i>                        </div>                        <div class="stat-content">                            <h3 th:text="${totalUsers}">234</h3>                            <p>VIP Clientele</p>                        </div>                    </div>                    <div class="stat-card">                        <div class="stat-icon">                            <i class="fas fa-file-invoice-dollar"></i>                        </div>                        <div class="stat-content">                            <h3 th:text="${totalOrders}">127</h3>                            <p>Recent Acquisitions</p>                        </div>                    </div>                    <div class="stat-card">                        <div class="stat-icon">                            <i class="fas fa-coins"></i>                        </div>                        <div class="stat-content">                            <h3 th:text="${'R$ ' + #numbers.formatDecimal(totalRevenue != null ? totalRevenue : 0, 1, 'POINT', 2, 'COMMA')}">R$ 68.450,00</h3>                            <p>Vault Total</p>                        </div>                    </div>                </div>                <div class="admin-grid">                    <div class="admin-card">                        <div class="card-header">                            <h3>Latest Acquisitions</h3>                        </div>                        <div class="card-content">                            <div class="activity-list">                                <div class="activity-item" th:each="order : ${recentOrders}">                                    <i class="fas fa-gem"></i>                                    <div>                                        <strong th:text="${'Order #' + order.id}">Order #125</strong>                                        <span th:text="${order.user != null ? order.user.fullName : 'Cliente Removido'}">Maria Santos</span>                                        <small th:text="${'R$ ' + #numbers.formatDecimal(order.totalAmount != null ? order.totalAmount : 0, 1, 'POINT', 2, 'COMMA') + ' - ' + order.status}">R$ 450,00 - Delivered</small>                                    </div>                                </div>                                <div class="activity-item" th:if="${recentOrders == null or recentOrders.empty}">                                    <i class="fas fa-info-circle"></i>                                    <div>                                        <strong>Nenhum pedido recente</strong>                                    </div>                                </div>                            </div>                        </div>                    </div>                    <div class="admin-card">                        <div class="card-header">                            <h3>Most Desired Pieces</h3>                        </div>                        <div class="card-content">                            <div class="product-ranking">                                <div class="ranking-item">                                    <span class="rank">I</span>                                    <span class="product-name">Diamond Encrusted Watch</span>                                    <span class="sales-count">45 reserved</span>                                </div>                                <div class="ranking-item">                                    <span class="rank">II</span>                                    <span class="product-name">Gold Platinum Bracelet</span>                                    <span class="sales-count">38 reserved</span>                                </div>                                <div class="ranking-item">                                    <span class="rank">III</span>                                    <span class="product-name">Obsidian Cufflinks</span>                                    <span class="sales-count">32 reserved</span>                                </div>                            </div>                        </div>                    </div>                </div>            </section>        </main>    </div>    <script th:src="@{/js/main.js}"></script>    <script th:src="@{/js/admin.js}"></script></body></html>

@@ -1,169 +1,1 @@
-<!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suburbio Store - Criar Conta</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
-    <link rel="stylesheet" th:href="@{/css/auth.css}" href="/css/auth.css">
-</head>
-<body>
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">
-                <a href="index.html">
-                    <h1><i class="fas fa-fire"></i> Suburbio Store</h1>
-                </a>
-            </div>
-            <div class="user-actions">
-                <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <main class="auth-main">
-        <div class="auth-container">
-            <div class="auth-card">
-                <div class="auth-header">
-                    <h2><i class="fas fa-user-plus"></i> Crie sua Conta</h2>
-                    <p>Cadastre-se e tenha acesso aos drops exclusivos</p>
-                </div>
-
-                <form class="auth-form" th:action="@{/signup}" th:object="${user}" method="post">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">
-                                <i class="fas fa-user"></i> Nome
-                            </label>
-                            <input type="text" id="firstName" name="firstName" required placeholder="Seu nome">
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">
-                                <i class="fas fa-user"></i> Sobrenome
-                            </label>
-                            <input type="text" id="lastName" name="lastName" required placeholder="Seu sobrenome">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">
-                            <i class="fas fa-envelope"></i> E-mail
-                        </label>
-                        <input type="email" id="email" name="email" required placeholder="Seu e-mail">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">
-                            <i class="fas fa-phone"></i> Telefone
-                        </label>
-                        <input type="tel" id="phone" name="phone" required placeholder="Seu telefone" maxlength="15">
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="password">
-                                <i class="fas fa-lock"></i> Senha
-                            </label>
-                            <div class="password-field">
-                                <input type="password" id="password" name="password" required placeholder="Crie uma senha" minlength="8">
-                                <button type="button" class="password-toggle" id="password-toggle">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmPassword">
-                                <i class="fas fa-lock"></i> Confirmar Senha
-                            </label>
-                            <div class="password-field">
-                                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirme sua senha">
-                                <button type="button" class="password-toggle" id="confirm-password-toggle">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="password-requirements" id="password-requirements">
-                        <p><i class="fas fa-shield-alt"></i> Security Requirements:</p>
-                        <ul>
-                            <li id="req-length"><i class="fas fa-times"></i> Minimum 8 characters</li>
-                            <li id="req-uppercase"><i class="fas fa-times"></i> One uppercase letter</li>
-                            <li id="req-number"><i class="fas fa-times"></i> One numeric value</li>
-                            <li id="req-special"><i class="fas fa-times"></i> One special symbol</li>
-                        </ul>
-                    </div>
-
-                    <div class="form-group" style="margin-top: 1rem;">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="terms" name="terms" required>
-                            <span class="checkmark"></span>
-                            <span>I accept the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">Privacy Policy</a></span>
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="newsletter" name="newsletter">
-                            <span class="checkmark"></span>
-                            <span>Subscribe to exclusive offers and updates</span>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-auth">
-                        Criar Conta <i class="fas fa-arrow-right"></i>
-                    </button>
-
-                    <div class="divider">
-                        <span>ou</span>
-                    </div>
-
-                    <div class="social-login">
-                        <a th:href="@{/oauth2/authorization/google}" class="btn btn-social btn-google">
-                            <i class="fab fa-google"></i> Cadastrar com Google
-                        </a>
-                        <button type="button" class="btn btn-social btn-facebook">
-                            <i class="fab fa-facebook-f"></i> Apply with Facebook
-                        </button>
-                    </div>
-                </form>
-
-                <div class="auth-footer">
-                    <p>Já tem conta? <a href="signin.html" class="auth-link">Faça login</a></p>
-                </div>
-            </div>
-
-            <!-- Decorative Side -->
-            <div class="auth-side">
-                <div class="auth-side-content">
-                    <h3>Suburbio Store</h3>
-                    <p>Faça parte da comunidade que dita as regras do streetwear. Drops exclusivos, preços especiais e estilo que fala por você.</p>
-                    <div class="auth-side-features">
-                        <div class="feature-item">
-                            <i class="fas fa-fire"></i>
-                            <span>Drops Exclusivos</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-tags"></i>
-                            <span>Preços Especiais</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-medal"></i>
-                            <span>Qualidade Garantida</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script th:src="@{/js/main.js}" src="/js/main.js"></script>
-    <script th:src="@{/js/auth.js}" src="/js/auth.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Suburbio Store - Criar Conta</title>    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">    <link rel="stylesheet" th:href="@{/css/auth.css}" href="/css/auth.css"></head><body>    <header class="header">        <nav class="nav-container">            <div class="logo">                <a href="index.html">                    <h1><i class="fas fa-fire"></i> Suburbio Store</h1>                </a>            </div>            <div class="user-actions">                <button class="theme-toggle" id="theme-toggle" title="Alternar tema">                    <i class="fas fa-moon"></i>                </button>            </div>        </nav>    </header>    <main class="auth-main">        <div class="auth-container">            <div class="auth-card">                <div class="auth-header">                    <h2><i class="fas fa-user-plus"></i> Crie sua Conta</h2>                    <p>Cadastre-se e tenha acesso aos drops exclusivos</p>                </div>                <form class="auth-form" th:action="@{/signup}" th:object="${user}" method="post">                    <div class="form-row">                        <div class="form-group">                            <label for="firstName">                                <i class="fas fa-user"></i> Nome                            </label>                            <input type="text" id="firstName" name="firstName" required placeholder="Seu nome">                        </div>                        <div class="form-group">                            <label for="lastName">                                <i class="fas fa-user"></i> Sobrenome                            </label>                            <input type="text" id="lastName" name="lastName" required placeholder="Seu sobrenome">                        </div>                    </div>                    <div class="form-group">                        <label for="email">                            <i class="fas fa-envelope"></i> E-mail                        </label>                        <input type="email" id="email" name="email" required placeholder="Seu e-mail">                    </div>                    <div class="form-group">                        <label for="phone">                            <i class="fas fa-phone"></i> Telefone                        </label>                        <input type="tel" id="phone" name="phone" required placeholder="Seu telefone" maxlength="15">                    </div>                    <div class="form-row">                        <div class="form-group">                            <label for="password">                                <i class="fas fa-lock"></i> Senha                            </label>                            <div class="password-field">                                <input type="password" id="password" name="password" required placeholder="Crie uma senha" minlength="8">                                <button type="button" class="password-toggle" id="password-toggle">                                    <i class="fas fa-eye"></i>                                </button>                            </div>                        </div>                        <div class="form-group">                            <label for="confirmPassword">                                <i class="fas fa-lock"></i> Confirmar Senha                            </label>                            <div class="password-field">                                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirme sua senha">                                <button type="button" class="password-toggle" id="confirm-password-toggle">                                    <i class="fas fa-eye"></i>                                </button>                            </div>                        </div>                    </div>                    <div class="password-requirements" id="password-requirements">                        <p><i class="fas fa-shield-alt"></i> Security Requirements:</p>                        <ul>                            <li id="req-length"><i class="fas fa-times"></i> Minimum 8 characters</li>                            <li id="req-uppercase"><i class="fas fa-times"></i> One uppercase letter</li>                            <li id="req-number"><i class="fas fa-times"></i> One numeric value</li>                            <li id="req-special"><i class="fas fa-times"></i> One special symbol</li>                        </ul>                    </div>                    <div class="form-group" style="margin-top: 1rem;">                        <label class="checkbox-container">                            <input type="checkbox" id="terms" name="terms" required>                            <span class="checkmark"></span>                            <span>I accept the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">Privacy Policy</a></span>                        </label>                    </div>                    <div class="form-group">                        <label class="checkbox-container">                            <input type="checkbox" id="newsletter" name="newsletter">                            <span class="checkmark"></span>                            <span>Subscribe to exclusive offers and updates</span>                        </label>                    </div>                    <button type="submit" class="btn btn-primary btn-auth">                        Criar Conta <i class="fas fa-arrow-right"></i>                    </button>                    <div class="divider">                        <span>ou</span>                    </div>                    <div class="social-login">                        <a th:href="@{/oauth2/authorization/google}" class="btn btn-social btn-google">                            <i class="fab fa-google"></i> Cadastrar com Google                        </a>                        <button type="button" class="btn btn-social btn-facebook">                            <i class="fab fa-facebook-f"></i> Apply with Facebook                        </button>                    </div>                </form>                <div class="auth-footer">                    <p>Já tem conta? <a href="signin.html" class="auth-link">Faça login</a></p>                </div>            </div>            <div class="auth-side">                <div class="auth-side-content">                    <h3>Suburbio Store</h3>                    <p>Faça parte da comunidade que dita as regras do streetwear. Drops exclusivos, preços especiais e estilo que fala por você.</p>                    <div class="auth-side-features">                        <div class="feature-item">                            <i class="fas fa-fire"></i>                            <span>Drops Exclusivos</span>                        </div>                        <div class="feature-item">                            <i class="fas fa-tags"></i>                            <span>Preços Especiais</span>                        </div>                        <div class="feature-item">                            <i class="fas fa-medal"></i>                            <span>Qualidade Garantida</span>                        </div>                    </div>                </div>            </div>        </div>    </main>    <script th:src="@{/js/main.js}" src="/js/main.js"></script>    <script th:src="@{/js/auth.js}" src="/js/auth.js"></script></body></html>

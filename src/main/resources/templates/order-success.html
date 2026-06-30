@@ -8,12 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
     <link rel="stylesheet" th:href="@{/css/order-success.css}" href="/css/order-success.css">
 </head>
 <body class="dark-luxury">
-    <!-- Header Minimalista -->
     <header class="dark-luxury-header" style="justify-content: center;">
         <div class="logo">
             <a th:href="@{/}">
@@ -21,20 +19,17 @@
             </a>
         </div>
     </header>
-
     <main class="luxury-container" style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
         <div class="luxury-card" style="text-align: center; max-width: 600px; padding: 4rem 2rem;">
             <div class="success-icon" style="font-size: 4rem; color: #00C851; margin-bottom: 2rem;">
                 <i class="fas fa-check-circle"></i>
             </div>
-            
             <h2 style="font-family: 'Cinzel', serif; margin-bottom: 1rem;">Pagamento Aprovado!</h2>
             <p style="color: #ccc; margin-bottom: 2rem; line-height: 1.6;">
                 Obrigado por adquirir nossas peças exclusivas. 
                 Sua transação foi processada com segurança pelo Stripe.
                 O pedido foi criado e o estoque foi reservado para você.
             </p>
-            
             <div class="luxury-actions-wrapper" style="justify-content: center;">
                 <a th:href="@{/}" class="luxury-btn luxury-btn-outline">
                     Voltar para a Loja
@@ -45,7 +40,6 @@
             </div>
         </div>
     </main>
-
     <footer class="footer" style="text-align: center; padding: 2rem; color: #777;">
         <p>&copy; 2026 Suburbio Store. Todos os direitos reservados. Streetwear culture.</p>
     </footer>

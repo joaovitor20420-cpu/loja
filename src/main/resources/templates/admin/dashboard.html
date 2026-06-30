@@ -4,32 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}">Admin Dashboard - Suburbio</title>
-    <!-- FontAwesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/index.css}">
-    
     <style>
         .admin-layout {
             display: flex;
             min-height: calc(100vh - 80px);
             background: #0f0f13;
         }
-        
         .admin-sidebar {
             width: 250px;
             background: #1a1a24;
             border-right: 1px solid #333;
             padding: 2rem 0;
         }
-        
         .admin-sidebar-menu {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-        
         .admin-sidebar-menu li a {
             display: flex;
             align-items: center;
@@ -41,51 +35,43 @@
             font-size: 0.9rem;
             letter-spacing: 1px;
         }
-        
         .admin-sidebar-menu li a i {
             margin-right: 15px;
             font-size: 1.2rem;
             width: 20px;
             text-align: center;
         }
-        
         .admin-sidebar-menu li a:hover, .admin-sidebar-menu li.active a {
             color: #00ffcc;
             background: rgba(0, 255, 204, 0.1);
             border-left: 3px solid #00ffcc;
         }
-        
         .admin-content {
             flex: 1;
             padding: 3rem;
             overflow-y: auto;
         }
-        
         .admin-header {
             margin-bottom: 3rem;
             border-bottom: 1px solid #333;
             padding-bottom: 1rem;
         }
-        
         .admin-header h1 {
             font-family: 'Orbitron', sans-serif;
             color: #fff;
             margin: 0;
             font-size: 2rem;
         }
-        
         .admin-header p {
             color: #888;
             margin-top: 5px;
         }
-        
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
-        
         .stat-card {
             background: #1a1a24;
             border: 1px solid #333;
@@ -95,19 +81,16 @@
             align-items: center;
             transition: 0.3s;
         }
-        
         .stat-card:hover {
             border-color: #00ffcc;
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 255, 204, 0.1);
         }
-        
         .stat-icon {
             font-size: 3rem;
             color: #00ffcc;
             margin-right: 1.5rem;
         }
-        
         .stat-info h3 {
             color: #888;
             font-size: 0.9rem;
@@ -115,7 +98,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
         .stat-info p {
             color: #fff;
             font-size: 2rem;
@@ -126,18 +108,13 @@
     </style>
 </head>
 <body>
-
-    <!-- Header Principal -->
     <header class="main-header">
         <div class="logo">SUBURBIO</div>
-        
         <nav class="main-nav">
             <a th:href="@{/}">Loja</a>
             <a th:href="@{/admin}" class="active">Admin</a>
         </nav>
-        
         <div class="header-actions">
-            <!-- Usuário Autenticado -->
             <div sec:authorize="isAuthenticated()" class="user-menu">
                 <button class="btn-icon user-dropdown-btn">
                     <i class="fas fa-user-circle"></i>
@@ -145,7 +122,6 @@
                 </button>
                 <div class="dropdown-content">
                     <a th:href="@{/}" class="dropdown-item"><i class="fas fa-store"></i> Voltar à Loja</a>
-                    
                     <form th:action="@{/logout}" method="post" class="dropdown-item logout-form">
                         <button type="submit" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sair</button>
                     </form>
@@ -153,7 +129,6 @@
             </div>
         </div>
     </header>
-
     <div class="admin-layout">
         <aside class="admin-sidebar">
             <ul class="admin-sidebar-menu">
@@ -164,13 +139,11 @@
                 <li><a href="#"><i class="fas fa-cog"></i> Configurações</a></li>
             </ul>
         </aside>
-        
         <main class="admin-content">
             <div class="admin-header">
                 <h1>Painel de Controle</h1>
                 <p>Bem-vindo à área administrativa da Suburbio Store.</p>
             </div>
-            
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-box"></i></div>
@@ -179,7 +152,6 @@
                         <p>12</p>
                     </div>
                 </div>
-                
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-shopping-bag"></i></div>
                     <div class="stat-info">
@@ -187,7 +159,6 @@
                         <p>0</p>
                     </div>
                 </div>
-                
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-users"></i></div>
                     <div class="stat-info">
@@ -195,7 +166,6 @@
                         <p>5</p>
                     </div>
                 </div>
-                
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
                     <div class="stat-info">
@@ -204,7 +174,6 @@
                     </div>
                 </div>
             </div>
-            
             <div style="background: #1a1a24; padding: 2rem; border-radius: 8px; border: 1px solid #333;">
                 <h2 style="color: #fff; font-family: 'Orbitron', sans-serif; margin-top: 0;">Ações Rápidas</h2>
                 <p style="color: #888;">Gerencie sua loja a partir do menu lateral. O módulo de produtos já está ativo para cadastrar novos itens.</p>
@@ -214,8 +183,6 @@
             </div>
         </main>
     </div>
-
-    <!-- Scripts -->
     <script th:src="@{/js/main.js}"></script>
 </body>
 </html>

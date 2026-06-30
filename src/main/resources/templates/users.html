@@ -1,225 +1,1 @@
-<!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}">Clientele - Admin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/auth.css}">
-    <link rel="stylesheet" th:href="@{/css/admin.css}">
-</head>
-<body>
-    <header class="admin-header">
-        <div class="admin-nav-container">
-            <div class="admin-logo">
-                <a th:href="@{/}">
-                    <h1><i class="fas fa-crown"></i> L'ÉLÉGANCE</h1>
-                </a>
-                <span class="admin-badge">Director</span>
-            </div>
-            <div class="admin-user-actions">
-                <div class="admin-user-info">
-                    <i class="fas fa-user-tie"></i>
-                    <span>Admin</span>
-                </div>
-                <a th:href="@{/}" class="btn btn-outline btn-small">
-                    <i class="fas fa-arrow-left"></i> Main Site
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <div class="admin-layout">
-        <aside class="admin-sidebar">
-            <nav class="admin-nav">
-                <ul class="admin-nav-list">
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/dashboard}" class="admin-nav-link">
-                            <i class="fas fa-gem"></i>
-                            <span>Overview</span>
-                        </a>
-                    </li>
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/products}" class="admin-nav-link">
-                            <i class="fas fa-box-open"></i>
-                            <span>Collection</span>
-                        </a>
-                    </li>
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/orders}" class="admin-nav-link">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Acquisitions</span>
-                        </a>
-                    </li>
-                    <li class="admin-nav-item">
-                        <a th:href="@{/admin/users}" class="admin-nav-link active">
-                            <i class="fas fa-users"></i>
-                            <span>Clientele</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="admin-main">
-            <!-- Delete Confirmation -->
-            <section id="delete-confirmation-user" class="admin-section" style="display:none">
-                <div class="admin-card" style="max-width:600px; margin:0 auto;">
-                    <div class="card-header" style="background:var(--bg-secondary); border-color:var(--danger)">
-                        <h3 style="color:var(--danger)">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            Revoke Membership
-                        </h3>
-                    </div>
-                    <div class="card-content">
-                        <div class="delete-confirmation">
-                            <div class="warning-icon">
-                                <i class="fas fa-ban"></i>
-                            </div>
-                            <h2>Confirm Revocation</h2>
-                            <p>Are you sure you wish to permanently revoke access for:</p>
-                            <h4 class="product-name-highlight">Selected VIP Member</h4>
-                            <p class="warning-text">This action is irreversible and immediate.</p>
-                        </div>
-                    </div>
-                    <div class="card-footer delete-footer" style="display: flex; justify-content: center; padding-bottom: 2rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">
-                        <div class="form-actions" style="gap: 1rem; margin-top:0;">
-                            <button type="button" class="btn btn-outline" onclick="document.getElementById('delete-confirmation-user').style.display='none'; document.getElementById('usuarios-section').style.display='block';">
-                                <i class="fas fa-times"></i> Cancel
-                            </button>
-                            <a href="#" class="btn btn-danger">
-                                <i class="fas fa-trash"></i> Revoke
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="usuarios-section" class="admin-section active">
-                <div class="admin-header-section">
-                    <div>
-                        <h2><i class="fas fa-users"></i> VIP Clientele</h2>
-                        <p>Manage access and details of elite patrons</p>
-                    </div>
-                    <button class="btn btn-primary" id="add-usuario-btn" onclick="document.getElementById('usuario-form').style.display='grid';">
-                        <i class="fas fa-plus"></i> Register Member
-                    </button>
-                </div>
-
-                <form id="usuario-form" class="form-grid two-columns" action="/users/save" method="POST" style="display:none; margin-bottom: 3rem;">
-                    <input type="hidden" name="id" value="">
-                    <input type="hidden" name="createdAt" value="">
-                    <div class="form-group">
-                        <label for="usuario-firstname">First Name</label>
-                        <input type="text" id="usuario-firstname" name="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="usuario-lastname">Last Name</label>
-                        <input type="text" id="usuario-lastname" name="lastName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="usuario-email">Email Address</label>
-                        <input type="email" id="usuario-email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="usuario-phone">Private Line</label>
-                        <input type="tel" id="usuario-phone" name="phone" required placeholder="(XX) XXXXX-XXXX" maxlength="15">
-                    </div>
-                    <div class="form-group">
-                        <label for="usuario-password">
-                            <i class="fas fa-lock"></i> Passcode
-                        </label>
-                        <input type="password" id="usuario-password" name="password" required placeholder="Enter secure passcode" minlength="8">
-                    </div>
-                    <div class="form-group">
-                        <label for="usuario-confirm-password">
-                            <i class="fas fa-lock"></i> Confirm Passcode
-                        </label>
-                        <input type="password" id="usuario-confirm-password" name="confirmPassword" required placeholder="Confirm secure passcode">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="usuario-status">Membership Status</label>
-                        <select id="usuario-status" name="status" required>
-                            <option value="">Select Status...</option>
-                            <option value="ACTIVE">Active</option>
-                            <option value="INACTIVE">Inactive</option>
-                            <option value="BLOCKED">Blocked</option>
-                            <option value="SUSPENDED">Suspended</option>
-                        </select>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-outline btn-form" onclick="document.getElementById('usuario-form').style.display='none';">
-                            <i class="fas fa-times"></i> Cancel
-                        </button>
-                        <button type="submit" class="btn btn-primary btn-form">
-                            <i class="fas fa-save"></i> Save Details
-                        </button>
-                    </div>
-                </form>
-
-                <!-- Filters -->
-                <div class="admin-filters">
-                    <div class="filter-group">
-                        <input type="text" id="search-usuarios" placeholder="Search clientele..." class="admin-input">
-                        <select id="filter-status" class="admin-select">
-                            <option value="" selected>All Statuses</option>
-                            <option value="ACTIVE">Active</option>
-                            <option value="INACTIVE">Inactive</option>
-                            <option value="BLOCKED">Blocked</option>
-                            <option value="SUSPENDED">Suspended</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="admin-table-container">
-                    <table class="admin-table" id="usuarios-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Contact</th>
-                                <th>Status</th>
-                                <th>Role</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usuarios-tbody">
-                            <tr th:each="user : ${users}">
-                                <td th:text="${user.id}">1</td>
-                                <td th:text="${user.fullName}">Maria Santos</td>
-                                <td th:text="${user.email}">maria.santos@email.com</td>
-                                <td th:text="${user.phone}">(11) 98765-4321</td>
-                                <td><span th:class="${'status-badge status-' + (user.status != null ? #strings.toLowerCase(user.status) : 'inactive')}" th:text="${user.status}">ACTIVE</span></td>
-                                <td th:text="${user.role}">USER</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-icon btn-edit" title="Edit" onclick="document.getElementById('usuario-form').style.display='grid';">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn-icon btn-delete" title="Revoke" onclick="document.getElementById('delete-confirmation-user').style.display='block'; document.getElementById('usuarios-section').style.display='none';">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr th:if="${users == null or users.empty}">
-                                <td colspan="7" style="text-align: center;">Nenhum cliente cadastrado.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/admin.js}"></script>
-</body>
-</html>
+<!DOCTYPE html><html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title th:text="${title}">Clientele - Admin</title>    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <link rel="stylesheet" th:href="@{/css/styles.css}">    <link rel="stylesheet" th:href="@{/css/auth.css}">    <link rel="stylesheet" th:href="@{/css/admin.css}"></head><body>    <header class="admin-header">        <div class="admin-nav-container">            <div class="admin-logo">                <a th:href="@{/}">                    <h1><i class="fas fa-crown"></i> L'ÉLÉGANCE</h1>                </a>                <span class="admin-badge">Director</span>            </div>            <div class="admin-user-actions">                <div class="admin-user-info">                    <i class="fas fa-user-tie"></i>                    <span>Admin</span>                </div>                <a th:href="@{/}" class="btn btn-outline btn-small">                    <i class="fas fa-arrow-left"></i> Main Site                </a>            </div>        </div>    </header>    <div class="admin-layout">        <aside class="admin-sidebar">            <nav class="admin-nav">                <ul class="admin-nav-list">                    <li class="admin-nav-item">                        <a th:href="@{/admin/dashboard}" class="admin-nav-link">                            <i class="fas fa-gem"></i>                            <span>Overview</span>                        </a>                    </li>                    <li class="admin-nav-item">                        <a th:href="@{/admin/products}" class="admin-nav-link">                            <i class="fas fa-box-open"></i>                            <span>Collection</span>                        </a>                    </li>                    <li class="admin-nav-item">                        <a th:href="@{/admin/orders}" class="admin-nav-link">                            <i class="fas fa-file-invoice-dollar"></i>                            <span>Acquisitions</span>                        </a>                    </li>                    <li class="admin-nav-item">                        <a th:href="@{/admin/users}" class="admin-nav-link active">                            <i class="fas fa-users"></i>                            <span>Clientele</span>                        </a>                    </li>                </ul>            </nav>        </aside>        <main class="admin-main">            <section id="delete-confirmation-user" class="admin-section" style="display:none">                <div class="admin-card" style="max-width:600px; margin:0 auto;">                    <div class="card-header" style="background:var(--bg-secondary); border-color:var(--danger)">                        <h3 style="color:var(--danger)">                            <i class="fas fa-exclamation-triangle"></i>                            Revoke Membership                        </h3>                    </div>                    <div class="card-content">                        <div class="delete-confirmation">                            <div class="warning-icon">                                <i class="fas fa-ban"></i>                            </div>                            <h2>Confirm Revocation</h2>                            <p>Are you sure you wish to permanently revoke access for:</p>                            <h4 class="product-name-highlight">Selected VIP Member</h4>                            <p class="warning-text">This action is irreversible and immediate.</p>                        </div>                    </div>                    <div class="card-footer delete-footer" style="display: flex; justify-content: center; padding-bottom: 2rem; border-top:1px solid var(--border-color); padding-top:1.5rem;">                        <div class="form-actions" style="gap: 1rem; margin-top:0;">                            <button type="button" class="btn btn-outline" onclick="document.getElementById('delete-confirmation-user').style.display='none'; document.getElementById('usuarios-section').style.display='block';">                                <i class="fas fa-times"></i> Cancel                            </button>                            <a href="#" class="btn btn-danger">                                <i class="fas fa-trash"></i> Revoke                            </a>                        </div>                    </div>                </div>            </section>            <section id="usuarios-section" class="admin-section active">                <div class="admin-header-section">                    <div>                        <h2><i class="fas fa-users"></i> VIP Clientele</h2>                        <p>Manage access and details of elite patrons</p>                    </div>                    <button class="btn btn-primary" id="add-usuario-btn" onclick="document.getElementById('usuario-form').style.display='grid';">                        <i class="fas fa-plus"></i> Register Member                    </button>                </div>                <form id="usuario-form" class="form-grid two-columns" action="/users/save" method="POST" style="display:none; margin-bottom: 3rem;">                    <input type="hidden" name="id" value="">                    <input type="hidden" name="createdAt" value="">                    <div class="form-group">                        <label for="usuario-firstname">First Name</label>                        <input type="text" id="usuario-firstname" name="firstName" required>                    </div>                    <div class="form-group">                        <label for="usuario-lastname">Last Name</label>                        <input type="text" id="usuario-lastname" name="lastName" required>                    </div>                    <div class="form-group">                        <label for="usuario-email">Email Address</label>                        <input type="email" id="usuario-email" name="email" required>                    </div>                    <div class="form-group">                        <label for="usuario-phone">Private Line</label>                        <input type="tel" id="usuario-phone" name="phone" required placeholder="(XX) XXXXX-XXXX" maxlength="15">                    </div>                    <div class="form-group">                        <label for="usuario-password">                            <i class="fas fa-lock"></i> Passcode                        </label>                        <input type="password" id="usuario-password" name="password" required placeholder="Enter secure passcode" minlength="8">                    </div>                    <div class="form-group">                        <label for="usuario-confirm-password">                            <i class="fas fa-lock"></i> Confirm Passcode                        </label>                        <input type="password" id="usuario-confirm-password" name="confirmPassword" required placeholder="Confirm secure passcode">                    </div>                    <div class="form-group">                        <label for="usuario-status">Membership Status</label>                        <select id="usuario-status" name="status" required>                            <option value="">Select Status...</option>                            <option value="ACTIVE">Active</option>                            <option value="INACTIVE">Inactive</option>                            <option value="BLOCKED">Blocked</option>                            <option value="SUSPENDED">Suspended</option>                        </select>                    </div>                    <div class="form-actions">                        <button type="button" class="btn btn-outline btn-form" onclick="document.getElementById('usuario-form').style.display='none';">                            <i class="fas fa-times"></i> Cancel                        </button>                        <button type="submit" class="btn btn-primary btn-form">                            <i class="fas fa-save"></i> Save Details                        </button>                    </div>                </form>                <div class="admin-filters">                    <div class="filter-group">                        <input type="text" id="search-usuarios" placeholder="Search clientele..." class="admin-input">                        <select id="filter-status" class="admin-select">                            <option value="" selected>All Statuses</option>                            <option value="ACTIVE">Active</option>                            <option value="INACTIVE">Inactive</option>                            <option value="BLOCKED">Blocked</option>                            <option value="SUSPENDED">Suspended</option>                        </select>                    </div>                </div>                <div class="admin-table-container">                    <table class="admin-table" id="usuarios-table">                        <thead>                            <tr>                                <th>ID</th>                                <th>Name</th>                                <th>Email</th>                                <th>Contact</th>                                <th>Status</th>                                <th>Role</th>                                <th>Actions</th>                            </tr>                        </thead>                        <tbody id="usuarios-tbody">                            <tr th:each="user : ${users}">                                <td th:text="${user.id}">1</td>                                <td th:text="${user.fullName}">Maria Santos</td>                                <td th:text="${user.email}">maria.santos@email.com</td>                                <td th:text="${user.phone}">(11) 98765-4321</td>                                <td><span th:class="${'status-badge status-' + (user.status != null ? #strings.toLowerCase(user.status) : 'inactive')}" th:text="${user.status}">ACTIVE</span></td>                                <td th:text="${user.role}">USER</td>                                <td>                                    <div class="action-buttons">                                        <button class="btn-icon btn-edit" title="Edit" onclick="document.getElementById('usuario-form').style.display='grid';">                                            <i class="fas fa-edit"></i>                                        </button>                                        <button class="btn-icon btn-delete" title="Revoke" onclick="document.getElementById('delete-confirmation-user').style.display='block'; document.getElementById('usuarios-section').style.display='none';">                                            <i class="fas fa-trash"></i>                                        </button>                                    </div>                                </td>                            </tr>                            <tr th:if="${users == null or users.empty}">                                <td colspan="7" style="text-align: center;">Nenhum cliente cadastrado.</td>                            </tr>                        </tbody>                    </table>                </div>            </section>        </main>    </div>    <script th:src="@{/js/main.js}"></script>    <script th:src="@{/js/admin.js}"></script></body></html>
